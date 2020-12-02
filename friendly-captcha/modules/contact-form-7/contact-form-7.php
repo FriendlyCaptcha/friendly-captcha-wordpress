@@ -23,10 +23,10 @@ function frcaptcha_wpcf7_friendly_captcha_enqueue_scripts() {
 }
 
 add_filter( 'wpcf7_form_elements',
-	'wpcf7_friendly_captcha_add_widget_if_missing', 100, 1
+	'frcaptcha_wpcf7_friendly_captcha_add_widget_if_missing', 100, 1
 );
 
-function wpcf7_friendly_captcha_add_widget_if_missing( $elements ) {
+function frcaptcha_wpcf7_friendly_captcha_add_widget_if_missing( $elements ) {
     $plugin = FriendlyCaptcha_Plugin::$instance;
     if (!$plugin->is_configured() or !$plugin->get_contact_form_7_active()) {
         return $elements;
