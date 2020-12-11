@@ -7,7 +7,7 @@ function frcaptcha_enqueue_widget_scripts() {
         return;
     }
 
-    $version = '0.6.1';
+    $version = '0.6.2';
 
     /* Modern browsers will load this smaller bundle */
     wp_enqueue_script( 'friendly-captcha-widget-module',
