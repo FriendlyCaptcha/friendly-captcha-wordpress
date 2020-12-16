@@ -1,11 +1,10 @@
 <?php
 /**
 * Plugin Name: Friendly Captcha for WordPress
-* Plugin URI: https://friendlycaptcha.com
 * Description: Protect WordPress website forms from spam and abuse with Friendly Captcha, a privacy-first anti-bot solution.
-* Version: 0.1.0
+* Version: 1.0.1
 * Requires at least: 5.0
-* Requires PHP: 7.2
+* Requires PHP: 5.6
 * Author: Friendly Captcha GmbH
 * Author URI: https://friendlycaptcha.com
 * License: GPL v2 or later
