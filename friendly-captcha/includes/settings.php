@@ -51,7 +51,7 @@ if (is_admin()) {
             'frcaptcha_general_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_sitekey_name,
-                "description" => "Paste your application's sitekey value.<br>Don't have an application yet? Create one <a href=\"https://friendlycaptcha.com/account\">here</a>.",
+                "description" => "Paste your application's sitekey value.<br>Don't have an application yet? Create one <a href=\"https://friendlycaptcha.com/account\" target=\"_blank\">here</a>.",
                 "type" => "text"
             )
         );
@@ -63,7 +63,7 @@ if (is_admin()) {
             'frcaptcha_general_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_api_key_name,
-                "description" => "Create a new API key in the <a href=\"https://friendlycaptcha.com/account\">account panel</a> and paste the value here. Keep this one secret!",
+                "description" => "Create a new API key in the <a href=\"https://friendlycaptcha.com/account\" target=\"_blank\">account panel</a> and paste the value here. Keep this one secret!",
                 "type" => "password"
             )
         );
