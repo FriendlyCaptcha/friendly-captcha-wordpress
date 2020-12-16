@@ -1,2 +1,2 @@
 # friendly-captcha-wp
-Wordpress plugin for Friendly Captcha
+WordPress plugin for Friendly Captcha
