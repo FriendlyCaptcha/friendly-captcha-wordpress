@@ -8,7 +8,7 @@ if (is_admin()) {
     function frcaptcha_options_page() {
         add_menu_page(
             'Friendly Captcha',
-            'FriendlyCaptcha',
+            'Friendly Captcha',
             'manage_options',
             'friendly_captcha_admin',
             'frcaptcha_options_page_html',
