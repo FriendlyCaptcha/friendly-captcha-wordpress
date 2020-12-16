@@ -15,7 +15,7 @@ function frcaptcha_options_page_html() {
             submit_button();
             ?>
         </form>
-        <p style="opacity:0.7">Friendly Captcha for Wordpress version <?php echo FriendlyCaptcha_Plugin::$version?></p>
+        <p style="opacity:0.7">Friendly Captcha for WordPress. Version <?php echo FriendlyCaptcha_Plugin::$version?>.</p>
     </div>
     <?php
 }
@@ -23,10 +23,10 @@ function frcaptcha_options_page_html() {
 
 
 function frcaptcha_general_section_callback() {
-    echo '<p>If you don\'t have a FriendlyCaptcha account yet, you will need to first sign up at <a href="https://friendlycaptcha.com">FriendlyCaptcha.com</a>.';
+    echo '<p>If you don\'t have a Friendly Captcha account yet, you can sign up at <a href="https://friendlycaptcha.com" target="_blank">FriendlyCaptcha.com</a>.';
 }
 function frcaptcha_integrations_section_callback() {
-    echo '<p>Friendly Captcha can be enabled individually for different parts of your website. </p>';
+    echo '<p>Friendly Captcha can be enabled individually for different parts of your website.</p>';
 }
 
 // field content cb
