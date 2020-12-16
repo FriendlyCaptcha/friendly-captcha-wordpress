@@ -1,8 +1,8 @@
 <?php
 /**
-* Plugin Name: Friendly Captcha for Wordpress
-* Plugin URI: https://friendlycaptcha.com/wp
-* Description: Official Friendly Captcha Wordpress integration plugin.
+* Plugin Name: Friendly Captcha for WordPress
+* Plugin URI: https://friendlycaptcha.com
+* Description: Protect WordPress website forms from spam and abuse with Friendly Captcha, a privacy-first anti-bot solution.
 * Version: 0.1.0
 * Requires at least: 5.0
 * Requires PHP: 7.2
