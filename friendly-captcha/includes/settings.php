@@ -84,7 +84,7 @@ if (is_admin()) {
             'frcaptcha_integrations_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_wpforms_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://en-gb.wordpress.org/plugins/wpforms/\">WPForms</a> and <a href=\"https://en-gb.wordpress.org/plugins/wpforms-lite/\">WPForms lite</a> forms.",
+                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/wpforms/\" target=\"_blank\">WPForms</a> and <a href=\"https://wordpress.org/plugins/wpforms-lite/\"  target=\"_blank\">WPForms lite</a> forms.",
                 "type" => "checkbox"
             )
         );
@@ -96,43 +96,43 @@ if (is_admin()) {
             'frcaptcha_integrations_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_contact_form_7_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://en-gb.wordpress.org/plugins/contact-form-7/\">Contact Form 7</a> forms.",
+                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/contact-form-7/\" target=\"_blank\">Contact Form 7</a> forms.",
                 "type" => "checkbox"
             )
         );
 
         add_settings_field(
             'frcaptcha_settings_wp_register_integration_field',
-            'Wordpress Register', 'frcaptcha_settings_field_callback',
+            'WordPress Register', 'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_wp_register_integration_active_name,
-                "description" => "Enable Friendly Captcha for the Wordpress sign up form.",
+                "description" => "Enable Friendly Captcha for the WordPress sign up form.",
                 "type" => "checkbox"
             )
         );
 
         add_settings_field(
             'frcaptcha_settings_wp_login_integration_field',
-            'Wordpress Login', 'frcaptcha_settings_field_callback',
+            'WordPress Login', 'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_wp_login_integration_active_name,
-                "description" => "Enable Friendly Captcha for the Wordpress log in form.",
+                "description" => "Enable Friendly Captcha for the WordPress log in form.",
                 "type" => "checkbox"
             )
         );
 
         add_settings_field(
             'frcaptcha_settings_wp_forgot_password_integration_field',
-            'Wordpress Forgot Password', 'frcaptcha_settings_field_callback',
+            'WordPress Forgot Password', 'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_wp_reset_password_integration_active_name,
-                "description" => "Enable Friendly Captcha for the Wordpress <i>\"Reset Password\"</i> form.",
+                "description" => "Enable Friendly Captcha for the WordPress <i>\"Reset Password\"</i> form.",
                 "type" => "checkbox"
             )
         );
