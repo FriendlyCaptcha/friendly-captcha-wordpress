@@ -7,7 +7,7 @@ function frcaptcha_enqueue_widget_scripts() {
         return;
     }
 
-    $version = '0.6.2';
+    $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
 
     /* Modern browsers will load this smaller bundle */
     wp_enqueue_script( 'friendly-captcha-widget-module',
@@ -36,7 +36,7 @@ function frcaptcha_echo_script_tags() {
         return;
     }
 
-    $version = "0.6.1";
+    $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
 
     echo '<script async defer type="module" src="'. plugin_dir_url( __FILE__ ) . '/vendor/widget.module.min.js?ver=' . $version . '"></script>';
     echo '<script async defer nomodule src="'. plugin_dir_url( __FILE__ ) . '/vendor/widget.polyfilled.min.js?ver=' . $version . '"></script>';
