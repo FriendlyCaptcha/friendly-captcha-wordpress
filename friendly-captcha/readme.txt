@@ -4,7 +4,7 @@ Tags: captcha, anti-spam, antispam, block spam, spam, contact form, comments, fr
 Requires at least: 5.0
 Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
  
@@ -62,6 +62,9 @@ Normal CAPTCHA tasks are not easy for all humans. Our solution works without lab
 Join thousands of organizations in switching to a privacy-first anti-bot solution.
  
 == Changelog ==
+
+= 1.0.2 =
+* Improvements relating to input and output validation and sanitization.
 
 = 1.0.1 =
 * Minor bugfixes
