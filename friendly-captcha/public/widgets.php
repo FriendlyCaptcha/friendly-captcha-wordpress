@@ -60,7 +60,7 @@ function frcaptcha_generate_widget_tag($sitekey, $theme = "") {
 	return sprintf(
         '<div class="frc-captcha %s" data-sitekey="%s"></div>
 		<noscript>You need to enable Javascript for the anti-spam check.</noscript>',
-	$theme,
-    $sitekey);
+	esc_html($theme),
+    esc_html($sitekey));
 }
 

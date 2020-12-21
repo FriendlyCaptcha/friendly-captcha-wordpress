@@ -30,7 +30,7 @@ function frcaptcha_wp_login_validate($user, $username, $password) {
     }
 
     $errorPrefix = '<strong>' . __( 'Error', 'wp-captcha' ) . '</strong> : ';
-	$solution = isset( $_POST['frc-captcha-solution'] ) ? trim( $_POST['frc-captcha-solution'] ) : '';
+	$solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 	
 	if ( empty( $solution ) ) {
         return new WP_Error("frcaptcha-empty-error", $errorPrefix . FriendlyCaptcha_Plugin::$default_error_user_message . " (captcha missing)" );

@@ -175,8 +175,7 @@ function frcaptcha_wpforms_process( $fields, $entry, $form_data ) {
         return;
     }
 
-	$solution = isset( $_POST['frc-captcha-solution'] )
-		? trim( $_POST['frc-captcha-solution'] ) : '';
+	$solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 		
 	if ( empty( $solution ) ) {
         wpforms()->process->errors[ $form_data['id'] ] [ 'header' ] = esc_html__( FriendlyCaptcha_Plugin::$default_error_user_message, 'frcaptcha' );
