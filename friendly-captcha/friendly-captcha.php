@@ -4,7 +4,7 @@
 * Description: Protect WordPress website forms from spam and abuse with Friendly Captcha, a privacy-first anti-bot solution.
 * Version: 1.0.2
 * Requires at least: 5.0
-* Requires PHP: 5.6
+* Requires PHP: 7.3
 * Author: Friendly Captcha GmbH
 * Author URI: https://friendlycaptcha.com
 * License: GPL v2 or later
