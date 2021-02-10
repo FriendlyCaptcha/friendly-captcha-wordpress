@@ -28,6 +28,9 @@ function frcaptcha_general_section_callback() {
 function frcaptcha_integrations_section_callback() {
     echo '<p>Friendly Captcha can be enabled individually for different parts of your website.</p>';
 }
+function frcaptcha_widget_section_callback() {
+    echo '<p>Settings for the Friendly Captcha widget. This is the widget the users of your website will see.</p>';
+}
 
 // field content cb
 function frcaptcha_settings_field_callback(array $args) {
@@ -47,6 +50,25 @@ function frcaptcha_settings_field_callback(array $args) {
     } 
     ?>
     <input autcomplete="none" type="<?php echo $type; ?>" name="<?php echo $option_name; ?>" id="<?php echo $option_name; ?>" value="<?php echo $value ?>" <?php echo $checked ?>>
+    <p class="description"><?php echo $description ?></p>
+    <?php
+}
+
+// a specific callback for the language dropdown as it's hard to generalize.
+function frcaptcha_widget_language_field_callback(array $args) {
+    $option_name   = $args['option_name'];
+    $description = $args['description'];
+
+    // Value of the option
+    $setting = get_option($option_name);
+    $value = isset( $setting ) ? esc_attr( $setting ) : 'en';
+    ?>
+    <select autcomplete="none" type="select" name="<?php echo $option_name; ?>" id="<?php echo $option_name; ?>">
+        <option value="en" <?php if($value=="en"){echo "selected ";}?>>English</option>
+        <option value="de" <?php if($value=="de"){echo "selected ";}?>>German</option>
+        <option value="fr" <?php if($value=="fr"){echo "selected ";}?>>French</option>
+        <option value="nl" <?php if($value=="nl"){echo "selected ";}?>>Dutch</option>
+    </select>
     <p class="description"><?php echo $description ?></p>
     <?php
 }

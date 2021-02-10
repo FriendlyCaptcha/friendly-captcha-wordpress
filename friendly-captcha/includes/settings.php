@@ -35,8 +35,14 @@ if (is_admin()) {
             FriendlyCaptcha_Plugin::$option_wp_reset_password_integration_active_name,
         );
 
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_widget_language_name,
+        );
+
         /* General section */
 
+        // Section
         add_settings_section(
             'frcaptcha_general_settings_section',
             'Account Configuration',
@@ -70,6 +76,7 @@ if (is_admin()) {
 
         /* Integrations section */
 
+        // Section
         add_settings_section(
             'frcaptcha_integrations_settings_section',
             'Integrations',
@@ -137,7 +144,26 @@ if (is_admin()) {
             )
         );
 
+        /* Widget settings section */
 
+        // Section
+        add_settings_section(
+            'frcaptcha_widget_settings_section',
+            'Widget Settings',
+            'frcaptcha_widget_section_callback',
+            'friendly_captcha_admin',
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_widget_language_field',
+            'Widget Language',
+            'frcaptcha_widget_language_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_widget_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_widget_language_name,
+                "description" => "Set the language for the widget. Need another language? <a href=\"http://docs.friendlycaptcha.com/#/widget_api?id=data-lang-attribute\">Help us translate</a>.",
+            )
+        );
     }
-
 }

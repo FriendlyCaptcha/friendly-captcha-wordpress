@@ -26,6 +26,8 @@
         public static $option_wp_login_integration_active_name = "frcaptcha_wp_login_integration_active";
         public static $option_wp_reset_password_integration_active_name = "frcaptcha_wp_reset_password_integration_active";
 
+        public static $option_widget_language_name = "frcaptcha_widget_language";
+
         public static $default_error_user_message = "Anti-robot verification failed, please try again.";
 
         public function init() {
@@ -74,6 +76,11 @@
 
         public function get_wp_reset_password_active() {
             return get_option(FriendlyCaptcha_Plugin::$option_wp_reset_password_integration_active_name) == 1;
+        }
+
+        public function get_widget_language() {
+            $lang = get_option(FriendlyCaptcha_Plugin::$option_widget_language_name);
+            return empty($lang) ? "en" : $lang; // Default to en
         }
     }
 

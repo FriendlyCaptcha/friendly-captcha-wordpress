@@ -56,11 +56,11 @@ function frcaptcha_transform_friendly_captcha_script_tags( $tag, $handle, $src )
 	return $tag;
 }
 
-function frcaptcha_generate_widget_tag($sitekey, $theme = "") {
+function frcaptcha_generate_widget_tag($sitekey, $language, $theme = "") {
 	return sprintf(
-        '<div class="frc-captcha %s" data-sitekey="%s"></div>
+        '<div class="frc-captcha %s" data-sitekey="%s" data-lang="%s"></div>
 		<noscript>You need to enable Javascript for the anti-spam check.</noscript>',
 	esc_html($theme),
-    esc_html($sitekey));
+    esc_html($sitekey),
+    esc_html($language));
 }
-

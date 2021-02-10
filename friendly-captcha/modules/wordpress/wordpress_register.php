@@ -8,7 +8,7 @@ function frcaptcha_wp_register_show_widget() {
         return;
     }
 
-    echo frcaptcha_generate_widget_tag($plugin->get_sitekey());
+    echo frcaptcha_generate_widget_tag($plugin->get_sitekey(), $plugin->get_widget_language());
 
     // it just slightly overflows without this.
     echo "<style>.frc-captcha {max-width:100%;}</style>";

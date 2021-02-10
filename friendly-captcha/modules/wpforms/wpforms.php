@@ -161,7 +161,7 @@ function frcaptcha_wpforms_add_widget( $form_data ) {
     }
 
     $sitekey = $plugin->get_sitekey();
-    echo frcaptcha_generate_widget_tag($sitekey, "");
+    echo frcaptcha_generate_widget_tag($sitekey, $plugin->get_widget_language(), "");
     return;
 }
 
