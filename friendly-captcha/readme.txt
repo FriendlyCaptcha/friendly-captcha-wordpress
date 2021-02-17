@@ -4,7 +4,7 @@ Tags: captcha, anti-spam, antispam, block spam, spam, contact form, comments, fr
 Requires at least: 5.0
 Tested up to: 5.6
 Requires PHP: 7.3
-Stable tag: 1.0.4
+Stable tag: 1.1.0
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -62,6 +62,7 @@ A: Please see our website at: https://friendlycaptcha.com/
 * WordPress Login Form
 * WordPress Register Form
 * WordPress Lost Password Form
+* Wordpress Comments
 * WPForms
 * Contact Form 7
 
@@ -71,6 +72,10 @@ https://github.com/FriendlyCaptcha/friendly-captcha-wordpress
 However, you may wish to email the authors of plugins you'd like to support Friendly Captcha: it will usually take them only an hour or two to add native support if they choose to do so. This will simplify your use of Friendly Captcha, and is the best solution in the long run.
 
 == Changelog ==
+= 1.1.0 =
+* Added support for Wordpress Comments (both for logged in and guest users).
+* Made the default error message shown to users translatable.
+
 = 1.0.4 =
 * Added localization support (English, German, French and Dutch)
 * Added text-transform:none to the widget's button (so that it is no longer uppercase in some Wordpress themes).

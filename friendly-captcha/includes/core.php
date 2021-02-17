@@ -25,10 +25,11 @@
         public static $option_wp_register_integration_active_name = "frcaptcha_wp_register_integration_active";
         public static $option_wp_login_integration_active_name = "frcaptcha_wp_login_integration_active";
         public static $option_wp_reset_password_integration_active_name = "frcaptcha_wp_reset_password_integration_active";
+        public static $option_wp_comments_integration_active_name = "frcaptcha_wp_comments_integration_active";
+        public static $option_wp_comments_logged_in_integration_active_name = "frcaptcha_wp_comments_logged_in_integration_active";
+
 
         public static $option_widget_language_name = "frcaptcha_widget_language";
-
-        public static $default_error_user_message = "Anti-robot verification failed, please try again.";
 
         public function init() {
             if ( defined( 'FRIENDLY_CAPTCHA_VERSION' ) ) {
@@ -41,6 +42,11 @@
             $this->plugin_name = 'friendly-captcha';
 
             FriendlyCaptcha_Plugin::$instance = $this;
+        }
+
+        public static function default_error_user_message() {
+            /* translators: this is the main error message shown to the user when the captcha failed or wasn't completed. */
+            return __("Anti-robot verification failed, please try again.", "frcaptcha");
         }
 
         /**
@@ -76,6 +82,14 @@
 
         public function get_wp_reset_password_active() {
             return get_option(FriendlyCaptcha_Plugin::$option_wp_reset_password_integration_active_name) == 1;
+        }
+
+        public function get_wp_comments_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_wp_comments_integration_active_name) == 1;
+        }
+
+        public function get_wp_comments_logged_in_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_wp_comments_logged_in_integration_active_name) == 1;
         }
 
         public function get_widget_language() {
@@ -119,5 +133,9 @@
 
     if (FriendlyCaptcha_Plugin::$instance->get_wp_reset_password_active()) {
         require plugin_dir_path( __FILE__ ) . '../modules/wordpress/wordpress_reset_password.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_wp_comments_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/wordpress/wordpress_comments.php';
     }
 // }

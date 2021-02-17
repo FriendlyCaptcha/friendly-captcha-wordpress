@@ -33,13 +33,13 @@ function frcaptcha_wp_login_validate($user, $username, $password) {
 	$solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 	
 	if ( empty( $solution ) ) {
-        return new WP_Error("frcaptcha-empty-error", $errorPrefix . FriendlyCaptcha_Plugin::$default_error_user_message . " (captcha missing)" );
+        return new WP_Error("frcaptcha-empty-error", $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message() . __(" (captcha missing)", "frcaptcha") );
     }
 
     $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
 
     if (!$verification["success"]) {
-        return new WP_Error("frcaptcha-solution-error", $errorPrefix . FriendlyCaptcha_Plugin::$default_error_user_message);
+        return new WP_Error("frcaptcha-solution-error", $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message());
     }
 
     return $user;

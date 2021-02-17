@@ -14,6 +14,7 @@ if (is_admin()) {
             FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_api_key_name,
         );
+
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_contact_form_7_integration_active_name,
@@ -33,6 +34,14 @@ if (is_admin()) {
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_wp_reset_password_integration_active_name,
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_wp_comments_integration_active_name,
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_wp_comments_logged_in_integration_active_name,
         );
 
         register_setting(
@@ -140,6 +149,30 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_wp_reset_password_integration_active_name,
                 "description" => "Enable Friendly Captcha for the WordPress <i>\"Reset Password\"</i> form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_wp_comments_integration_field',
+            'WordPress Comments<br>(guests)', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_wp_comments_integration_active_name,
+                "description" => "Enable Friendly Captcha for WordPress Comments for guest visitors.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_wp_comments_logged_in_integration_field',
+            'WordPress Comments<br>(logged in users)', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_wp_comments_logged_in_integration_active_name,
+                "description" => "Enable Friendly Captcha for WordPress Comments for users that are logged in to Wordpress.",
                 "type" => "checkbox"
             )
         );
