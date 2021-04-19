@@ -160,8 +160,7 @@ function frcaptcha_wpforms_add_widget( $form_data ) {
         return;
     }
 
-    $sitekey = $plugin->get_sitekey();
-    echo frcaptcha_generate_widget_tag($sitekey, $plugin->get_widget_language(), "");
+    echo frcaptcha_generate_widget_tag_from_plugin($plugin);
     return;
 }
 

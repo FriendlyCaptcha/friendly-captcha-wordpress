@@ -32,6 +32,12 @@ function frcaptcha_widget_section_callback() {
     echo '<p>Settings for the Friendly Captcha widget. This is the widget the users of your website will see.</p>';
 }
 
+function frcaptcha_endpoint_section_callback() {
+    echo '<p><b>⚠️ If you are not on a Friendly Captcha Business or Enterprise plan this section is not relevant for you.</b></p>
+    <p>Endpoint for the widget to talk to. If no boxes are selected the global endpoint is used.</p>
+    <p>To use the dedicated EU endpoint must enable it for your app in the <a href="https://app.friendlycaptcha.com/account">dashboard</a>. If you are seeing 403 erorrs, please ensure this endpoint is enabled in the Friendly Captcha dashboard for your sitekey.</p>';
+}
+
 // field content cb
 function frcaptcha_settings_field_callback(array $args) {
     $type   = $args['type'];
@@ -67,6 +73,7 @@ function frcaptcha_widget_language_field_callback(array $args) {
         <option value="en" <?php if($value=="en"){echo "selected ";}?>>English</option>
         <option value="de" <?php if($value=="de"){echo "selected ";}?>>German</option>
         <option value="fr" <?php if($value=="fr"){echo "selected ";}?>>French</option>
+        <option value="it" <?php if($value=="it"){echo "selected ";}?>>Italian</option>
         <option value="nl" <?php if($value=="nl"){echo "selected ";}?>>Dutch</option>
     </select>
     <p class="description"><?php echo $description ?></p>

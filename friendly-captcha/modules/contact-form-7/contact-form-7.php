@@ -43,9 +43,7 @@ function frcaptcha_wpcf7_friendly_captcha_add_widget_if_missing($elements)
 		return $elements;
 	}
 
-	$sitekey = $plugin->get_sitekey();
-	$lang = $plugin->get_widget_language();
-	$elements .= frcaptcha_generate_widget_tag($sitekey, $lang, "");
+	$elements .= frcaptcha_generate_widget_tag_from_plugin($plugin);
 
 	return $elements;
 }
@@ -128,11 +126,7 @@ function frcaptcha_wpcf7_friendly_captcha_widget_shortcode($form_tag)
 		return;
 	}
 
-	$sitekey = $plugin->get_sitekey();
-	$class = $form_tag->get_class_option("");
-	$lang = $plugin->get_widget_language();
-
-	return frcaptcha_generate_widget_tag($sitekey, $lang, $class);
+	return frcaptcha_generate_widget_tag_from_plugin($plugin);
 }
 
 add_action('wpcf7_init', 'frcaptcha_wpcf7_friendly_captcha_add_form_tag_friendly_captcha', 10, 0);

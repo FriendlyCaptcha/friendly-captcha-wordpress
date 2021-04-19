@@ -28,8 +28,12 @@
         public static $option_wp_comments_integration_active_name = "frcaptcha_wp_comments_integration_active";
         public static $option_wp_comments_logged_in_integration_active_name = "frcaptcha_wp_comments_logged_in_integration_active";
 
-
         public static $option_widget_language_name = "frcaptcha_widget_language";
+        public static $option_widget_dark_theme_active_name = "frcaptcha_widget_dark_theme_active";
+
+        public static $option_global_puzzle_endpoint_active_name = "frcaptcha_global_endpoint_active";
+        public static $option_eu_puzzle_endpoint_active_name = "frcaptcha_eu_endpoint_active";
+        
 
         public function init() {
             if ( defined( 'FRIENDLY_CAPTCHA_VERSION' ) ) {
@@ -92,9 +96,28 @@
             return get_option(FriendlyCaptcha_Plugin::$option_wp_comments_logged_in_integration_active_name) == 1;
         }
 
+        /* Widget options */
+
         public function get_widget_language() {
             $lang = get_option(FriendlyCaptcha_Plugin::$option_widget_language_name);
             return empty($lang) ? "en" : $lang; // Default to en
+        }
+
+        public function get_widget_dark_theme_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_widget_dark_theme_active_name) == 1;
+        }
+
+        /* Endpoint settings */
+
+        public function get_eu_puzzle_endpoint_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_eu_puzzle_endpoint_active_name) == 1;
+        }
+
+        public function get_global_puzzle_endpoint_active() {
+            $eu_active = $this->get_eu_puzzle_endpoint_active();
+            if (!$eu_active) return true; // At least one must be enabled.
+
+            return get_option(FriendlyCaptcha_Plugin::$option_global_puzzle_endpoint_active_name) == 1;
         }
     }
 

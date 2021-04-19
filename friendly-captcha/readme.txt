@@ -4,7 +4,7 @@ Tags: captcha, anti-spam, antispam, block spam, spam, contact form, comments, fr
 Requires at least: 5.0
 Tested up to: 5.7
 Requires PHP: 7.3
-Stable tag: 1.1.1
+Stable tag: 1.2.0
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -72,6 +72,13 @@ https://github.com/FriendlyCaptcha/friendly-captcha-wordpress
 However, you may wish to email the authors of plugins you'd like to support Friendly Captcha: it will usually take them only an hour or two to add native support if they choose to do so. This will simplify your use of Friendly Captcha, and is the best solution in the long run.
 
 == Changelog ==
+= 1.2.0 =
+* Updated widget to version 0.8.4 (which includes a small fix for IE11).
+* Added support for Italian language.
+* Added dark theme setting.
+* Added endpoint selection menu (only relevant for Business and Enterprise).
+* The plugin now talks to `api.friendlycaptcha.com` instead of `friendlycaptcha.com` (no user-facing changes).
+
 = 1.1.1 =
 * Update to widget version 0.8.0, which has improved fake-browser detection and slight styling tweaks.
 

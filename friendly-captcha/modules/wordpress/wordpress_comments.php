@@ -8,7 +8,7 @@ function frcaptcha_wp_comments_show_widget() {
         return;
     }
 
-    echo frcaptcha_generate_widget_tag($plugin->get_sitekey(), $plugin->get_widget_language());
+    echo frcaptcha_generate_widget_tag_from_plugin($plugin);
 
     // For some reason there is no spacing by default otherwise
     echo "<style>.frc-captcha {margin-bottom: 1em}</style>";
@@ -23,7 +23,7 @@ function frcaptcha_wp_comments_logged_in_show_widget() {
         return;
     }
 
-    echo frcaptcha_generate_widget_tag($plugin->get_sitekey(), $plugin->get_widget_language());
+    echo frcaptcha_generate_widget_tag_from_plugin($plugin);
 
     // For some reason there is no spacing by default otherwise
     echo "<style>.frc-captcha {margin-bottom: 1em}</style>";

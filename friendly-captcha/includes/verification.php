@@ -2,7 +2,7 @@
 
 
 function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key) {
-        $endpoint = 'https://friendlycaptcha.com/api/v1/siteverify';
+        $endpoint = 'https://api.friendlycaptcha.com/api/v1/siteverify';
 
         $response_body = array(
             'secret' => $api_key,
@@ -15,7 +15,6 @@ function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key) {
 			'body' => $response_body,
         );
 
-        
         $response = wp_remote_post( esc_url_raw( $endpoint ), $request );
         $status = wp_remote_retrieve_response_code( $response );
 

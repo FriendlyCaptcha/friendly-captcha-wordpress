@@ -44,9 +44,24 @@ if (is_admin()) {
             FriendlyCaptcha_Plugin::$option_wp_comments_logged_in_integration_active_name,
         );
 
+        /*Widget settings */
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_widget_language_name,
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_widget_dark_theme_active_name,
+        );
+
+        /*Endpoints*/
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_eu_puzzle_endpoint_active_name,
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_global_puzzle_endpoint_active_name,
         );
 
         /* General section */
@@ -78,7 +93,7 @@ if (is_admin()) {
             'frcaptcha_general_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_api_key_name,
-                "description" => "Create a new API key in the <a href=\"https://friendlycaptcha.com/account\" target=\"_blank\">account panel</a> and paste the value here. Keep this one secret!",
+                "description" => "Create a new API key in the <a href=\"https://app.friendlycaptcha.com/account\" target=\"_blank\">account panel</a> and paste the value here. Keep this one secret!",
                 "type" => "password"
             )
         );
@@ -196,6 +211,52 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_widget_language_name,
                 "description" => "Set the language for the widget. Need another language? <a href=\"http://docs.friendlycaptcha.com/#/widget_api?id=data-lang-attribute\">Help us translate</a>.",
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_widget_theme_field',
+            'Dark theme', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_widget_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_widget_dark_theme_active_name,
+                "description" => "Enable a dark theme for Friendly Captcha widgets.",
+                "type" => "checkbox"
+            )
+        );
+
+        /* Endpoint section */
+
+        // Section
+        add_settings_section(
+            'frcaptcha_endpoint_settings_section',
+            'Endpoint Settings (advanced, requires Business or Enterprise account)',
+            'frcaptcha_endpoint_section_callback',
+            'friendly_captcha_admin',
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_global_endpoint_field',
+            '🌍 Global Endpoint', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_endpoint_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_global_puzzle_endpoint_active_name,
+                "description" => "Enable the default global puzzle service.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_eu_endpoint_field',
+            '🇪🇺 Dedicated EU Endpoint', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_endpoint_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_eu_puzzle_endpoint_active_name,
+                "description" => "Enable the dedicated EU endpoint service, see the <a href=\"http://docs.friendlycaptcha.com/#/eu_endpoint\">documentation</a> for more details.",
+                "type" => "checkbox"
             )
         );
     }
