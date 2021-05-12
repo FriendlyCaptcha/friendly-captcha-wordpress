@@ -8,60 +8,60 @@ if (is_admin()) {
     function frcaptcha_settings_init() {
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_sitekey_name,
+            FriendlyCaptcha_Plugin::$option_sitekey_name
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_api_key_name,
+            FriendlyCaptcha_Plugin::$option_api_key_name
         );
 
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_contact_form_7_integration_active_name,
+            FriendlyCaptcha_Plugin::$option_contact_form_7_integration_active_name
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wpforms_integration_active_name,
+            FriendlyCaptcha_Plugin::$option_wpforms_integration_active_name
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wp_register_integration_active_name,
+            FriendlyCaptcha_Plugin::$option_wp_register_integration_active_name
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wp_login_integration_active_name,
+            FriendlyCaptcha_Plugin::$option_wp_login_integration_active_name
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wp_reset_password_integration_active_name,
+            FriendlyCaptcha_Plugin::$option_wp_reset_password_integration_active_name
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wp_comments_integration_active_name,
+            FriendlyCaptcha_Plugin::$option_wp_comments_integration_active_name
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wp_comments_logged_in_integration_active_name,
+            FriendlyCaptcha_Plugin::$option_wp_comments_logged_in_integration_active_name
         );
 
         /*Widget settings */
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_widget_language_name,
+            FriendlyCaptcha_Plugin::$option_widget_language_name
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_widget_dark_theme_active_name,
+            FriendlyCaptcha_Plugin::$option_widget_dark_theme_active_name
         );
 
         /*Endpoints*/
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_eu_puzzle_endpoint_active_name,
+            FriendlyCaptcha_Plugin::$option_eu_puzzle_endpoint_active_name
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_global_puzzle_endpoint_active_name,
+            FriendlyCaptcha_Plugin::$option_global_puzzle_endpoint_active_name
         );
 
         /* General section */
@@ -199,7 +199,7 @@ if (is_admin()) {
             'frcaptcha_widget_settings_section',
             'Widget Settings',
             'frcaptcha_widget_section_callback',
-            'friendly_captcha_admin',
+            'friendly_captcha_admin'
         );
 
         add_settings_field(
@@ -233,7 +233,7 @@ if (is_admin()) {
             'frcaptcha_endpoint_settings_section',
             'Endpoint Settings (advanced, requires Business or Enterprise account)',
             'frcaptcha_endpoint_section_callback',
-            'friendly_captcha_admin',
+            'friendly_captcha_admin'
         );
 
         add_settings_field(
