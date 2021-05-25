@@ -25,6 +25,10 @@ if (is_admin()) {
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_gravity_forms_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_wp_register_integration_active_name
         );
         register_setting(
@@ -128,6 +132,18 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_contact_form_7_integration_active_name,
                 "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/contact-form-7/\" target=\"_blank\">Contact Form 7</a> forms.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_gravity_forms_integration_field',
+            'Gravity Forms', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_gravity_forms_integration_active_name,
+                "description" => "Enable Friendly Captcha for <a href=\"https://gravityforms.com\" target=\"_blank\">Gravity Forms</a> forms.<br> The widget is available under <i>Advanced Fields</i> in the form builder.",
                 "type" => "checkbox"
             )
         );

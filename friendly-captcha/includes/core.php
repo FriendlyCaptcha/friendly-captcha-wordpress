@@ -20,13 +20,17 @@
         public static $option_sitekey_name = "frcaptcha_sitekey";
         public static $option_api_key_name = "frcaptcha_api_key";
 
+        // Integrations
         public static $option_contact_form_7_integration_active_name = "frcaptcha_contact_form_7_integration_active";
         public static $option_wpforms_integration_active_name = "frcaptcha_wpforms_integration_active";
+        public static $option_gravity_forms_integration_active_name = "frcaptcha_gravity_forms_integration_active";
+
         public static $option_wp_register_integration_active_name = "frcaptcha_wp_register_integration_active";
         public static $option_wp_login_integration_active_name = "frcaptcha_wp_login_integration_active";
         public static $option_wp_reset_password_integration_active_name = "frcaptcha_wp_reset_password_integration_active";
         public static $option_wp_comments_integration_active_name = "frcaptcha_wp_comments_integration_active";
         public static $option_wp_comments_logged_in_integration_active_name = "frcaptcha_wp_comments_logged_in_integration_active";
+        
 
         public static $option_widget_language_name = "frcaptcha_widget_language";
         public static $option_widget_dark_theme_active_name = "frcaptcha_widget_dark_theme_active";
@@ -74,6 +78,10 @@
 
         public function get_wpforms_active() {
             return get_option(FriendlyCaptcha_Plugin::$option_wpforms_integration_active_name) == 1;
+        }
+
+        public function get_gravity_forms_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_gravity_forms_integration_active_name) == 1;
         }
 
         public function get_wp_register_active() {
@@ -144,6 +152,10 @@
 
     if (FriendlyCaptcha_Plugin::$instance->get_wpforms_active()) {
         require plugin_dir_path( __FILE__ ) . '../modules/wpforms/wpforms.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_gravity_forms_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/gravityforms/gravityforms.php';
     }
 
     if (FriendlyCaptcha_Plugin::$instance->get_wp_register_active()) {
