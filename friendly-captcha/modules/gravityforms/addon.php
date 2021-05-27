@@ -35,7 +35,7 @@ class GFFormsFriendlyCaptchaAddOn extends GFAddOn {
     //                 array(
     //                 // array(
     //                 //     'name'                  => 'frcaptcha-sitekey',
-    //                 //     'tooltip'               => '<h6>' . esc_html__( 'Friendly Captcha sitekey', 'gf-hcaptcha' ) . '</h6>',
+    //                 //     'tooltip'               => '<h6>' . esc_html__( 'Friendly Captcha sitekey', 'frcaptcha' ) . '</h6>',
     //                 //     'label'                 => '<label for="frcaptcha-sitekey"><strong>' . esc_html__( 'Friendly Captcha sitekey', 'frcaptcha' ) . '</strong></label>',
     //                 //     'type'                  => 'text',
     //                 //     'style'                 => 'width:350px;',

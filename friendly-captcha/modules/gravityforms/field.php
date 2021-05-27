@@ -124,7 +124,7 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 		$this->validate_frcaptcha( $form );
 	}
 
-	// Validate the hCaptcha field
+	// Validate the Friendly Captcha solution
 	public function validate_frcaptcha( $form ) {
 		$plugin = FriendlyCaptcha_Plugin::$instance;
 		if (!$plugin->is_configured() or !$plugin->get_gravity_forms_active()) {
@@ -147,5 +147,4 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 	}
 }
 
-// Register the field
 GF_Fields::register( new GFForms_Friendlycaptcha_Field() );

@@ -17,7 +17,3 @@ class frcaptcha_gform_load_addon {
         GFAddOn::register( 'GFFormsFriendlyCaptchaAddOn' );
     }
 }
-
-function frcaptcha_gform_addon() {
-    return GFFormsFriendlyCaptchaAddOn::get_instance();
-}
