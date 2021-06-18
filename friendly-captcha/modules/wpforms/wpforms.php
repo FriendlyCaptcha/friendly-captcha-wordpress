@@ -177,7 +177,7 @@ function frcaptcha_wpforms_process( $fields, $entry, $form_data ) {
 	$solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 		
 	if ( empty( $solution ) ) {
-        wpforms()->process->errors[ $form_data['id'] ] [ 'header' ] = esc_html__( FriendlyCaptcha_Plugin::$default_error_user_message, 'frcaptcha' );
+        wpforms()->process->errors[ $form_data['id'] ] [ 'header' ] = esc_html__( FriendlyCaptcha_Plugin::default_error_user_message(), 'frcaptcha' );
         wpforms_log(
             esc_html__( '[Friendly Captcha] Spam Entry' ) . uniqid(),
             array( "Friendly Captcha solution not present", $entry ),
@@ -191,7 +191,7 @@ function frcaptcha_wpforms_process( $fields, $entry, $form_data ) {
     $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
 
     if (!$verification["success"]) {
-        wpforms()->process->errors[ $form_data['id'] ] [ 'header' ] = esc_html__( FriendlyCaptcha_Plugin::$default_error_user_message, 'frcaptcha' );
+        wpforms()->process->errors[ $form_data['id'] ] [ 'header' ] = esc_html__( FriendlyCaptcha_Plugin::default_error_user_message(), 'frcaptcha' );
         $captcha_error_str = $verification["error_codes"] ? $verification["error_codes"] : reset($verification["error_codes"]);
         // Not entirely sure this will work as expected..
         // We could not log to be more safe?
