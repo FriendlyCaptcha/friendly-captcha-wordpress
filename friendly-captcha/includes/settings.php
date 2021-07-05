@@ -143,7 +143,7 @@ if (is_admin()) {
             'frcaptcha_integrations_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_gravity_forms_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://gravityforms.com\" target=\"_blank\">Gravity Forms</a> forms.<br> The widget is available under <i>Advanced Fields</i> in the form builder.",
+                "description" => "Enable Friendly Captcha for <a href=\"https://gravityforms.com\" target=\"_blank\">Gravity Forms</a> forms.<br> The widget is available under <i>Advanced Fields</i> in the form builder. For the best protection add the widget to the last page in multi-page forms.",
                 "type" => "checkbox"
             )
         );

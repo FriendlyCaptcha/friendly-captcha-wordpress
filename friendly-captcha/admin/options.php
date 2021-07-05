@@ -75,7 +75,10 @@ function frcaptcha_widget_language_field_callback(array $args) {
         <option value="fr" <?php if($value=="fr"){echo "selected ";}?>>French</option>
         <option value="it" <?php if($value=="it"){echo "selected ";}?>>Italian</option>
         <option value="pt" <?php if($value=="pt"){echo "selected ";}?>>Portuguese</option>
+        <option value="es" <?php if($value=="es"){echo "selected ";}?>>Spanish</option>
+        <option value="ca" <?php if($value=="ca"){echo "selected ";}?>>Catalan</option>
         <option value="nl" <?php if($value=="nl"){echo "selected ";}?>>Dutch</option>
+
     </select>
     <p class="description"><?php echo $description ?></p>
     <?php

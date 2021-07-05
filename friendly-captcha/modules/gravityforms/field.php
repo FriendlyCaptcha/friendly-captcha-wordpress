@@ -119,8 +119,21 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 		<?php
 	}
 
-	// Call the validation function
+	/**
+	 * Returns true if this captcha field is on the last page of the given form.
+	 *
+	 * @param array $form The form data.
+	 * @return bool
+	 */
+	private function is_on_last_page( $form ) {
+	    $pages = GFAPI::get_fields_by_type( $form, array( 'page' ) );
+	    return count( $pages ) + 1 === (int) $this->pageNumber;
+    }
+
 	public function validate( $value, $form ) {
+		if ( GFFormDisplay::is_last_page( $form ) && !$this->is_on_last_page( $form ) ) {
+			return;
+		}
 		$this->validate_frcaptcha( $form );
 	}
 
@@ -143,6 +156,7 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 			$this->failed_validation  = true;
 			$this->validation_message = FriendlyCaptcha_Plugin::default_error_user_message();
 			GFCommon::log_debug( __METHOD__ . '(): Validating the Friendly Captcha response has failed due to the following: ' . $verification["error_codes"] );
+			return;
 		}
 	}
 }
