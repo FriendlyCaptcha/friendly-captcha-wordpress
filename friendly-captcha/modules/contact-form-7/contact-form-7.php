@@ -48,9 +48,9 @@ function frcaptcha_wpcf7_friendly_captcha_add_widget_if_missing($elements)
 	return $elements;
 }
 
-add_filter('wpcf7_spam', 'frcaptcha_wpcf7_friendly_captcha_verify_response', 9, 2);
+add_filter('wpcf7_spam', 'frcaptcha_wpcf7_friendly_captcha_verify_response', 9, 1);
 
-function frcaptcha_wpcf7_friendly_captcha_verify_response($spam, $submission)
+function frcaptcha_wpcf7_friendly_captcha_verify_response($spam)
 {
 	if ($spam) {
 		return $spam;
@@ -73,14 +73,8 @@ function frcaptcha_wpcf7_friendly_captcha_verify_response($spam, $submission)
 
 	$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
 
-	// The next statement was kept from the original WPCF7 plugin, no clue whether they are still a good idea.
-	if ($submission = WPCF7_Submission::get_instance()) {
-		$submission->friendly_captcha = array(
-			'version' => '1',
-			'response' => $verification["response_body"],
-		);
-	}
-
+	$submission = WPCF7_Submission::get_instance();
+	
 	if ($verification["success"]) {
 		$spam = false;
 	} else {
