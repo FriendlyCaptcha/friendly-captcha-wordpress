@@ -62,6 +62,7 @@ function frcaptcha_wpcf7_friendly_captcha_verify_response($spam)
 	}
 
 	$solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
+	$submission = WPCF7_Submission::get_instance();
 
 	if (empty($solution)) {
 		$spam = true;
@@ -73,8 +74,6 @@ function frcaptcha_wpcf7_friendly_captcha_verify_response($spam)
 
 	$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
 
-	$submission = WPCF7_Submission::get_instance();
-	
 	if ($verification["success"]) {
 		$spam = false;
 	} else {
