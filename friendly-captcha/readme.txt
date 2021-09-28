@@ -2,7 +2,7 @@
 Contributors: friendlycaptcha
 Tags: captcha, anti-spam, antispam, block spam, spam, contact form, comments, friendly-captcha, recaptcha
 Requires at least: 5.0
-Tested up to: 5.7
+Tested up to: 5.9
 Requires PHP: 7.3
 Stable tag: 1.4.0
 License: GPL v2 or later
