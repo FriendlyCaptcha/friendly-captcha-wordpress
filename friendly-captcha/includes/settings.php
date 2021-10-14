@@ -29,6 +29,10 @@ if (is_admin()) {
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_coblocks_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_wp_register_integration_active_name
         );
         register_setting(
@@ -144,6 +148,18 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_gravity_forms_integration_active_name,
                 "description" => "Enable Friendly Captcha for <a href=\"https://gravityforms.com\" target=\"_blank\">Gravity Forms</a> forms.<br> The widget is available under <i>Advanced Fields</i> in the form builder. For the best protection add the widget to the last page in multi-page forms.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_coblocks_integration_field',
+            'CoBlocks Forms', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_coblocks_integration_active_name,
+                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/coblocks/\" target=\"_blank\">CoBlocks</a> forms.<br> t.b.d: The widget is available under <i>Advanced Fields</i> in the form builder. For the best protection add the widget to the last page in multi-page forms.",
                 "type" => "checkbox"
             )
         );
