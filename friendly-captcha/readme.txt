@@ -4,7 +4,7 @@ Tags: captcha, anti-spam, antispam, block spam, spam, contact form, comments, fr
 Requires at least: 5.0
 Tested up to: 5.9
 Requires PHP: 7.3
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -73,6 +73,9 @@ https://github.com/FriendlyCaptcha/friendly-captcha-wordpress
 However, you may wish to email the authors of plugins you'd like to support Friendly Captcha: it will usually take them only an hour or two to add native support if they choose to do so. This will simplify your use of Friendly Captcha, and is the best solution in the long run.
 
 == Changelog ==
+
+= 1.4.1 =
+* Fix captcha verification not happening for guest Wordpress users (i.e. those not logged in) in Wordpress Comments, thank you @amenk!
 
 = 1.4.0 =
 * Fix for some Contact Form 7 users.
