@@ -53,7 +53,7 @@ function frcaptcha_wp_comments_validate($comment) {
         return $comment;
     }
     // Non-Guest user
-    else if (!$plugin->get_wp_comments_logged_in_active()) {
+    else if ($comment["user_id"] != 0 && !$plugin->get_wp_comments_logged_in_active()) {
         return $comment;
     }
 
