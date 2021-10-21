@@ -6,43 +6,8 @@
   "parent": [
     "coblocks/form"
   ],
-  "description": "Shows warning, error or success notices…",
+  "description": "Inserts FriendlyCaptcha widget",
   "keywords": [
-    "alert",
-    "message"
-  ],
-  "version": "1.0.3",
-  "textdomain": "my-plugin",
-  "attributes": {
-    "message": {
-      "type": "string",
-      "source": "html",
-      "selector": ".message"
-    }
-  },
-  "providesContext": {
-    "my-plugin/message": "message"
-  },
-  "usesContext": [
-    "groupId"
-  ],
-  "supports": {
-    "align": true
-  },
-  "styles": [
-    {
-      "name": "default",
-      "label": "Default",
-      "isDefault": true
-    },
-    {
-      "name": "other",
-      "label": "Other"
-    }
-  ],
-  "example": {
-    "attributes": {
-      "message": "This is a notice!"
-    }
-  }
+    "captcha"
+  ]
 }

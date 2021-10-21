@@ -1,24 +1,26 @@
 (function (blocks, element, blockEditor) {
     var el = element.createElement;
     var useBlockProps = blockEditor.useBlockProps;
+    var createElement = wp.element.createElement;
+    var InnerBlocks = wp.editor.InnerBlocks;
+    var blockProps = {
+        src: window.frcaptcha_coblocks_settings.preview,
+        title: 'This form is protected by FriendlyCaptcha. The Widget will be rendered here. Remark: If you have multiple Coblocks forms on this page, this the widget needs to be present on all blocks',
+        style: {width: 282, height: 68}
+    };
+
 
     var edit = function (props) {
-        var blockProps = wp.blockEditor.useBlockProps({style: {}});
-
-        return wp.element.createElement(
-            'div',
+        return createElement('div', { className: 'myClass' }, createElement(
+            'img',
             blockProps,
-            'FriendlyCaptcha Widget will be rendered here.'
-        );
+        ));
     }
 
     var save = function () {
-        var blockProps = useBlockProps.save({style: {}});
-
         return wp.element.createElement(
-            'div',
+            'img',
             blockProps,
-            'FriendlyCaptcha Widget will be rendered here.'
         );
     }
 
@@ -32,9 +34,11 @@
             ],
             "description": "Inserts FriendlyCaptcha widget",
             "keywords": [
-                "captcha",
+                "captcha"
             ],
             "example": {},
+            "editor_script": 'frcaptcha-coblocks-edit-script',
+            "editor_style": 'frcaptcha-coblocks-edit-style',
             "edit": edit,
             "save": save
         }
