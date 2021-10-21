@@ -159,7 +159,7 @@ if (is_admin()) {
             'frcaptcha_integrations_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_coblocks_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/coblocks/\" target=\"_blank\">CoBlocks</a> forms.<br> t.b.d: The widget is available under <i>Advanced Fields</i> in the form builder. For the best protection add the widget to the last page in multi-page forms.",
+                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/coblocks/\" target=\"_blank\">CoBlocks</a> forms.<br> Please insert the Friendly Captcha block into each form which should be protected. If multiple CoBlocks forms are used on the same page, all of them must use Friendly Captcha.",
                 "type" => "checkbox"
             )
         );
