@@ -31,6 +31,7 @@
             "name": "frcaptcha/field-friendly-captcha",
             "title": "Friendly Captcha",
             "category": "design",
+            "icon": "shield-alt",
             "parent": [
                 "coblocks/form"
             ],
