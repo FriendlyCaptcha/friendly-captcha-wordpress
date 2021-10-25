@@ -6,13 +6,12 @@ if (is_admin()) {
     add_action( 'admin_menu', 'frcaptcha_options_page' );
 
     function frcaptcha_options_page() {
-        add_menu_page(
+        add_options_page(
             'Friendly Captcha',
             'Friendly Captcha',
             'manage_options',
             'friendly_captcha_admin',
             'frcaptcha_options_page_html',
-            'dashicons-shield-alt',
             30
         );
     }
