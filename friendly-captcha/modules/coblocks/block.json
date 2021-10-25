@@ -1,0 +1,13 @@
+{
+  "apiVersion": 2,
+  "name": "frcaptcha/field-friendly-captcha",
+  "title": "Friendly Captcha",
+  "category": "design",
+  "parent": [
+    "coblocks/form"
+  ],
+  "description": "Inserts FriendlyCaptcha widget",
+  "keywords": [
+    "captcha"
+  ]
+}
