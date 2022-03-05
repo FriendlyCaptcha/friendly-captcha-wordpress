@@ -51,6 +51,22 @@ if (is_admin()) {
             FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_wp_comments_logged_in_integration_active_name
         );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_wc_register_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_wc_login_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_wc_lost_password_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_wc_checkout_integration_active_name
+        );
 
         /*Widget settings */
         register_setting(
@@ -220,6 +236,54 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_wp_comments_logged_in_integration_active_name,
                 "description" => "Enable Friendly Captcha for WordPress Comments for users that are logged in to Wordpress.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_wc_register_integration_field',
+            'WooCommerce Register', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_wc_register_integration_active_name,
+                "description" => "Enable Friendly Captcha for the WooCommerce sign up form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_wc_login_integration_field',
+            'WooCommerce Login', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_wc_login_integration_active_name,
+                "description" => "Enable Friendly Captcha for the WooCommerce log in form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_wc_lost_password_integration_field',
+            'WooCommerce Lost Password', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_wc_lost_password_integration_active_name,
+                "description" => "Enable Friendly Captcha for the WooCommerce lost password form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_wc_checkout_integration_field',
+            'WooCommerce Checkout', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_wc_checkout_integration_active_name,
+                "description" => "Enable Friendly Captcha for the WooCommerce checkout form.",
                 "type" => "checkbox"
             )
         );
