@@ -33,6 +33,10 @@ if (is_admin()) {
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_fluentform_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_wp_register_integration_active_name
         );
         register_setting(
@@ -160,6 +164,18 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_coblocks_integration_active_name,
                 "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/coblocks/\" target=\"_blank\">CoBlocks</a> forms.<br> Please insert the Friendly Captcha block into each form which should be protected. If multiple CoBlocks forms are used on the same page, all of them must use Friendly Captcha.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_fluentform_integration_field',
+            'Fluentform Forms', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_fluentform_integration_active_name,
+                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/fluentform/\" target=\"_blank\">Fluentform</a> forms.<br>",
                 "type" => "checkbox"
             )
         );
