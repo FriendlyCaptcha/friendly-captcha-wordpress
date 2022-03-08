@@ -25,6 +25,7 @@
         public static $option_wpforms_integration_active_name = "frcaptcha_wpforms_integration_active";
         public static $option_gravity_forms_integration_active_name = "frcaptcha_gravity_forms_integration_active";
         public static $option_coblocks_integration_active_name = "frcaptcha_coblocks_integration_active";
+        public static $option_fluentform_integration_active_name = "frcaptcha_fluentform_integration_active";
 
         public static $option_wp_register_integration_active_name = "frcaptcha_wp_register_integration_active";
         public static $option_wp_login_integration_active_name = "frcaptcha_wp_login_integration_active";
@@ -92,6 +93,10 @@
 
         public function get_coblocks_active() {
             return get_option(FriendlyCaptcha_Plugin::$option_coblocks_integration_active_name) == 1;
+        }
+
+        public function get_fluentform_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_fluentform_integration_active_name) == 1;
         }
 
         public function get_wp_register_active() {
@@ -186,6 +191,10 @@
 
     if (FriendlyCaptcha_Plugin::$instance->get_coblocks_active()) {
         require plugin_dir_path( __FILE__ ) . '../modules/coblocks/coblocks.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_fluentform_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/fluentform/fluentform.php';
     }
 
     if (FriendlyCaptcha_Plugin::$instance->get_wp_register_active()) {
