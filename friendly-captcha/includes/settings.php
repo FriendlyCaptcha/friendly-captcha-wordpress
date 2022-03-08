@@ -71,6 +71,18 @@ if (is_admin()) {
             FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_wc_checkout_integration_active_name
         );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_um_login_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_um_register_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_um_reset_password_integration_active_name
+        );
 
         /*Widget settings */
         register_setting(
@@ -221,8 +233,8 @@ if (is_admin()) {
         );
 
         add_settings_field(
-            'frcaptcha_settings_wp_forgot_password_integration_field',
-            'WordPress Forgot Password', 'frcaptcha_settings_field_callback',
+            'frcaptcha_settings_wp_reset_password_integration_field',
+            'WordPress Reset Password', 'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -300,6 +312,42 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_wc_checkout_integration_active_name,
                 "description" => "Enable Friendly Captcha for the WooCommerce checkout form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_um_login_integration_field',
+            'Ultimate Member Login', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_um_login_integration_active_name,
+                "description" => "Enable Friendly Captcha for the Ultimate Member login form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_um_register_integration_field',
+            'Ultimate Member Register', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_um_register_integration_active_name,
+                "description" => "Enable Friendly Captcha for the Ultimate Member sign up form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_um_reset_password_integration_field',
+            'Ultimate Member Reset Password', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_um_reset_password_integration_active_name,
+                "description" => "Enable Friendly Captcha for the Ultimate Member reset password form.",
                 "type" => "checkbox"
             )
         );

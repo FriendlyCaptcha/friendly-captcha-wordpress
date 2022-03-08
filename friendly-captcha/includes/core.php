@@ -38,6 +38,10 @@
         public static $option_wc_lost_password_integration_active_name = "frcaptcha_wc_lost_password_integration_active";
         public static $option_wc_checkout_integration_active_name = "frcaptcha_wc_checkout_integration_active";
         
+        public static $option_um_login_integration_active_name = "frcaptcha_um_login_integration_active";
+        public static $option_um_register_integration_active_name = "frcaptcha_um_register_integration_active";
+        public static $option_um_reset_password_integration_active_name = "frcaptcha_um_reset_password_integration_active";
+        
 
         public static $option_widget_language_name = "frcaptcha_widget_language";
         public static $option_widget_dark_theme_active_name = "frcaptcha_widget_dark_theme_active";
@@ -135,6 +139,18 @@
             return get_option(FriendlyCaptcha_Plugin::$option_wc_checkout_integration_active_name) == 1;
         }
 
+        public function get_um_login_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_um_login_integration_active_name) == 1;
+        }
+
+        public function get_um_register_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_um_register_integration_active_name) == 1;
+        }
+
+        public function get_um_reset_password_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_um_reset_password_integration_active_name) == 1;
+        }
+
         /* Widget options */
 
         public function get_widget_language() {
@@ -227,5 +243,17 @@
 
     if (FriendlyCaptcha_Plugin::$instance->get_wc_checkout_active()) {
         require plugin_dir_path( __FILE__ ) . '../modules/woocommerce/woocommerce_checkout.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_um_login_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/ultimate-member/ultimate-member_login.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_um_register_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/ultimate-member/ultimate-member_register.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_um_reset_password_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/ultimate-member/ultimate-member_reset_password.php';
     }
 // }
