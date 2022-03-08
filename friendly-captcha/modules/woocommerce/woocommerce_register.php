@@ -29,7 +29,7 @@ function frcaptcha_wc_register_validate($validation_error) {
         return;
     }
 
-    $errorPrefix = '<strong>' . __( 'Error', 'wp-captcha' ) . '</strong> : ';
+    $errorPrefix = '<strong>' . __( 'Error', 'frcaptcha' ) . '</strong> : ';
 	$solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 	
 	if ( empty( $solution ) ) {
