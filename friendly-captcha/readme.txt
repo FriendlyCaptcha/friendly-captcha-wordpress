@@ -63,6 +63,10 @@ A: Please see our website at: https://friendlycaptcha.com/
 * WordPress Register Form
 * WordPress Lost Password Form
 * Wordpress Comments
+* WooCommerce Login Form
+* WooCommerce Register Form
+* WooCommerce Checkout Form
+* WooCommerce Lost Password Form
 * WPForms
 * Contact Form 7
 * Gravity Forms

@@ -31,6 +31,11 @@
         public static $option_wp_reset_password_integration_active_name = "frcaptcha_wp_reset_password_integration_active";
         public static $option_wp_comments_integration_active_name = "frcaptcha_wp_comments_integration_active";
         public static $option_wp_comments_logged_in_integration_active_name = "frcaptcha_wp_comments_logged_in_integration_active";
+
+        public static $option_wc_register_integration_active_name = "frcaptcha_wc_register_integration_active";
+        public static $option_wc_login_integration_active_name = "frcaptcha_wc_login_integration_active";
+        public static $option_wc_lost_password_integration_active_name = "frcaptcha_wc_lost_password_integration_active";
+        public static $option_wc_checkout_integration_active_name = "frcaptcha_wc_checkout_integration_active";
         
 
         public static $option_widget_language_name = "frcaptcha_widget_language";
@@ -109,6 +114,22 @@
             return get_option(FriendlyCaptcha_Plugin::$option_wp_comments_logged_in_integration_active_name) == 1;
         }
 
+        public function get_wc_login_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_wc_login_integration_active_name) == 1;
+        }
+
+        public function get_wc_register_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_wc_register_integration_active_name) == 1;
+        }
+
+        public function get_wc_lost_password_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_wc_lost_password_integration_active_name) == 1;
+        }
+
+        public function get_wc_checkout_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_wc_checkout_integration_active_name) == 1;
+        }
+
         /* Widget options */
 
         public function get_widget_language() {
@@ -181,5 +202,21 @@
 
     if (FriendlyCaptcha_Plugin::$instance->get_wp_comments_active()) {
         require plugin_dir_path( __FILE__ ) . '../modules/wordpress/wordpress_comments.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_wc_login_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/woocommerce/woocommerce_login.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_wc_register_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/woocommerce/woocommerce_register.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_wc_lost_password_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/woocommerce/woocommerce_lost_password.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_wc_checkout_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/woocommerce/woocommerce_checkout.php';
     }
 // }
