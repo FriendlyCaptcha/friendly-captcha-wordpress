@@ -67,6 +67,7 @@ A: Please see our website at: https://friendlycaptcha.com/
 * Contact Form 7
 * Gravity Forms
 * Coblocks
+* FluentForm
 
 If you see an integration that's missing, please open a pull request:
 https://github.com/FriendlyCaptcha/friendly-captcha-wordpress
