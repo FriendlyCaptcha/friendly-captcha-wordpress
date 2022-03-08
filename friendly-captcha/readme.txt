@@ -80,6 +80,10 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 == Changelog ==
 
+= Unreleased (will be 1.6.0) =
+* Add support for WooCommerce (thank you @TheZoker!)
+* Add support for FluentForm (thank you @TheZoker!)
+
 = 1.5.1 =
 * Fix Coblocks integration
 
