@@ -61,12 +61,15 @@ A: Please see our website at: https://friendlycaptcha.com/
 
 * WordPress Login Form
 * WordPress Register Form
-* WordPress Lost Password Form
+* WordPress Reset Password Form
 * Wordpress Comments
 * WooCommerce Login Form
 * WooCommerce Register Form
 * WooCommerce Checkout Form
 * WooCommerce Lost Password Form
+* Ultimate Member Login Form
+* Ultimate Member Register Form
+* Ultimate Member Reset Password Form
 * WPForms
 * Contact Form 7
 * Gravity Forms
@@ -83,6 +86,7 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 = Unreleased (will be 1.6.0) =
 * Add support for WooCommerce (thank you @TheZoker!)
 * Add support for FluentForm (thank you @TheZoker!)
+* Add support for Ultimate Member (thank you @TheZoker!)
 
 = 1.5.1 =
 * Fix Coblocks integration
