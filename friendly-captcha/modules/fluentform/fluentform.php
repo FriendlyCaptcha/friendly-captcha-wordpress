@@ -25,7 +25,7 @@ function frcaptcha_fluentform_validate($insert_data, $data, $form) {
         return;
     }
 
-    $solution = $data['frc-captcha-solution'];
+	$solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 
     if ( empty( $solution ) ) {
         $error_message = FriendlyCaptcha_Plugin::default_error_user_message() . __(" (captcha missing)", "frcaptcha");
