@@ -55,7 +55,7 @@ Join thousands of organizations in switching to a privacy-first anti-bot solutio
 
 The Friendly Captcha plugin supports WordPress core and many plugins with forms automatically. 
 
-To use Friendly Captcha, you can create an account at [www.friendlycaptcha.com](https://friendlycaptcha.com/) and create a Site Key and API Key there. It is best to copy both keys and save them in a safe place. Then go to the Friendly Captcha plugin settings page and enter the created site key and API key. Below that, select the forms you want to protect. Then save these settings by clicking on the "Save Changes" button at the end of the settings page.
+To use Friendly Captcha, you can create an account at [www.friendlycaptcha.com](https://friendlycaptcha.com/) and create a Site Key and API Key there. It is best to copy both keys and save them in a safe place. Then go to the Friendly Captcha plugin settings page and enter the created site key and API key. Below that, select the forms you want to protect. Finally, save these settings by clicking on the "Save Changes" button at the end of the settings page.
 
 = You don't support a certain plugin. How can I get support for it added? =
 Open a PR on GitHub [here](https://github.com/FriendlyCaptcha/friendly-captcha-wordpress) or just email the authors of the plugin itself. Adding Friendly Captcha support is typically quite a quick task for most plugins.
