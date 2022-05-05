@@ -121,7 +121,7 @@ if (is_admin()) {
             'frcaptcha_general_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_sitekey_name,
-                "description" => "Paste your application's sitekey value.<br>Don't have an application yet? Create one <a href=\"https://friendlycaptcha.com/account\" target=\"_blank\">here</a>.",
+                "description" => "Paste your application's sitekey value.<br>Don't have an application yet? Create one <a href=\"https://app.friendlycaptcha.com/dashboard/\" target=\"_blank\">here</a>.",
                 "type" => "text"
             )
         );
@@ -133,7 +133,7 @@ if (is_admin()) {
             'frcaptcha_general_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_api_key_name,
-                "description" => "Create a new API key in the <a href=\"https://app.friendlycaptcha.com/account\" target=\"_blank\">account panel</a> and paste the value here. Keep this one secret!",
+                "description" => "Create a new API key in the <a href=\"https://app.friendlycaptcha.com/dashboard/\" target=\"_blank\">account panel</a> and paste the value here. Keep this one secret!",
                 "type" => "password"
             )
         );
@@ -370,7 +370,7 @@ if (is_admin()) {
             'frcaptcha_widget_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_widget_language_name,
-                "description" => "Set the language for the widget. Need another language? <a href=\"http://docs.friendlycaptcha.com/#/widget_api?id=data-lang-attribute\">Help us translate</a>.",
+                "description" => "Set the language for the widget. Need another language? <a href=\"https://docs.friendlycaptcha.com/#/widget_api?id=data-lang-attribute\">Help us translate</a>.",
             )
         );
 
@@ -415,7 +415,7 @@ if (is_admin()) {
             'frcaptcha_endpoint_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_eu_puzzle_endpoint_active_name,
-                "description" => "Enable the dedicated EU endpoint service, see the <a href=\"http://docs.friendlycaptcha.com/#/eu_endpoint\">documentation</a> for more details.",
+                "description" => "Enable the dedicated EU endpoint service, see the <a href=\"https://docs.friendlycaptcha.com/#/eu_endpoint\">documentation</a> for more details.",
                 "type" => "checkbox"
             )
         );
