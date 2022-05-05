@@ -38,9 +38,9 @@ function frcaptcha_widget_section_callback()
 
 function frcaptcha_endpoint_section_callback()
 {
-    echo '<p><b>⚠️ If you are not on a Friendly Captcha Business or Enterprise plan this section is not relevant for you.</b></p>
+    echo '<p><b>⚠️ If you are not on a Friendly Captcha Advanced or Enterprise plan, this section is not relevant for you.</b></p>
     <p>Endpoint for the widget to talk to. If no boxes are selected the global endpoint is used.</p>
-    <p>To use the dedicated EU endpoint must enable it for your app in the <a href="https://app.friendlycaptcha.com/account">dashboard</a>. If you are seeing 403 erorrs, please ensure this endpoint is enabled in the Friendly Captcha dashboard for your sitekey.</p>';
+    <p>To use the dedicated EU endpoint must enable it for your app in the <a href="https://app.friendlycaptcha.com/dashboard/">dashboard</a>. If you are seeing 403 erorrs, please ensure this endpoint is enabled in the Friendly Captcha dashboard for your sitekey.</p>';
 }
 
 // field content cb
