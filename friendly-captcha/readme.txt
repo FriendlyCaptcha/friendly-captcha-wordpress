@@ -46,16 +46,22 @@ Join thousands of organizations in switching to a privacy-first anti-bot solutio
  
 1. Upload `friendly-captcha` folder to the `/wp-content/plugins/` directory  
 2. Activate the plugin through the 'Plugins' menu in WordPress  
-3. Enter your Site Key and API Key in the Friendly Captcha menu in WordPress  
-4. Enable desired Integrations
+3. Enter your Site Key and API Key in the Settings -> Friendly Captcha menu in WordPress  
+4. Enable the desired integrations
  
 == Frequently Asked Questions ==
 
-Q: You don't support a certain plugin. How can I get support for it added?
-A: Open a PR on github: https://github.com/FriendlyCaptcha/friendly-captcha-wordpress or just email the authors of the plugin itself. Adding Friendly Captcha support is typically quite a quick task for most plugins.
+= How to use the Friendly Captcha plugin? =
 
-Q: Where can I get more information about Friendly Captcha?  
-A: Please see our website at: https://friendlycaptcha.com/
+The Friendly Captcha plugin supports WordPress core and many plugins with forms automatically. 
+
+To use Friendly Captcha, you can create an account at [www.friendlycaptcha.com](https://friendlycaptcha.com/) and create a Site Key and API Key there. It is best to copy both keys and save them in a safe place. Then go to the Friendly Captcha plugin settings page and enter the created site key and API key. Below that, select the forms you want to protect. Then save these settings by clicking on the "Save Changes" button at the end of the settings page.
+
+= You don't support a certain plugin. How can I get support for it added? =
+Open a PR on GitHub [here](https://github.com/FriendlyCaptcha/friendly-captcha-wordpress) or just email the authors of the plugin itself. Adding Friendly Captcha support is typically quite a quick task for most plugins.
+
+= Where can I get more information about Friendly Captcha? =
+Please see our website at: [www.friendlycaptcha.com](https://friendlycaptcha.com/)
 
 == Forms and Plugins Supported ==
 
@@ -76,8 +82,7 @@ A: Please see our website at: https://friendlycaptcha.com/
 * Coblocks
 * FluentForm
 
-If you see an integration that's missing, please open a pull request:
-https://github.com/FriendlyCaptcha/friendly-captcha-wordpress
+If you see an integration that's missing, please [open a pull request](https://github.com/FriendlyCaptcha/friendly-captcha-wordpress)
 
 However, you may wish to email the authors of plugins you'd like to support Friendly Captcha: it will usually take them only an hour or two to add native support if they choose to do so. This will simplify your use of Friendly Captcha, and is the best solution in the long run.
 
