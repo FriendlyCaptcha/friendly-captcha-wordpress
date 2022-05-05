@@ -391,7 +391,7 @@ if (is_admin()) {
         // Section
         add_settings_section(
             'frcaptcha_endpoint_settings_section',
-            'Endpoint Settings (advanced, requires Business or Enterprise account)',
+            'Endpoint Settings (optional)',
             'frcaptcha_endpoint_section_callback',
             'friendly_captcha_admin'
         );
