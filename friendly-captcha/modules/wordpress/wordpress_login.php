@@ -44,3 +44,13 @@ function frcaptcha_wp_login_validate($user, $username, $password) {
 
     return $user;
 }
+
+
+/* Remove the captcha hook, when Ultimate Member is used, so it does not get called twice */
+add_filter( 'um_submit_form_errors_hook_login', 'remove_filter_authenticate' );
+
+function remove_filter_authenticate( $credentials ) {
+    remove_filter( 'authenticate', 'frcaptcha_wp_login_validate', 20 );
+
+    return $credentials;
+}
