@@ -88,6 +88,9 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 == Changelog ==
 
+= 1.6.3 (unreleased) =
+* Fix for Ultimate Member login integration (thank you @TheZoker!)
+
 = 1.6.2 =
 * Update Friendly Captcha dashboard links
 
