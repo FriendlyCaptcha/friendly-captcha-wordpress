@@ -26,7 +26,7 @@ class Elementor_Friendly_Captcha_Control extends \Elementor\Base_Data_Control {
 		$control_uid = $this->get_control_uid();
 		$atts = "data-solution-field-name=\"" . $control_uid . "\"";
 		$plugin = FriendlyCaptcha_Plugin::$instance;
-    if (!$plugin->is_configured() or !$plugin->get_wpforms_active()) {
+    if (!$plugin->is_configured() or !$plugin->get_elementor_active()) {
         return;
     }
 
