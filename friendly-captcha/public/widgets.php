@@ -79,10 +79,33 @@ function frcaptcha_generate_widget_tag_from_plugin($plugin) {
     return frcaptcha_generate_widget_tag($sitekey, $lang, $extra_attributes, $theme);
 }
 
+function frcaptcha_generate_widget_tag_from_plugin_with_attributes($plugin, $atts) {
+	if (!$plugin->is_configured()) {
+		return "";
+	}
+
+	$sitekey = $plugin->get_sitekey();
+	$lang = $plugin->get_widget_language();
+
+    $extra_attributes = "";
+    $global = $plugin->get_global_puzzle_endpoint_active();
+    $eu = $plugin->get_eu_puzzle_endpoint_active();
+    
+    if ($global && $eu) {
+        $extra_attributes = $atts . " data-puzzle-endpoint=\"https://eu-api.friendlycaptcha.eu/api/v1/puzzle,https://api.friendlycaptcha.com/api/v1/puzzle\"";
+    } else if ($eu) {
+        $extra_attributes = $atts . " data-puzzle-endpoint=\"https://eu-api.friendlycaptcha.eu/api/v1/puzzle\"";
+    }
+
+    $theme = $plugin->get_widget_dark_theme_active() ? "dark" : "";
+
+    return frcaptcha_generate_widget_tag($sitekey, $lang, $extra_attributes, $theme);
+}
+
 function frcaptcha_generate_widget_tag($sitekey, $language, $extra_attributes = "", $theme = "") {
 	return sprintf(
         '<div class="frc-captcha %s" data-sitekey="%s" data-lang="%s" %s></div>
-		<noscript>You need to enable Javascript for the anti-spam check.</noscript>',
+		<noscript>You need to enable Javascript for the anti-spam check.</noscript> <h1> TODO: Remove </h1>',
 	esc_html($theme),
     esc_html($sitekey),
     esc_html($language),
@@ -90,4 +113,5 @@ function frcaptcha_generate_widget_tag($sitekey, $language, $extra_attributes = 
 }
 
 function frcaptcha_generate_extra_widget_attributes($plugin) {
+    
 }
