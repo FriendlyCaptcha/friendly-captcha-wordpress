@@ -5,6 +5,7 @@ class Elementor_Friendly_Captcha_Control extends \Elementor\Base_Data_Control {
 		return [
 			'label_block' => true,
 			'separator' => 'after',
+			'show_label' => 'false'
 		];
 	}
 

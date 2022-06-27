@@ -15,6 +15,20 @@ function register_friendlycaptcha_control( $controls_manager ) {
 }
 add_action( 'elementor/controls/register', 'register_friendlycaptcha_control' );
 
+function register_field_type($field_types) {
+    $customControls = array(
+        'frcaptcha' => esc_html( 'Friendly Captcha')
+    );
+    $newTypes = array_merge($field_types, $customControls);
+    return $newTypes;
+}
+add_filter( 'elementor_pro/forms/field_types', 'register_field_type' );
+
+function rende_control($field_types) {
+    
+}
+add_filter( 'elementor_pro/forms/content_template/field/frcaptcha', 'render_control' );
+
 function register_friendlycaptcha_widget( $widgets_manager ) {
 
 	require_once( __DIR__ . '/widgets/friendly-captcha-widget.php' );
@@ -25,20 +39,20 @@ function register_friendlycaptcha_widget( $widgets_manager ) {
 add_action( 'elementor/widgets/register', 'register_friendlycaptcha_widget' );
 
 
-function change_form_widget_content( $widget_content, $widget ) {
+// function change_form_widget_content( $widget_content, $widget ) {
 
-	if ( 'form' === $widget->get_name() ) {
-        $plugin = FriendlyCaptcha_Plugin::$instance;
-        if (!$plugin->is_configured() or !$plugin->get_elementor_active()) {
-            return $widget_content .= '<h1>Testing</h1>';
-        }
-        $widget_content .= frcaptcha_generate_widget_tag_from_plugin($plugin);
-	}
+// 	if ( 'form' === $widget->get_name() ) {
+//         $plugin = FriendlyCaptcha_Plugin::$instance;
+//         if (!$plugin->is_configured() or !$plugin->get_elementor_active()) {
+//             return $widget_content .= '<h1>Testing</h1>';
+//         }
+//         $widget_content .= frcaptcha_generate_widget_tag_from_plugin($plugin);
+// 	}
 
-	return $widget_content;
+// 	return $widget_content;
 
-}
-add_filter( 'elementor/widget/render_content', 'change_form_widget_content', 10, 2 );
+// }
+// add_filter( 'elementor/widget/render_content', 'change_form_widget_content', 10, 2 );
 
 // function inject_into_form_widget ( $element, $args ) {
 //     $element->add_control( 'friendly_captcha',
@@ -69,11 +83,3 @@ add_filter( 'elementor/widget/render_content', 'change_form_widget_content', 10,
 //     );
 // }, 10, 2);
 
-function register_field_type($field_types) {
-    $customControls = array(
-        'frcaptcha' => esc_html( 'Friendly Captcha')
-    );
-    $newTypes = array_merge($field_types, $customControls);
-    return $newTypes;
-}
-add_filter( 'elementor_pro/forms/field_types', 'register_field_type' );
