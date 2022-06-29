@@ -24,17 +24,21 @@ function register_field_type($field_types) {
 }
 add_filter( 'elementor_pro/forms/field_types', 'register_field_type' );
 
-function rende_control($field_types) {
+/**
+* @param array $item       The field value.
+* @param int   $item_index The field index.
+* @param Form  $this       An instance of the form.
+*/
+function render_field($item, $item_index, $this) {
     
 }
-add_filter( 'elementor_pro/forms/content_template/field/frcaptcha', 'render_control' );
+add_filter( 'elementor_pro/forms/render/item/frcaptcha', 'render_control' );
 
 function register_friendlycaptcha_widget( $widgets_manager ) {
 
 	require_once( __DIR__ . '/widgets/friendly-captcha-widget.php' );
 
 	$widgets_manager->register( new \Elementor_Friendly_Captcha_Widget() );
-
 }
 add_action( 'elementor/widgets/register', 'register_friendlycaptcha_widget' );
 
