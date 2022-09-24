@@ -91,8 +91,7 @@ class Elementor_Form_Friendlycaptcha_Field extends \ElementorPro\Modules\Forms\F
 			return;
 		}
 
-        // I haven't figured out how to remove the label yet
-        $control_data = $this->remove_control_form_field_type( 'width', $control_data );
+        $control_data = $this->remove_control_form_field_type( 'required', $control_data ); // The captcha is always required
 
 		$widget->update_control( 'form_fields', $control_data );
 	}
@@ -113,4 +112,42 @@ class Elementor_Form_Friendlycaptcha_Field extends \ElementorPro\Modules\Forms\F
         }
         return $control_data;
     }
+
+    public function __construct() {
+		parent::__construct();
+		add_action( 'elementor/preview/init', [ $this, 'editor_preview_footer' ] );
+	}
+
+	public function editor_preview_footer() {
+		add_action( 'wp_footer', [ $this, 'content_template_script' ] );
+	}
+
+	public function content_template_script() {
+		?>
+		<script>
+		jQuery( document ).ready( () => {
+
+			elementor.hooks.addFilter(
+				'elementor_pro/forms/content_template/field/<?php echo $this->get_type(); ?>',
+				function ( inputField, item, i ) {
+					const fieldId = `form_field_${i}`;
+
+                    // We render a placeholder instead of the real widget here
+                    // The real widget messed with the Elementor editor
+					return `<div id="${fieldId}" style="
+                        position: relative;
+	                    min-width: 250px;
+	                    max-width: 312px;
+                        text-align: center;
+	                    border: 1px solid #f4f4f4;
+	                    padding-bottom: 20px;
+                        padding-top: 20px;
+	                    background-color: #fff;">Anti-Robot Verification</div>`;
+				}, 10, 3
+			);
+
+		});
+		</script>
+		<?php
+	}
 }
