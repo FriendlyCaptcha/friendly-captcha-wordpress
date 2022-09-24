@@ -21,6 +21,20 @@ if (!defined('WPINC')) {
 
 define('FRIENDLY_CAPTCHA_VERSION', '1.6.0');
 define('FRIENDLY_CAPTCHA_FRIENDLY_CHALLENGE_VERSION', '0.9.1');
+define('FRIENDLY_CAPTCHA_SUPPORTED_LANGUAGES', [
+	"en" => "English",
+	"de" => "German",
+	"fr" => "French",
+	"it" => "Italian",
+	"pt" => "Portuguese",
+	"es" => "Spanish",
+	"ca" => "Catalan",
+	"nl" => "Dutch",
+	"da" => "Danish",
+	"ja" => "Japanese",
+	"ru" => "Russian",
+	"sv" => "Swedish",
+]);
 
 register_activation_hook(__FILE__, 'frcaptcha_activate');
 
