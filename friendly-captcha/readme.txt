@@ -88,6 +88,12 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 == Changelog ==
 
+= 1.7.0 (unreleased) =
+* Add support for Elementor Pro Forms
+* Pull default widget language from wordpress
+* Updated to friendly-challenge widget version 0.9.7.
+* Added support for Turkish, Greek, Ukrainian, Bulgarian, Czech, Slovak, Norwegian, Finnish, Latvian, Lithuanian, Polish, Estonian, Croatian, Serbian, Hungarian, Romanian, and Chinese langauge.
+
 = 1.6.3 (unreleased) =
 * Fix for Ultimate Member login integration (thank you @TheZoker!)
 
