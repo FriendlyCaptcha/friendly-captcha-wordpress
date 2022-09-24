@@ -37,6 +37,10 @@ if (is_admin()) {
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_elementor_forms_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_wp_register_integration_active_name
         );
         register_setting(
@@ -204,6 +208,18 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_fluentform_integration_active_name,
                 "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/fluentform/\" target=\"_blank\">Fluentform</a> forms.<br>",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_elementor_integration_field',
+            'Elementor', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_elementor_forms_integration_active_name,
+                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/elementor/\" target=\"_blank\">Elementor</a> forms.",
                 "type" => "checkbox"
             )
         );
