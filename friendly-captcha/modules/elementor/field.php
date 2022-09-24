@@ -43,6 +43,8 @@ class Elementor_Form_Friendlycaptcha_Field extends \ElementorPro\Modules\Forms\F
         
 		echo frcaptcha_generate_widget_tag_from_plugin($plugin);
         frcaptcha_enqueue_widget_scripts();
+
+        echo "<style>.frc-captcha {max-width: 100%; width:100%}</style>";
 	}
 
 	/**
@@ -136,8 +138,7 @@ class Elementor_Form_Friendlycaptcha_Field extends \ElementorPro\Modules\Forms\F
                     // The real widget messed with the Elementor editor
 					return `<div id="${fieldId}" style="
                         position: relative;
-	                    min-width: 250px;
-	                    max-width: 312px;
+	                    width: 100%;
                         text-align: center;
 	                    border: 1px solid #f4f4f4;
 	                    padding-bottom: 20px;
