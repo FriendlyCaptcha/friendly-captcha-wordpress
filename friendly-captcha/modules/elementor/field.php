@@ -43,8 +43,17 @@ class Elementor_Form_Friendlycaptcha_Field extends \ElementorPro\Modules\Forms\F
         
 		echo frcaptcha_generate_widget_tag_from_plugin($plugin);
         frcaptcha_enqueue_widget_scripts();
-
         echo "<style>.frc-captcha {max-width: 100%; width:100%}</style>";
+
+        // We render a hidden field so Elementor knows where to display errors
+        $form->add_render_attribute(
+			'input' . $item_index,
+			[
+				'type'        => 'text',
+				'style'       => 'display: none',
+			]
+		);
+		echo '<input ' . $form->get_render_attribute_string( 'input' . $item_index ) . '>';
 	}
 
 	/**
