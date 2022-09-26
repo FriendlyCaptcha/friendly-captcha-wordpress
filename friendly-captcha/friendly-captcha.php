@@ -50,7 +50,7 @@ define('FRIENDLY_CAPTCHA_SUPPORTED_LANGUAGES', [
 	"sr" =>	"Serbian",
 	"hu" => "Hungarian",
 	"ro" => "Romanian",
-	"zh" => "Chinese",
+	"zh" => "Chinese (simplified)",
 ]);
 
 register_activation_hook(__FILE__, 'frcaptcha_activate');
