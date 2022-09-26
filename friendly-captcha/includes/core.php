@@ -160,7 +160,14 @@
 
         public function get_widget_language() {
             $lang = get_option(FriendlyCaptcha_Plugin::$option_widget_language_name);
-            return empty($lang) ? "en" : $lang; // Default to en
+            $lang = empty($lang) ? "automatic" : $lang; // Default to automatic
+            if ( $lang == "automatic" ) {
+                $lang = substr(get_locale(), 0, 2);
+                if ( ! array_key_exists($lang, FRIENDLY_CAPTCHA_SUPPORTED_LANGUAGES) ) {
+                    $lang = "en"; // Fallback to en
+                }
+            }
+            return $lang;
         }
 
         public function get_widget_dark_theme_active() {

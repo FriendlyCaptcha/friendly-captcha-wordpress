@@ -74,46 +74,18 @@ function frcaptcha_widget_language_field_callback(array $args)
 
     // Value of the option
     $setting = get_option($option_name);
-    $value = isset($setting) ? esc_attr($setting) : 'en';
+    $value = isset($setting) ? esc_attr($setting) : 'automatic';
 ?>
     <select autcomplete="none" type="select" name="<?php echo $option_name; ?>" id="<?php echo $option_name; ?>">
-        <option value="en" <?php if ($value == "en") {
+        <option value="automatic" <?php if ($value == "automatic") {
                                 echo "selected ";
-                            } ?>>English</option>
-        <option value="de" <?php if ($value == "de") {
-                                echo "selected ";
-                            } ?>>German</option>
-        <option value="fr" <?php if ($value == "fr") {
-                                echo "selected ";
-                            } ?>>French</option>
-        <option value="it" <?php if ($value == "it") {
-                                echo "selected ";
-                            } ?>>Italian</option>
-        <option value="pt" <?php if ($value == "pt") {
-                                echo "selected ";
-                            } ?>>Portuguese</option>
-        <option value="es" <?php if ($value == "es") {
-                                echo "selected ";
-                            } ?>>Spanish</option>
-        <option value="ca" <?php if ($value == "ca") {
-                                echo "selected ";
-                            } ?>>Catalan</option>
-        <option value="nl" <?php if ($value == "nl") {
-                                echo "selected ";
-                            } ?>>Dutch</option>
-        <option value="da" <?php if ($value == "da") {
-                                echo "selected ";
-                            } ?>>Danish</option>
-        <option value="ja" <?php if ($value == "ja") {
-                                echo "selected ";
-                            } ?>>Japanese</option>
-        <option value="ru" <?php if ($value == "ru") {
-                                echo "selected ";
-                            } ?>>Russian</option>
-        <option value="sv" <?php if ($value == "sv") {
-                                echo "selected ";
-                            } ?>>Swedish</option>
-
+                            } ?>>Automatic</option>
+        <?php 
+            foreach (FRIENDLY_CAPTCHA_SUPPORTED_LANGUAGES as $code => $name) {
+                $selected = $code == $value ? 'selected' : '';
+                echo "<option value=\"{$code}\" {$selected}>{$name}</option>";
+            }
+        ?>
     </select>
     <p class="description"><?php echo $description ?></p>
 <?php
