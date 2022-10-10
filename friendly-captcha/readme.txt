@@ -68,19 +68,20 @@ Please see our website at: [www.friendlycaptcha.com](https://friendlycaptcha.com
 * WordPress Login Form
 * WordPress Register Form
 * WordPress Reset Password Form
-* Wordpress Comments
+* WordPress Comments
+* CoBlocks
+* Contact Form 7
+* Elementor Pro Forms
+* FluentForm
+* Gravity Forms
+* Ultimate Member Login Form
+* Ultimate Member Register Form
+* Ultimate Member Reset Password Form
 * WooCommerce Login Form
 * WooCommerce Register Form
 * WooCommerce Checkout Form
 * WooCommerce Lost Password Form
-* Ultimate Member Login Form
-* Ultimate Member Register Form
-* Ultimate Member Reset Password Form
 * WPForms
-* Contact Form 7
-* Gravity Forms
-* Coblocks
-* FluentForm
 
 If you see an integration that's missing, please [open a pull request](https://github.com/FriendlyCaptcha/friendly-captcha-wordpress)
 
