@@ -65,11 +65,11 @@ function frcaptcha_wpcf7_friendly_captcha_verify_response($spam)
 	$submission = WPCF7_Submission::get_instance();
 
 	if (empty($solution)) {
-		$spam = true;
 		$submission->add_spam_log(array(
 			'agent' => 'friendly-captcha',
 			'reason' => __('FriendlyCaptcha solution value frc-captcha-solution was missing', 'frcaptcha'),
 		));
+		return true;
 	}
 
 	$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
