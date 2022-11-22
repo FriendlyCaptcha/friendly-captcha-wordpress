@@ -146,18 +146,6 @@ if (is_admin()) {
             )
         );
 
-        add_settings_field(
-            'frcaptcha_settings_skip_style_injection_field',
-            'Disable Style Injection', 'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_general_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_skip_style_injection,
-                "description" => "Don't load the CSS-Styles for the widget. Use this if you want to style the widget yourself.",
-                "type" => "checkbox"
-            )
-        );
-
         /* Integrations section */
 
         // Section
@@ -414,6 +402,18 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_widget_dark_theme_active_name,
                 "description" => "Enable a dark theme for Friendly Captcha widgets.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_skip_style_injection_field',
+            'Disable Style Injection', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_widget_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_skip_style_injection,
+                "description" => "Don't load the CSS-Styles for the widget. Use this if you want to style the widget yourself.",
                 "type" => "checkbox"
             )
         );
