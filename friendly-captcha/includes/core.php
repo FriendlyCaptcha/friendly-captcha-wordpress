@@ -19,6 +19,7 @@
         public static $option_group = "frcaptcha_options";
         public static $option_sitekey_name = "frcaptcha_sitekey";
         public static $option_api_key_name = "frcaptcha_api_key";
+        public static $option_skip_style_injection = "frcaptcha_skip_style_injection";
 
         // Integrations
         public static $option_contact_form_7_integration_active_name = "frcaptcha_contact_form_7_integration_active";
@@ -82,6 +83,10 @@
 
         public function get_api_key() {
             return trim(get_option(FriendlyCaptcha_Plugin::$option_api_key_name));
+        }
+
+        public function get_skip_style_injection() {
+            return get_option(FriendlyCaptcha_Plugin::$option_skip_style_injection) == 1;
         }
 
         public function get_contact_form_7_active() {
