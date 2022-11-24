@@ -9,7 +9,7 @@ add_filter( 'hf_form_html', function( $html ) {
     frcaptcha_enqueue_widget_scripts();
 
     $widget = frcaptcha_generate_widget_tag_from_plugin($plugin);
-    $html = str_replace( '</form>', $widget, $html );
+    $html = str_replace( '</form>', $widget . '</form>', $html );
 	return $html;
 });
 
