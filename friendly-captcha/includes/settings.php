@@ -41,6 +41,10 @@ if (is_admin()) {
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_html_forms_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_wp_register_integration_active_name
         );
         register_setting(
@@ -220,6 +224,18 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_elementor_forms_integration_active_name,
                 "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/elementor/\" target=\"_blank\">Elementor Pro</a> forms.<br> The widget is available as a field type in Elementor Pro form editor. Add it as a field to the forms that you want to protect.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_html_forms_integration_field',
+            'HTML Forms', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_html_forms_integration_active_name,
+                "description" => "Enable Friendly Captcha for <a href=\"https://de.wordpress.org/plugins/html-forms/\" target=\"_blank\">HTML Forms</a>.",
                 "type" => "checkbox"
             )
         );

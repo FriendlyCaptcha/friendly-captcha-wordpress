@@ -27,6 +27,7 @@
         public static $option_coblocks_integration_active_name = "frcaptcha_coblocks_integration_active";
         public static $option_fluentform_integration_active_name = "frcaptcha_fluentform_integration_active";
         public static $option_elementor_forms_integration_active_name = "frcaptcha_elementor_integration_active";
+        public static $option_html_forms_integration_active_name = "frcaptcha_html_forms_integration_active";
 
         public static $option_wp_register_integration_active_name = "frcaptcha_wp_register_integration_active";
         public static $option_wp_login_integration_active_name = "frcaptcha_wp_login_integration_active";
@@ -106,6 +107,10 @@
 
         public function get_elementor_active() {
             return get_option(FriendlyCaptcha_Plugin::$option_elementor_forms_integration_active_name) == 1;
+        }
+
+        public function get_html_forms_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_html_forms_integration_active_name) == 1;
         }
 
         public function get_wp_register_active() {
@@ -227,6 +232,10 @@
 
     if (FriendlyCaptcha_Plugin::$instance->get_elementor_active()) {
         require plugin_dir_path( __FILE__ ) . '../modules/elementor/elementor.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_html_forms_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/html-forms/html-forms.php';
     }
 
     if (FriendlyCaptcha_Plugin::$instance->get_wp_register_active()) {
