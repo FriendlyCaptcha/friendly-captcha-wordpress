@@ -83,9 +83,7 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 
 		$is_form_editor  = $this->is_form_editor();
 
-		add_action( 'wp_footer', function() {
-			frcaptcha_enqueue_widget_scripts();
-		});
+		frcaptcha_enqueue_widget_scripts();
 			
 		add_action( 'gform_preview_footer', array( $this, 'ensure_frcaptcha_init' ) );
 
