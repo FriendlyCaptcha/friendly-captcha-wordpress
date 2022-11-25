@@ -89,6 +89,11 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 == Changelog ==
 
+= 1.7.3 (unreleased) =
+* Add support for HTML forms
+* Fix widget not loading with Gravity Form integration
+* Add setting to disable the loading of CSS styles
+
 = 1.7.2 =
 * Update to widget library version 0.9.8, which fixes rare cases in which the widget wouldn't work for users with specific browsers plugins installed.
 
