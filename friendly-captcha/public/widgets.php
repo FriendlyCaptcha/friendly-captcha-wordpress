@@ -76,7 +76,11 @@ function frcaptcha_generate_widget_tag_from_plugin($plugin) {
 
     $theme = $plugin->get_widget_dark_theme_active() ? "dark" : "";
 
-    return frcaptcha_generate_widget_tag($sitekey, $lang, $extra_attributes, $theme);
+    return sprintf(
+        '%s%s',
+        frcaptcha_generate_skip_style_injection_tag($plugin),
+        frcaptcha_generate_widget_tag($sitekey, $lang, $extra_attributes, $theme)
+    );
 }
 
 function frcaptcha_generate_widget_tag($sitekey, $language, $extra_attributes = "", $theme = "") {
@@ -87,6 +91,22 @@ function frcaptcha_generate_widget_tag($sitekey, $language, $extra_attributes = 
     esc_html($sitekey),
     esc_html($language),
     $extra_attributes);
+}
+
+$frcaptcha_skip_style_injection_tag_injected = false;
+
+function frcaptcha_generate_skip_style_injection_tag($plugin) {
+    if (!$plugin->get_skip_style_injection()) {
+        return '';
+    }
+
+    if ($frcaptcha_skip_style_injection_tag_injected) {
+        // we only want to inject the element once
+        return '';
+    }
+
+    $frcaptcha_skip_style_injection_tag_injected = true;
+    return '<div id="frc-style"></div>';
 }
 
 function frcaptcha_generate_extra_widget_attributes($plugin) {
