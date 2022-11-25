@@ -4,7 +4,7 @@ Tags: captcha, antispam, spam, contact form, recaptcha, friendly-captcha, block 
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.3
-Stable tag: 1.7.2
+Stable tag: 1.8.0
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -89,7 +89,7 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 == Changelog ==
 
-= 1.7.3 (unreleased) =
+= 1.8.0 =
 * Add support for HTML forms
 * Fix widget not loading with Gravity Form integration
 * Add setting to disable the loading of CSS styles
