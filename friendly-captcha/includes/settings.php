@@ -95,6 +95,18 @@ if (is_admin()) {
             FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_um_reset_password_integration_active_name
         );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_pb_login_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_pb_register_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_pb_reset_password_integration_active_name
+        );
 
         /*Widget settings */
         register_setting(
@@ -384,6 +396,42 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_um_reset_password_integration_active_name,
                 "description" => "Enable Friendly Captcha for the Ultimate Member reset password form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_pb_login_integration_field',
+            'Profile Builder Login', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_pb_login_integration_active_name,
+                "description" => "Enable Friendly Captcha for the <a href=\"https://de.wordpress.org/plugins/profile-builder/\" target=\"_blank\">Profile Builder</a> login form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_pb_register_integration_field',
+            'Profile Builder Register', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_pb_register_integration_active_name,
+                "description" => "Enable Friendly Captcha for the <a href=\"https://de.wordpress.org/plugins/profile-builder/\" target=\"_blank\">Profile Builder</a> sign up form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_pb_reset_password_integration_field',
+            'Profile Builder Reset Password', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_pb_reset_password_integration_active_name,
+                "description" => "Enable Friendly Captcha for the <a href=\"https://de.wordpress.org/plugins/profile-builder/\" target=\"_blank\">Profile Builder</a> reset password form.",
                 "type" => "checkbox"
             )
         );
