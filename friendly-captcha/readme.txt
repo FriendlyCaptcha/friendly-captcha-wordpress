@@ -89,6 +89,9 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 == Changelog ==
 
+= 1.8.1 (unreleased) =
+* Fix internal error becauses of wrong error_codes type
+
 = 1.8.0 =
 * Add support for HTML forms
 * Fix widget not loading with Gravity Form integration
