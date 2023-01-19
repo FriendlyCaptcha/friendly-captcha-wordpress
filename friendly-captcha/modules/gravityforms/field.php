@@ -161,7 +161,7 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 		if (!$verification["success"]) {
 			$this->failed_validation  = true;
 			$this->validation_message = FriendlyCaptcha_Plugin::default_error_user_message();
-			GFCommon::log_debug( __METHOD__ . '(): Validating the Friendly Captcha response has failed due to the following: ' . $verification["error_codes"] );
+			GFCommon::log_debug( __METHOD__ . '(): Validating the Friendly Captcha response has failed due to the following: ' . reset($verification["error_codes"]) );
 			return;
 		}
 	}
