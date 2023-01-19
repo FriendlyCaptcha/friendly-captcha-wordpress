@@ -84,6 +84,14 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 		$is_form_editor  = $this->is_form_editor();
 
 		frcaptcha_enqueue_widget_scripts();
+
+		wp_enqueue_script(
+			'frcaptcha_gravity_forms-friendly-captcha',
+			plugin_dir_url(__FILE__) . 'script.js',
+			array('friendly-captcha-widget-module', 'friendly-captcha-widget-fallback'),
+			FriendlyCaptcha_Plugin::$version,
+			true
+		);
 			
 		add_action( 'gform_preview_footer', array( $this, 'ensure_frcaptcha_init' ) );
 
