@@ -77,7 +77,6 @@ Please see our website at: [www.friendlycaptcha.com](https://friendlycaptcha.com
 * Ultimate Member Login Form
 * Ultimate Member Register Form
 * Ultimate Member Reset Password Form
-* WooCommerce Login Form
 * WooCommerce Register Form
 * WooCommerce Checkout Form
 * WooCommerce Lost Password Form
