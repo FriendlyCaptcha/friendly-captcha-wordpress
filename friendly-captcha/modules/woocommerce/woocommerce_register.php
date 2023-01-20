@@ -21,12 +21,12 @@ add_action( 'woocommerce_process_registration_errors', 'frcaptcha_wc_register_va
 function frcaptcha_wc_register_validate($validation_error) {
 
     if ( empty( $_POST ) ) {
-        return;
+        return $validation_error;
     }
 
     $plugin = FriendlyCaptcha_Plugin::$instance;
     if (!$plugin->is_configured() or !$plugin->get_wc_register_active()) {
-        return;
+        return $validation_error;
     }
 
     $errorPrefix = '<strong>' . __( 'Error', 'frcaptcha' ) . '</strong>: ';

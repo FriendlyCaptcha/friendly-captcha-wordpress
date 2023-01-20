@@ -19,14 +19,18 @@ function frcaptcha_wc_login_show_widget() {
 add_action( 'woocommerce_process_login_errors', 'frcaptcha_wc_login_validate', 20, 3 );	
 
 function frcaptcha_wc_login_validate($validation_error) {
-
     if ( empty( $_POST ) ) {
-        return;
+        return $validation_error;
     }
 
     $plugin = FriendlyCaptcha_Plugin::$instance;
     if (!$plugin->is_configured() or !$plugin->get_wc_login_active()) {
-        return;
+        return $validation_error;
+    }
+
+    if ($plugin->get_wp_login_active()) {
+        // If the WP login form is active, the captcha is already validated by the 'authenticate' filter.
+        return $validation_error;
     }
 
     $errorPrefix = '<strong>' . __( 'Error', 'wp-captcha' ) . '</strong>: ';
