@@ -77,6 +77,7 @@ Please see our website at: [www.friendlycaptcha.com](https://friendlycaptcha.com
 * Ultimate Member Login Form
 * Ultimate Member Register Form
 * Ultimate Member Reset Password Form
+* WooCommerce Login Form
 * WooCommerce Register Form
 * WooCommerce Checkout Form
 * WooCommerce Lost Password Form
@@ -87,6 +88,9 @@ If you see an integration that's missing, please [open a pull request](https://g
 However, you may wish to email the authors of plugins you'd like to support Friendly Captcha: it will usually take them only an hour or two to add native support if they choose to do so. This will simplify your use of Friendly Captcha, and is the best solution in the long run.
 
 == Changelog ==
+
+= 1.8.2 (unreleased) =
+* Fixed WooCommerce Login Form integration
 
 = 1.8.1 =
 * Fix internal error becauses of wrong error_codes type
