@@ -91,6 +91,7 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 = 1.8.1 =
 * Fix internal error becauses of wrong error_codes type
 * Temporarily removed WooCommerce Login Form from the supported forms
+* Fix gravity forms multi page forms
 
 = 1.8.0 =
 * Add support for HTML forms
