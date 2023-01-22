@@ -91,6 +91,7 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 = 1.8.2 (unreleased) =
 * Fixed WooCommerce Login Form integration
+* Add support form WP User Manager
 
 = 1.8.1 =
 * Fix internal error becauses of wrong error_codes type
