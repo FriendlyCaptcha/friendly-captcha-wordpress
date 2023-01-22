@@ -44,6 +44,10 @@
         public static $option_um_login_integration_active_name = "frcaptcha_um_login_integration_active";
         public static $option_um_register_integration_active_name = "frcaptcha_um_register_integration_active";
         public static $option_um_reset_password_integration_active_name = "frcaptcha_um_reset_password_integration_active";
+
+        public static $option_wpum_registration_integration_active_name = "frcaptcha_wpum_registration_integration_active";
+        public static $option_wpum_login_integration_active_name = "frcaptcha_wpum_login_integration_active";
+        public static $option_wpum_password_recovery_integration_active_name = "frcaptcha_wpum_password_recovery_integration_active";
         
 
         public static $option_widget_language_name = "frcaptcha_widget_language";
@@ -166,6 +170,18 @@
             return get_option(FriendlyCaptcha_Plugin::$option_um_reset_password_integration_active_name) == 1;
         }
 
+        public function get_wpum_login_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_wpum_login_integration_active_name) == 1;
+        }
+
+        public function get_wpum_registration_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_wpum_registration_integration_active_name) == 1;
+        }
+
+        public function get_wpum_password_recovery_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_wpum_password_recovery_integration_active_name) == 1;
+        }
+
         /* Widget options */
 
         public function get_widget_language() {
@@ -285,5 +301,20 @@
 
     if (FriendlyCaptcha_Plugin::$instance->get_um_reset_password_active()) {
         require plugin_dir_path( __FILE__ ) . '../modules/ultimate-member/ultimate-member_reset_password.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_wpum_login_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/wpum/wpum_login.php';
+        require_once plugin_dir_path( __FILE__ ) . '../modules/wpum/wpum_validate.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_wpum_registration_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/wpum/wpum_registration.php';
+        require_once plugin_dir_path( __FILE__ ) . '../modules/wpum/wpum_validate.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_wpum_password_recovery_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/wpum/wpum_password-recovery.php';
+        require_once plugin_dir_path( __FILE__ ) . '../modules/wpum/wpum_validate.php';
     }
 // }
