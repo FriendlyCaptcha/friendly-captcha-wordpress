@@ -4,7 +4,7 @@ Tags: captcha, antispam, spam, contact form, recaptcha, friendly-captcha, block 
 Requires at least: 5.0
 Tested up to: 6.1
 Requires PHP: 7.3
-Stable tag: 1.8.1
+Stable tag: 1.8.2
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -89,9 +89,10 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 == Changelog ==
 
-= 1.8.2 (unreleased) =
+= 1.8.2 =
 * Fixed WooCommerce Login Form integration
 * Add support form WP User Manager
+* Update to widget library version 0.9.10, which fixes rare false positives of the headless browser check and other minor things.
 
 = 1.8.1 =
 * Fix internal error becauses of wrong error_codes type
