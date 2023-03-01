@@ -49,6 +49,9 @@
         public static $option_wpum_login_integration_active_name = "frcaptcha_wpum_login_integration_active";
         public static $option_wpum_password_recovery_integration_active_name = "frcaptcha_wpum_password_recovery_integration_active";
         
+        public static $option_pb_login_integration_active_name = "frcaptcha_pb_login_integration_active";
+        public static $option_pb_register_integration_active_name = "frcaptcha_pb_register_integration_active";
+        public static $option_pb_reset_password_integration_active_name = "frcaptcha_pb_reset_password_integration_active";
 
         public static $option_widget_language_name = "frcaptcha_widget_language";
         public static $option_widget_dark_theme_active_name = "frcaptcha_widget_dark_theme_active";
@@ -180,6 +183,18 @@
 
         public function get_wpum_password_recovery_active() {
             return get_option(FriendlyCaptcha_Plugin::$option_wpum_password_recovery_integration_active_name) == 1;
+        }
+
+        public function get_pb_login_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_pb_login_integration_active_name) == 1;
+        }
+
+        public function get_pb_register_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_pb_register_integration_active_name) == 1;
+        }
+
+        public function get_pb_reset_password_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_pb_reset_password_integration_active_name) == 1;
         }
 
         /* Widget options */
@@ -316,5 +331,17 @@
     if (FriendlyCaptcha_Plugin::$instance->get_wpum_password_recovery_active()) {
         require plugin_dir_path( __FILE__ ) . '../modules/wpum/wpum_password-recovery.php';
         require_once plugin_dir_path( __FILE__ ) . '../modules/wpum/wpum_validate.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_pb_login_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/profile-builder/profile_builder_login.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_pb_register_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/profile-builder/profile_builder_register.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_pb_reset_password_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/profile-builder/profile_builder_reset_password.php';
     }
 // }

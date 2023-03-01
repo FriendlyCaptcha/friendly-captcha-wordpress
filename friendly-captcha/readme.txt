@@ -82,6 +82,9 @@ Please see our website at: [www.friendlycaptcha.com](https://friendlycaptcha.com
 * WooCommerce Checkout Form
 * WooCommerce Lost Password Form
 * WPForms
+* Profile Builder Login Form
+* Profile Builder Register Form
+* Profile Builder Reset Password Form
 
 If you see an integration that's missing, please [open a pull request](https://github.com/FriendlyCaptcha/friendly-captcha-wordpress)
 
