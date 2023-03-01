@@ -16,3 +16,15 @@ if (is_admin()) {
         );
     }
 }
+
+if (!FriendlyCaptcha_Plugin::$instance->is_configured()) {
+    function frcaptcha_admin_notice__not_configured() {
+        ?>
+        <div class="notice notice-error is-dismissible">
+            <p><b>Friendly Captcha is not configured properly!</b> Go to the settings to set the Sitekey and API key.</p>
+        </div>
+        <?php
+    }
+
+    add_action( 'admin_notices', 'frcaptcha_admin_notice__not_configured' );
+}

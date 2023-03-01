@@ -97,6 +97,18 @@ if (is_admin()) {
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_wpum_registration_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_wpum_login_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_wpum_password_recovery_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_pb_login_integration_active_name
         );
         register_setting(
@@ -396,6 +408,42 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_um_reset_password_integration_active_name,
                 "description" => "Enable Friendly Captcha for the Ultimate Member reset password form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_wpum_registration_integration_field',
+            'WPUM Registration', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_wpum_registration_integration_active_name,
+                "description" => "Enable Friendly Captcha for the WPUM registration form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_wpum_login_integration_field',
+            'WPUM Login', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_wpum_login_integration_active_name,
+                "description" => "Enable Friendly Captcha for the WPUM login form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_wpum_password_recovery_integration_field',
+            'WPUM Password Recovery', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_wpum_password_recovery_integration_active_name,
+                "description" => "Enable Friendly Captcha for the WPUM password recovery form.",
                 "type" => "checkbox"
             )
         );

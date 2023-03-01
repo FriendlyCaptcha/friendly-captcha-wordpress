@@ -47,7 +47,7 @@ function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key) {
             : false;
 
         $errorCodes = isset( $response_body['errors'] )
-			? reset($response_body['errors'])
+			? $response_body['errors']
 			: array();
 
 
