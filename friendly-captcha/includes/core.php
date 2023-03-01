@@ -79,7 +79,7 @@
          * When both the sitekey and the apikey are set, we can consider the plugin configured.
          */
         public function is_configured() {
-            return null !== $this->get_sitekey() && null !== $this->get_api_key();
+            return $this->get_sitekey() !== null && $this->get_sitekey() !== "" && $this->get_api_key() !== null && $this->get_api_key() !== "";
         }
 
         public function get_sitekey() {
