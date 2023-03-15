@@ -9,6 +9,8 @@ function frcaptcha_forminator_add_captcha( $html, $button ) {
         return;
     }
 
+    rcaptcha_enqueue_widget_scripts();
+
 	$elements .= frcaptcha_generate_widget_tag_from_plugin($plugin);
 
 	return str_replace( '<button ', $elements . '<button ', $html );
