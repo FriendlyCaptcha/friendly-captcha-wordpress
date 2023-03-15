@@ -45,7 +45,7 @@ if (is_admin()) {
             ?>
             <div class="notice notice-error is-dismissible">
                 <p>
-                    <b>Friendly Captcha is not configured properly!</b> 
+                    <b>Friendly Captcha is not configured yet!</b> 
                     Visit the <a href="<?php echo $url ?>">Friendly Captcha settings</a> and enter a valid Sitekey and API Key to complete the setup.</p>
             </div>
             <?php
