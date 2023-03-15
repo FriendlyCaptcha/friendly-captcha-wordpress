@@ -1,9 +1,9 @@
 <?php
 
-add_action( 'forminator_render_button_markup', [ $this, 'frcaptcha_forminator_add_captcha' ], 10, 2 );
-add_filter( 'forminator_cform_form_is_submittable', [ $this, 'frcaptcha_forminator_verify' ], 10, 3 );
+add_action( 'forminator_render_button_markup', 'frcaptcha_forminator_add_captcha', 10, 2 );
+add_filter( 'forminator_cform_form_is_submittable', 'frcaptcha_forminator_verify', 10, 3 );
 
-public function frcaptcha_forminator_add_captcha( $html, $button ) {
+function frcaptcha_forminator_add_captcha( $html, $button ) {
     $plugin = FriendlyCaptcha_Plugin::$instance;
     if (!$plugin->is_configured() or !$plugin->get_forminator_active()) {
         return;
@@ -14,7 +14,7 @@ public function frcaptcha_forminator_add_captcha( $html, $button ) {
 	return str_replace( '<button ', $elements . '<button ', $html );
 }
 
-public function frcaptcha_forminator_verify( $can_show, $id, $form_settings ) {
+function frcaptcha_forminator_verify( $can_show, $id, $form_settings ) {
     $plugin = FriendlyCaptcha_Plugin::$instance;
     if (!$plugin->is_configured() or !$plugin->get_forminator_active()) {
         return $can_show;
