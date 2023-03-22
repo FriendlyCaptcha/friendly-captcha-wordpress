@@ -1,0 +1,45 @@
+<?php
+
+add_action( 'fusion_element_button_content', 'add_friendly_captcha', 10, 2 );
+add_filter( 'fusion_form_demo_mode', 'verify_friendly_captcha' );
+
+function add_friendly_captcha( $html, $args ) {
+    if ( false === strpos( $html, '<button type="submit"' ) ) {
+        return $html;
+    }
+
+    $plugin = FriendlyCaptcha_Plugin::$instance;
+
+    if (!$plugin->is_configured() or !$plugin->get_avada_forms_active()) {
+        return $html;
+    }
+
+    frcaptcha_enqueue_widget_scripts();
+    $widget = frcaptcha_generate_widget_tag_from_plugin($plugin);
+
+    return $widget . $html;
+}
+
+function verify_friendly_captcha( $demo_mode ) {
+    $plugin = FriendlyCaptcha_Plugin::$instance;
+
+    if (!$plugin->is_configured() or !$plugin->get_avada_forms_active()) {
+        return $demo_mode;
+    }
+
+    $solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
+
+    if ( empty( $solution ) ) {
+        $message = FriendlyCaptcha_Plugin::default_error_user_message() . __(" (captcha missing)", "frcaptcha");
+        die( wp_json_encode( [ 'status' => 'error', 'info' => [ 'friendly_captcha' => $message ] ] ) );
+    }
+
+    $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+
+    if ( !$verification["success"] ) {
+        $message = FriendlyCaptcha_Plugin::default_error_user_message();
+        die( wp_json_encode( [ 'status' => 'error', 'info' => [ 'friendly_captcha' => $message ] ] ) );
+    }
+
+    return $demo_mode;
+}
