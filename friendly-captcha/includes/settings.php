@@ -53,6 +53,10 @@ if (is_admin()) {
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_avada_forms_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_wp_register_integration_active_name
         );
         register_setting(
@@ -280,6 +284,18 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_forminator_integration_active_name,
                 "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/forminator/\" target=\"_blank\">Forminator</a>.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_avada_forms_integration_field',
+            'Avada Form Builder', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_avada_forms_integration_active_name,
+                "description" => "Enable Friendly Captcha for Avada Form Builder.",
                 "type" => "checkbox"
             )
         );
