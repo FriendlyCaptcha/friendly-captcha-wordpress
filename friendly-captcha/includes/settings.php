@@ -49,6 +49,10 @@ if (is_admin()) {
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_forminator_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_avada_forms_integration_active_name
         );
         register_setting(
@@ -267,7 +271,19 @@ if (is_admin()) {
             'frcaptcha_integrations_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_html_forms_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://de.wordpress.org/plugins/html-forms/\" target=\"_blank\">HTML Forms</a>.",
+                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/html-forms/\" target=\"_blank\">HTML Forms</a>.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_forminator_integration_field',
+            'Forminator', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_forminator_integration_active_name,
+                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/forminator/\" target=\"_blank\">Forminator</a>.",
                 "type" => "checkbox"
             )
         );
