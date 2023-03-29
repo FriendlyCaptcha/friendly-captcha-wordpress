@@ -85,6 +85,8 @@ Please see our website at: [www.friendlycaptcha.com](https://friendlycaptcha.com
 * Profile Builder Login Form
 * Profile Builder Register Form
 * Profile Builder Reset Password Form
+* Forminator
+* Avada Form Builder
 
 If you see an integration that's missing, please [open a pull request](https://github.com/FriendlyCaptcha/friendly-captcha-wordpress)
 
