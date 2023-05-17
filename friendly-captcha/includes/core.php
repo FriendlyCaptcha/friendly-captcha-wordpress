@@ -19,7 +19,8 @@
         public static $option_group = "frcaptcha_options";
         public static $option_sitekey_name = "frcaptcha_sitekey";
         public static $option_api_key_name = "frcaptcha_api_key";
-        public static $option_skip_style_injection = "frcaptcha_skip_style_injection";
+        public static $option_skip_style_injection_name = "frcaptcha_skip_style_injection";
+        public static $option_enable_mutation_observer_name = "frcaptcha_enable_mutation_observer";
 
         // Integrations
         public static $option_contact_form_7_integration_active_name = "frcaptcha_contact_form_7_integration_active";
@@ -96,7 +97,11 @@
         }
 
         public function get_skip_style_injection() {
-            return get_option(FriendlyCaptcha_Plugin::$option_skip_style_injection) == 1;
+            return get_option(FriendlyCaptcha_Plugin::$option_skip_style_injection_name) == 1;
+        }
+
+        public function get_enable_mutation_observer() {
+            return get_option(FriendlyCaptcha_Plugin::$option_enable_mutation_observer_name) == 1;
         }
 
         public function get_contact_form_7_active() {
