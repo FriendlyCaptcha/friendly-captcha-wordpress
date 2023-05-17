@@ -18,7 +18,7 @@
     window.friendlyChallenge.autoWidget = autoWidget;
   }
 
-  const observer = new MutationObserver((mutationList, observer) => {
+  const observer = new MutationObserver((mutationList) => {
     for (const mutation of mutationList) {
       if (mutation.type === "childList") {
         for (const node of mutation.addedNodes) {
@@ -29,5 +29,9 @@
   });
 
   // Start observing the target node for configured mutations
-  observer.observe(document.body, config);
+  observer.observe(document.body, {
+    attributes: false,
+    childList: true,
+    subtree: false,
+  });
 })();
