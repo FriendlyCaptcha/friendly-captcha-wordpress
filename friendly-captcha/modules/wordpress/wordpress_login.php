@@ -26,7 +26,7 @@ function frcaptcha_wp_login_validate($user, $username, $password) {
 
     $plugin = FriendlyCaptcha_Plugin::$instance;
     if (!$plugin->is_configured() or !$plugin->get_wp_login_active()) {
-        return;
+        return $user;
     }
 
     $errorPrefix = '<strong>' . __( 'Error', 'wp-captcha' ) . '</strong> : ';

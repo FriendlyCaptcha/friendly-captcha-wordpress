@@ -26,7 +26,7 @@ function frcaptcha_wp_reset_password_validate($val) {
 
     $plugin = FriendlyCaptcha_Plugin::$instance;
     if (!$plugin->is_configured() or !$plugin->get_wp_reset_password_active()) {
-        return;
+        return $val;
     }
 
     $errorPrefix = '<strong>' . __( 'Error', 'wp-captcha' ) . '</strong> : ';
