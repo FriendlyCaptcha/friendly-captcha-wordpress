@@ -19,6 +19,10 @@ function frcaptcha_wp_login_show_widget() {
 add_filter( 'authenticate', 'frcaptcha_wp_login_validate', 20, 3 );	
 
 function frcaptcha_wp_login_validate($user, $username, $password) {
+    if ( $user instanceof WP_Error ) {
+        return $user;
+    }
+
     $plugin = FriendlyCaptcha_Plugin::$instance;
     if (!$plugin->is_configured() or !$plugin->get_wp_login_active()) {
         return $user;
