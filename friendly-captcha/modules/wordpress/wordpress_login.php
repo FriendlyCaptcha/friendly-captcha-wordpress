@@ -19,17 +19,16 @@ function frcaptcha_wp_login_show_widget() {
 add_filter( 'authenticate', 'frcaptcha_wp_login_validate', 20, 3 );	
 
 function frcaptcha_wp_login_validate($user, $username, $password) {
-
-    if ( empty( $_POST ) ) {
-        return;
-    }
-
     $plugin = FriendlyCaptcha_Plugin::$instance;
     if (!$plugin->is_configured() or !$plugin->get_wp_login_active()) {
         return $user;
     }
 
     $errorPrefix = '<strong>' . __( 'Error', 'wp-captcha' ) . '</strong> : ';
+    if ( empty( $_POST ) ) {
+        return new WP_Error("frcaptcha-empty-error", $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message() . __(" (empty body)", "frcaptcha") );
+    }
+
 	$solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 	
 	if ( empty( $solution ) ) {

@@ -19,17 +19,16 @@ function frcaptcha_wp_reset_password_show_widget() {
 add_filter( 'lostpassword_post', 'frcaptcha_wp_reset_password_validate', 10, 1 );	
 
 function frcaptcha_wp_reset_password_validate($val) {
-
-    if ( empty( $_POST ) ) {
-        return;
-    }
-
     $plugin = FriendlyCaptcha_Plugin::$instance;
     if (!$plugin->is_configured() or !$plugin->get_wp_reset_password_active()) {
         return $val;
     }
 
     $errorPrefix = '<strong>' . __( 'Error', 'wp-captcha' ) . '</strong> : ';
+    if ( empty( $_POST ) ) {
+        return new WP_Error("frcaptcha-empty-error", $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message() . __(" (empty body)", "frcaptcha") );
+    }
+
 	$solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 	
 	if ( empty( $solution ) ) {
