@@ -27,7 +27,12 @@ function verify_friendly_captcha( $demo_mode ) {
         return $demo_mode;
     }
 
-    $solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
+    // This is a modified version of frcaptcha_get_sanitized_frcaptcha_solution_from_post which looks for the solution in the formData key
+    $form_data = $_POST['formData'];
+    $form_data = wp_parse_args( str_replace( '&amp;', '&', $form_data ) );
+
+    $post_value = $form_data['frc-captcha-solution'];
+	$solution = isset($post_value) ? trim(sanitize_text_field($post_value)) : '';
 
     if ( empty( $solution ) ) {
         $message = FriendlyCaptcha_Plugin::default_error_user_message() . __(" (captcha missing)", "frcaptcha");
