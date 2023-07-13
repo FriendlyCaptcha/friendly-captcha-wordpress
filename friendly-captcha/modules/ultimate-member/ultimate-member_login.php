@@ -16,10 +16,10 @@ function frcaptcha_um_login_show_widget() {
     frcaptcha_enqueue_widget_scripts();
 }
 
-add_action( 'um_submit_form_errors_hook', 'frcaptcha_um_login_validate', 20 );	
+add_action( 'um_submit_form_errors_hook', 'frcaptcha_um_login_validate', 20, 2 );	
 
-function frcaptcha_um_login_validate($post) {
-    if ( isset( $post['mode'] ) && $post['mode'] == 'login') {
+function frcaptcha_um_login_validate($post,$form_data) {
+    if ( isset( $form_data['mode'] ) && $form_data['mode'] == 'login') {
         $plugin = FriendlyCaptcha_Plugin::$instance;
         if (!$plugin->is_configured() or !$plugin->get_um_login_active()) {
             return;
