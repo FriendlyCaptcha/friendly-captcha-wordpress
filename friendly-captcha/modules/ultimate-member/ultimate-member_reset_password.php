@@ -16,10 +16,10 @@ function frcaptcha_um_reset_password_show_widget() {
     frcaptcha_enqueue_widget_scripts();
 }
 
-add_action( 'um_reset_password_errors_hook', 'frcaptcha_um_reset_password_validate', 20 );	
+add_action( 'um_reset_password_errors_hook', 'frcaptcha_um_reset_password_validate', 20, 2 );	
 
-function frcaptcha_um_reset_password_validate($post) {
-    if ( isset( $post['mode'] ) && $post['mode'] == 'password') {
+function frcaptcha_um_reset_password_validate($post,$form_data) {
+    if ( isset( $form_data['mode'] ) && $form_data['mode'] == 'password') {
         $plugin = FriendlyCaptcha_Plugin::$instance;
         if (!$plugin->is_configured() or !$plugin->get_um_reset_password_active()) {
             return;
