@@ -19,6 +19,12 @@ function frcaptcha_wp_reset_password_show_widget() {
 add_filter( 'lostpassword_post', 'frcaptcha_wp_reset_password_validate', 10, 1 );	
 
 function frcaptcha_wp_reset_password_validate($val) {
+
+    // If the user is logged in, do nothing and return the original value
+    if (is_user_logged_in()) {
+        return $val;
+    }
+
     $plugin = FriendlyCaptcha_Plugin::$instance;
     if (!$plugin->is_configured() or !$plugin->get_wp_reset_password_active()) {
         return $val;
