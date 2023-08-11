@@ -25,6 +25,10 @@ if (is_admin()) {
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_f12_cf7_doubleoptin_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_wpforms_integration_active_name
         );
         register_setting(
@@ -212,6 +216,18 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_contact_form_7_integration_active_name,
                 "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/contact-form-7/\" target=\"_blank\">Contact Form 7</a> forms.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_f12_cf7_doubleoptin_integration_field',
+            'CF7 Double-Opt-In', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_f12_cf7_doubleoptin_integration_active_name,
+                "description" => "Enable support for the Forge12 Double Opt-In plugin for Contact Form 7. You need to enable Contact Form 7 as well.",
                 "type" => "checkbox"
             )
         );

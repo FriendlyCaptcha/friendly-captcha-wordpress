@@ -23,6 +23,7 @@
 
         // Integrations
         public static $option_contact_form_7_integration_active_name = "frcaptcha_contact_form_7_integration_active";
+        public static $option_f12_cf7_doubleoptin_integration_active_name = "frcaptcha_f12_cf7_doubleoptin_integration_active";
         public static $option_wpforms_integration_active_name = "frcaptcha_wpforms_integration_active";
         public static $option_gravity_forms_integration_active_name = "frcaptcha_gravity_forms_integration_active";
         public static $option_coblocks_integration_active_name = "frcaptcha_coblocks_integration_active";
@@ -101,6 +102,10 @@
 
         public function get_contact_form_7_active() {
             return get_option(FriendlyCaptcha_Plugin::$option_contact_form_7_integration_active_name) == 1;
+        }
+
+        public function get_f12_cf7_doubleoptin_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_f12_cf7_doubleoptin_integration_active_name) == 1;
         }
 
         public function get_wpforms_active() {
