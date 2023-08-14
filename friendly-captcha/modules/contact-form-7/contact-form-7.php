@@ -61,6 +61,14 @@ function frcaptcha_wpcf7_friendly_captcha_verify_response($spam)
 		return $spam;
 	}
 
+	if ($plugin->get_f12_cf7_doubleoptin_active()) {
+		// Forge12 Double Opt-In triggers a form submit when clicking the link in the email.
+		// That form submit will be a GET request and does not have the frc-captcha-solution field, so we need to let it pass.
+		if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['optin'])) {
+			return $spam;
+		}
+	}
+
 	$solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 	$submission = WPCF7_Submission::get_instance();
 
