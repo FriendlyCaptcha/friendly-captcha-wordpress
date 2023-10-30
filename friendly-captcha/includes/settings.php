@@ -584,12 +584,12 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_mutation_observer',
-            'Mutation Observer', 'frcaptcha_settings_field_callback',
+            'Dynamically Initialize', 'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
-            'frcaptcha_general_settings_section',
+            'frcaptcha_widget_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_enable_mutation_observer_name,
-                "description" => "Enable to watch for changes in the DOM and setup widgets that are added later on.",
+                "description" => "Make Friendly Captcha look for new widgets that are dynamically added to the page.<br>Enable this when you are using Friendly Captcha in a popup or a multi-step form.",
                 "type" => "checkbox"
             )
         );
