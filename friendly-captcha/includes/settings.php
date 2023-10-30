@@ -16,7 +16,11 @@ if (is_admin()) {
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_skip_style_injection
+            FriendlyCaptcha_Plugin::$option_skip_style_injection_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_enable_mutation_observer_name
         );
 
         register_setting(
@@ -572,11 +576,24 @@ if (is_admin()) {
             'friendly_captcha_admin',
             'frcaptcha_widget_settings_section',
             array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_skip_style_injection,
+                "option_name" => FriendlyCaptcha_Plugin::$option_skip_style_injection_name,
                 "description" => "Don't load the CSS-Styles for the widget. Use this if you want to style the widget yourself.",
                 "type" => "checkbox"
             )
         );
+
+        add_settings_field(
+            'frcaptcha_settings_mutation_observer',
+            'Dynamically Initialize', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_widget_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_enable_mutation_observer_name,
+                "description" => "Make Friendly Captcha look for new widgets that are dynamically added to the page.<br>Enable this when you are using Friendly Captcha in a popup or a multi-step form.",
+                "type" => "checkbox"
+            )
+        );
+
 
         /* Endpoint section */
 
