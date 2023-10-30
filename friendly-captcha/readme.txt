@@ -4,7 +4,7 @@ Tags: captcha, antispam, spam, contact form, recaptcha, friendly-captcha, block 
 Requires at least: 5.0
 Tested up to: 6.3
 Requires PHP: 7.3
-Stable tag: 1.12.0
+Stable tag: 1.12.1
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -94,7 +94,7 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 == Changelog ==
 
-= 1.12.0 =
+= 1.12.1 =
 * Support widgets that are dynamically added to the page (e.g. popups or multi-step forms)
 
 = 1.11.0 =
