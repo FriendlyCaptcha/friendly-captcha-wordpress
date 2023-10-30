@@ -1,10 +1,13 @@
 (function () {
   function findCaptchaElements(node) {
-    return document.body.querySelectorAll(".frc-captcha");
+    return node.querySelectorAll(".frc-captcha");
   }
 
   function setupCaptchaElements(node) {
-    if (!window.friendlyChallenge) return;
+    if (!window.friendlyChallenge) {
+      // The friendly-challenge library has not been loaded yet
+      return;
+    }
 
     let autoWidget = window.friendlyChallenge.autoWidget;
 
@@ -32,7 +35,7 @@
     }
   });
 
-  // Start observing the target node for configured mutations
+  // Start observing the document body for changes
   observer.observe(document.body, {
     attributes: false,
     childList: true,
