@@ -12,8 +12,8 @@
     let autoWidget = window.friendlyChallenge.autoWidget;
 
     const elements = findCaptchaElements(node);
-    for (let index = 0; index < elements.length; index++) {
-      const hElement = elements[index];
+    for (let i = 0; i < elements.length; i++) {
+      const hElement = elements[i];
 
       // friendly-challenge adds the "friendlyChallengeWidget" property to the element when it's initialized
       if (hElement && !hElement.friendlyChallengeWidget) {
@@ -25,11 +25,15 @@
   }
 
   const observer = new MutationObserver((mutationList) => {
-    for (const mutation of mutationList) {
+    for (let m = 0; m < mutationList.length; m++) {
+      const mutation = mutationList[m];
+
       if (mutation.type === "childList") {
         // We only care about new nodes being added
-        for (const node of mutation.addedNodes) {
-          setupCaptchaElements(node);
+        const nodes = mutation.addedNodes;
+
+        for (let n = 0; n < nodes.length; n++) {
+          setupCaptchaElements(nodes[n]);
         }
       }
     }
