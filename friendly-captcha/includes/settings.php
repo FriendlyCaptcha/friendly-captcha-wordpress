@@ -16,7 +16,11 @@ if (is_admin()) {
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_skip_style_injection
+            FriendlyCaptcha_Plugin::$option_skip_style_injection_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_enable_mutation_observer_name
         );
 
         register_setting(
@@ -572,11 +576,24 @@ if (is_admin()) {
             'friendly_captcha_admin',
             'frcaptcha_widget_settings_section',
             array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_skip_style_injection,
+                "option_name" => FriendlyCaptcha_Plugin::$option_skip_style_injection_name,
                 "description" => "Don't load the CSS-Styles for the widget. Use this if you want to style the widget yourself.",
                 "type" => "checkbox"
             )
         );
+
+        add_settings_field(
+            'frcaptcha_settings_mutation_observer',
+            'Mutation Observer', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_general_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_enable_mutation_observer_name,
+                "description" => "Enable to watch for changes in the DOM and setup widgets that are added later on.",
+                "type" => "checkbox"
+            )
+        );
+
 
         /* Endpoint section */
 

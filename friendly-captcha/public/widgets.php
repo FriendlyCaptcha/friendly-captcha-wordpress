@@ -24,6 +24,15 @@ function frcaptcha_enqueue_widget_scripts() {
         $version,
         true
     );
+
+    if ( $plugin->get_enable_mutation_observer() ) {
+        wp_enqueue_script( 'friendly-captcha-mutation-observer',
+            plugin_dir_url( __FILE__ ) . 'mutation-observer.js',
+            array(),
+            $version,
+            true
+        );
+    }
 }
 
 /**
