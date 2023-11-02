@@ -250,7 +250,7 @@
     }
 
     // This creates the singleton instance
-    if ( !defined(FriendlyCaptcha_Plugin::$instance)) {
+    if ( !isset(FriendlyCaptcha_Plugin::$instance)) {
         $frcaptcha_plugin_instance = new FriendlyCaptcha_Plugin();
         $frcaptcha_plugin_instance->init();
     }
