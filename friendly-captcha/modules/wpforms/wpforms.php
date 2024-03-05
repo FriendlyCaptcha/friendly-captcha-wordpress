@@ -10,6 +10,10 @@ function frcaptcha_wpforms_friendly_captcha_enqueue_scripts() {
 
     frcaptcha_echo_script_tags();
 
+    // We add our own script to reset the widget after form submission
+    // wp_enqueue_script doesn't work with WPForms for some reason, so we have to echo the script tags manually.
+    echo '<script async defer src="'. plugin_dir_url( __FILE__ ) . 'script.js"></script>';
+
     // The CSS reset of WPForms is really agressive.. so we add the frcaptcha styles but more `!important`ly now.
     // Really wish this wasn't necessary..
     echo "<style>
