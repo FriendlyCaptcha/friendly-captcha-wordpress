@@ -61,6 +61,10 @@ if (is_admin()) {
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_formidable_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_avada_forms_integration_active_name
         );
         register_setting(
@@ -304,6 +308,18 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_forminator_integration_active_name,
                 "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/forminator/\" target=\"_blank\">Forminator</a>.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_formidable_integration_field',
+            'Formidable', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_formidable_integration_active_name,
+                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/formidable/\" target=\"_blank\">Formidable</a>.<br /><strong>Important:</strong> Make sure to add the new Friendly Captcha field to your forms.",
                 "type" => "checkbox"
             )
         );

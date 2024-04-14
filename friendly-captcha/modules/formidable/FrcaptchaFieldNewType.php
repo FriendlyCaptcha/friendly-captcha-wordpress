@@ -67,7 +67,7 @@ class FrcaptchaFieldNewType extends FrmFieldType {
 	public function validate( $args ) {
 
 		$plugin = FriendlyCaptcha_Plugin::$instance;
-		if (!$plugin->is_configured() or !$plugin->get_wp_login_active()) {
+		if (!$plugin->is_configured() or !$plugin->get_formidable_active()) {
 			return array( 'field' . $args['id'] => __('FriendlyCaptcha_Plugin is missing') );
 		}
 
