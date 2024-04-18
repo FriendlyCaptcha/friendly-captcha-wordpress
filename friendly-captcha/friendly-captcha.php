@@ -65,4 +65,5 @@ function frcaptcha_deactivate()
 {
 }
 
+require plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 require plugin_dir_path(__FILE__) . 'includes/core.php';
