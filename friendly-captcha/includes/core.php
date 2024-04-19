@@ -1,9 +1,9 @@
 <?php
 
-/* Main entry point */ 
+/* Main entry point */
 
 // TODO: is this necessary? It breaks intellisense..
-// if ( !class_exists( 'FriendlyCaptcha_Plugin' ) ) {    
+// if ( !class_exists( 'FriendlyCaptcha_Plugin' ) ) {
     class FriendlyCaptcha_Plugin {
 
         /**
@@ -32,6 +32,7 @@
         public static $option_elementor_forms_integration_active_name = "frcaptcha_elementor_integration_active";
         public static $option_html_forms_integration_active_name = "frcaptcha_html_forms_integration_active";
         public static $option_forminator_integration_active_name = "frcaptcha_forminator_integration_active";
+        public static $option_formidable_integration_active_name = "frcaptcha_formidable_integration_active";
         public static $option_avada_forms_integration_active_name = "frcaptcha_avada_forms_integration_active";
 
         public static $option_wp_register_integration_active_name = "frcaptcha_wp_register_integration_active";
@@ -44,7 +45,7 @@
         public static $option_wc_login_integration_active_name = "frcaptcha_wc_login_integration_active";
         public static $option_wc_lost_password_integration_active_name = "frcaptcha_wc_lost_password_integration_active";
         public static $option_wc_checkout_integration_active_name = "frcaptcha_wc_checkout_integration_active";
-        
+
         public static $option_um_login_integration_active_name = "frcaptcha_um_login_integration_active";
         public static $option_um_register_integration_active_name = "frcaptcha_um_register_integration_active";
         public static $option_um_reset_password_integration_active_name = "frcaptcha_um_reset_password_integration_active";
@@ -52,7 +53,7 @@
         public static $option_wpum_registration_integration_active_name = "frcaptcha_wpum_registration_integration_active";
         public static $option_wpum_login_integration_active_name = "frcaptcha_wpum_login_integration_active";
         public static $option_wpum_password_recovery_integration_active_name = "frcaptcha_wpum_password_recovery_integration_active";
-        
+
         public static $option_pb_login_integration_active_name = "frcaptcha_pb_login_integration_active";
         public static $option_pb_register_integration_active_name = "frcaptcha_pb_register_integration_active";
         public static $option_pb_reset_password_integration_active_name = "frcaptcha_pb_reset_password_integration_active";
@@ -62,7 +63,7 @@
 
         public static $option_global_puzzle_endpoint_active_name = "frcaptcha_global_endpoint_active";
         public static $option_eu_puzzle_endpoint_active_name = "frcaptcha_eu_endpoint_active";
-        
+
 
         public function init() {
             if ( defined( 'FRIENDLY_CAPTCHA_VERSION' ) ) {
@@ -140,7 +141,11 @@
         public function get_forminator_active() {
             return get_option(FriendlyCaptcha_Plugin::$option_forminator_integration_active_name) == 1;
         }
-            
+
+        public function get_formidable_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_formidable_integration_active_name) == 1;
+        }
+
         public function get_avada_forms_active() {
             return get_option(FriendlyCaptcha_Plugin::$option_avada_forms_integration_active_name) == 1;
         }
@@ -258,7 +263,7 @@
     // These only contain pure functions
     require plugin_dir_path( __FILE__ ) . 'helpers.php';
     require plugin_dir_path( __FILE__ ) . 'verification.php';
-    
+
     // Register widget routines
     require plugin_dir_path( __FILE__ ) . '../public/widgets.php';
 
@@ -296,6 +301,10 @@
 
     if (FriendlyCaptcha_Plugin::$instance->get_forminator_active()) {
         require plugin_dir_path( __FILE__ ) . '../modules/forminator/forminator.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_formidable_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/formidable/formidable.php';
     }
 
     if (FriendlyCaptcha_Plugin::$instance->get_avada_forms_active()) {
