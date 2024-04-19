@@ -72,16 +72,21 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
 {
     $config = new ClientConfig();
     $config->setAPIKey($api_key)->setSitekey($sitekey);
+    $config->setSiteverifyEndpoint("https://eu.dev.frcapi.com/api/v2/captcha/siteverify");
 
     $captchaClient = new Client($config);
 
+    error_log(sprintf("Verifying solution %s", $solution));
+
     $result = $captchaClient->verifyCaptchaResponse($solution);
+
+    error_log("was able to verify: " . $result->wasAbleToVerify());
+    error_log("should accept: " . $result->shouldAccept());
 
     if (!$result->wasAbleToVerify()) {
         if (WP_DEBUG) {
             // TODO: log this
-            // frcaptcha_log_remote_request($endpoint, $request, $response);
-            // error_log("The body was " . $body);
+            error_log("verification has failed", $result->getErrorCode());
         }
 
         // TODO notify site admin somehow
@@ -90,6 +95,6 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
     return array(
         "success" => $result->shouldAccept(),
         "status" => $result->status,
-        "error_codes" => $result->getErrorCode()
+        "error_codes" => [$result->getErrorCode()]
     );
 }

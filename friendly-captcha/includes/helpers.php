@@ -16,13 +16,7 @@ function frcaptcha_log_remote_request($url, $request, $response)
 
 function frcaptcha_get_sanitized_frcaptcha_solution_from_post()
 {
-	if (FriendlyCaptcha_Plugin::$instance->get_enable_v2()) {
-		$postValue = $_POST['frc-captcha-response'];
-	} else {
-		// TODO: update all other places where this is referenced
-		$postValue = $_POST['frc-captcha-solution'];
-	}
-
+	$postValue = $_POST['frc-captcha-solution'];
 	$solution = isset($postValue) ? trim(sanitize_text_field($postValue)) : '';
 	return $solution;
 }

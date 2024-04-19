@@ -4,6 +4,7 @@
   }
 
   function setupCaptchaElements(node) {
+    // TODO: detect if v1 or v2 is used, same for auto reset
     if (!window.friendlyChallenge) {
       // The friendly-challenge library has not been loaded yet
       return;
