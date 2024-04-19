@@ -1,1 +1,1 @@
-<p>Friendly Captcha is load only on frontend.</p>
+<p>Friendly Captcha will be displayed here.</p>

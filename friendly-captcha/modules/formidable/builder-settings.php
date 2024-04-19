@@ -1,1 +1,1 @@
-<p>Settings is in the plugin Friendly Captcha</p>
+<p>Please configure Friendly Captcha in the plugin settings.</p>
