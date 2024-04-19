@@ -3,13 +3,7 @@
     return node.querySelectorAll(".frc-captcha");
   }
 
-  function setupCaptchaElements(node) {
-    // TODO: detect if v1 or v2 is used, same for auto reset
-    if (!window.friendlyChallenge) {
-      // The friendly-challenge library has not been loaded yet
-      return;
-    }
-
+  function setupV1CaptchaElements(node) {
     let autoWidget = window.friendlyChallenge.autoWidget;
 
     const elements = findCaptchaElements(node);
@@ -25,6 +19,11 @@
     window.friendlyChallenge.autoWidget = autoWidget;
   }
 
+  function setupV2CaptchaElements(node) {
+    const elements = findCaptchaElements(node);
+    window.frcaptcha.attach(elements);
+  }
+
   const observer = new MutationObserver((mutationList) => {
     for (let m = 0; m < mutationList.length; m++) {
       const mutation = mutationList[m];
@@ -34,7 +33,11 @@
         const nodes = mutation.addedNodes;
 
         for (let n = 0; n < nodes.length; n++) {
-          setupCaptchaElements(nodes[n]);
+          if (window.friendlyChallenge) {
+            setupV1CaptchaElements(nodes[n]);
+          } else if (window.frcaptcha) {
+            setupV2CaptchaElements(nodes[n]);
+          }
         }
       }
     }

@@ -70,7 +70,6 @@ function frcaptcha_v2_enqueue_widget_scripts($plugin)
         true
     );
 
-    // TODO: this probably doesn't work with V2...
     if ($plugin->get_enable_mutation_observer()) {
         wp_enqueue_script(
             'friendly-captcha-mutation-observer',
@@ -135,6 +134,14 @@ function frcaptcha_generate_widget_tag_from_plugin($plugin)
         return "";
     }
 
+    if ($plugin->get_enable_v2()) {
+        return frcaptcha_v2_generate_widget_tag_from_plugin($plugin);
+    } else {
+        return frcaptcha_v1_generate_widget_tag_from_plugin($plugin);
+    }
+}
+
+function frcaptcha_v1_generate_widget_tag_from_plugin($plugin) {
     $sitekey = $plugin->get_sitekey();
     $lang = $plugin->get_widget_language();
 
@@ -142,40 +149,65 @@ function frcaptcha_generate_widget_tag_from_plugin($plugin)
     $global = $plugin->get_global_puzzle_endpoint_active();
     $eu = $plugin->get_eu_puzzle_endpoint_active();
 
-    // TODO: adjust to support v2 https://developer.friendlycaptcha.com/docs/sdk/configuration
-    if ($plugin->get_enable_v2()) {
-        if ($eu) {
-            $extra_attributes = "data-api-endpoint=\"eu\"";
-        }
-    } else {
-        if ($global && $eu) {
-            $extra_attributes = "data-puzzle-endpoint=\"https://eu-api.friendlycaptcha.eu/api/v1/puzzle,https://api.friendlycaptcha.com/api/v1/puzzle\"";
-        } else if ($eu) {
-            $extra_attributes = "data-puzzle-endpoint=\"https://eu-api.friendlycaptcha.eu/api/v1/puzzle\"";
-        }
+    if ($global && $eu) {
+        $extra_attributes = "data-puzzle-endpoint=\"https://eu-api.friendlycaptcha.eu/api/v1/puzzle,https://api.friendlycaptcha.com/api/v1/puzzle\"";
+    } else if ($eu) {
+        $extra_attributes = "data-puzzle-endpoint=\"https://eu-api.friendlycaptcha.eu/api/v1/puzzle\"";
     }
-
-    $extra_attributes = "data-api-endpoint=\"https://eu.dev.frcapi.com/api/v2/captcha\" data-form-field-name=\"frc-captcha-solution\"";
     
-    // TODO: support data-theme in V2
     $theme = $plugin->get_widget_dark_theme_active() ? "dark" : "";
 
     return sprintf(
         '%s%s',
         frcaptcha_generate_skip_style_injection_tag($plugin),
-        frcaptcha_generate_widget_tag($sitekey, $lang, $extra_attributes, $theme)
+        frcaptcha_v1_generate_widget_tag($sitekey, $lang, $extra_attributes, $theme)
     );
 }
 
-function frcaptcha_generate_widget_tag($sitekey, $language, $extra_attributes = "", $theme = "")
+function frcaptcha_v2_generate_widget_tag_from_plugin($plugin) {
+    $sitekey = $plugin->get_sitekey();
+    $lang = $plugin->get_widget_language();
+
+    $extra_attributes = "";
+    $eu = $plugin->get_eu_puzzle_endpoint_active();
+
+    if ($eu) {
+        // TODO: replace with production endpoint: $extra_attributes = "data-api-endpoint=\"eu\"";
+        $extra_attributes = "data-api-endpoint=\"https://eu.dev.frcapi.com/api/v2/captcha\"";
+    }
+
+    if ($lang != "automatic") {
+        $extra_attributes .= " lang=\"" . esc_html($lang) . "\"";
+    }
+    
+    $theme = $plugin->get_widget_dark_theme_active() ? "dark" : "light";
+
+    return sprintf(
+        '%s%s',
+        frcaptcha_generate_skip_style_injection_tag($plugin),
+        frcaptcha_v2_generate_widget_tag($sitekey, $extra_attributes, $theme)
+    );
+}
+
+function frcaptcha_v1_generate_widget_tag($sitekey, $language, $extra_attributes = "", $theme = "")
 {
-    // Don't specify lang in V2
     return sprintf(
         '<div class="frc-captcha %s" data-sitekey="%s" data-lang="%s" %s></div>
 		<noscript>You need to enable Javascript for the anti-spam check.</noscript>',
         esc_html($theme),
         esc_html($sitekey),
         esc_html($language),
+        $extra_attributes
+    );
+}
+
+function frcaptcha_v2_generate_widget_tag($sitekey, $extra_attributes = "", $theme = "light")
+{
+    return sprintf(
+        '<div class="frc-captcha" data-form-field-name="frc-captcha-solution" data-sitekey="%s" data-theme="%s" %s></div>
+		<noscript>You need to enable Javascript for the anti-spam check.</noscript>',
+        esc_html($sitekey),
+        esc_html($theme),
         $extra_attributes
     );
 }
@@ -197,8 +229,4 @@ function frcaptcha_generate_skip_style_injection_tag($plugin)
 
     $frcaptcha_skip_style_injection_tag_injected = true;
     return '<div id="frc-style"></div>';
-}
-
-function frcaptcha_generate_extra_widget_attributes($plugin)
-{
 }
