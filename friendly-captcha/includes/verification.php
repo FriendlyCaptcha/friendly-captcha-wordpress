@@ -92,6 +92,7 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
         // TODO notify site admin somehow
     }
 
+    // TODO: handle this correctly for V2
     return array(
         "success" => $result->shouldAccept(),
         "status" => $result->status,
