@@ -9,13 +9,15 @@ function frcaptcha_enqueue_widget_scripts()
     }
 
     if (FriendlyCaptcha_Plugin::$instance->get_enable_v2()) {
-        return frcaptcha_v2_enqueue_widget_scripts($plugin);
+        return frcaptcha_v2_enqueue_widget_scripts();
     } else {
-        return frcaptcha_v1_enqueue_widget_scripts($plugin);
+        return frcaptcha_v1_enqueue_widget_scripts();
     }
+
+    frcaptcha_mutation_observer_scripts($plugin);
 }
 
-function frcaptcha_v1_enqueue_widget_scripts($plugin)
+function frcaptcha_v1_enqueue_widget_scripts()
 {
     $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
 
@@ -36,19 +38,9 @@ function frcaptcha_v1_enqueue_widget_scripts($plugin)
         $version,
         true
     );
-
-    if ($plugin->get_enable_mutation_observer()) {
-        wp_enqueue_script(
-            'friendly-captcha-mutation-observer',
-            plugin_dir_url(__FILE__) . 'mutation-observer.js',
-            array(),
-            $version,
-            true
-        );
-    }
 }
 
-function frcaptcha_v2_enqueue_widget_scripts($plugin)
+function frcaptcha_v2_enqueue_widget_scripts()
 {
     $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
 
@@ -69,7 +61,11 @@ function frcaptcha_v2_enqueue_widget_scripts($plugin)
         $version,
         true
     );
+}
 
+function frcaptcha_mutation_observer_scripts($plugin) {
+    $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
+    
     if ($plugin->get_enable_mutation_observer()) {
         wp_enqueue_script(
             'friendly-captcha-mutation-observer',

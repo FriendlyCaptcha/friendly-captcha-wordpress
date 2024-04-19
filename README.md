@@ -5,5 +5,30 @@
 FriendlyCaptcha is a proof-of-work based CAPTCHA alternative that respects the user's privacy, see the [**Friendly Captcha website**](https://friendlycaptcha.com).
 
 ## Getting started
+
 Install [**Friendly Captcha for WordPress**](https://wordpress.org/plugins/friendly-captcha/).
 
+## Development
+
+Make sure you have PHP installed (e.g. with `brew install php` on a Mac).
+
+### Install Composer
+
+```shell
+cd friendly-captcha
+
+mkdir -p bin
+php -r "copy('https://getcomposer.org/installer', './bin/composer-setup.php');"
+# You can omit `--2.2 LTS` if you are using a more recent PHP version than 7.2
+php bin/composer-setup.php --install-dir=bin --2.2 LTS
+```
+
+### Install dependencies
+
+```shell
+bin/composer.phar install
+```
+
+### Copy into Wordpress site
+
+The `friendly-captcha` directory is now ready to be installed as a Wordpress plugin by copying it into the `wp-content/plugins` directory of your site.
