@@ -1,6 +1,10 @@
 (function () {
   function findCaptchaElements(node) {
-    return node.querySelectorAll(".frc-captcha");
+    if (node.querySelectorAll) {
+      return node.querySelectorAll(".frc-captcha");
+    } else {
+      return [];
+    }
   }
 
   function setupCaptchaElements(node) {
@@ -28,21 +32,23 @@
     for (let m = 0; m < mutationList.length; m++) {
       const mutation = mutationList[m];
 
-      if (mutation.type === "childList") {
-        // We only care about new nodes being added
-        const nodes = mutation.addedNodes;
+      const nodes = mutation.addedNodes;
 
-        for (let n = 0; n < nodes.length; n++) {
-          setupCaptchaElements(nodes[n]);
-        }
+      for (let n = 0; n < nodes.length; n++) {
+        setupCaptchaElements(nodes[n]);
       }
     }
   });
 
-  // Start observing the document body for changes
-  observer.observe(document.body, {
-    attributes: false,
-    childList: true,
-    subtree: false,
-  });
+  function init()  {
+    // Start observing the document body for changes
+    observer.observe(document.body, {
+      attributes: false,
+      childList: true,
+      subtree: true,
+  })};
+
+  // scripts are loaded async, so we always need to make sure that one of the main scripts is already loaded
+  document.getElementById('friendly-captcha-widget-module-js').addEventListener('load', init);
+  document.getElementById('friendly-captcha-widget-fallback-js').addEventListener('load', init);
 })();

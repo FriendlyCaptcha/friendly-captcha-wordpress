@@ -31,9 +31,9 @@ class frcaptcha_divi_core_addon extends ET_Core_API_Spam_Provider {
 			return;
 		}
 
-        frcaptcha_enqueue_widget_scripts();
+        frcaptcha_enqueue_widget_scripts(true);
 
-        wp_enqueue_script( 'et-core-api-spam-recaptcha', plugin_dir_url(__FILE__) . 'script.js', array('friendly-captcha-widget-module'), FRIENDLY_CAPTCHA_VERSION, true );
+        wp_dequeue_script('et-core-api-spam-recaptcha');
 	}
 
     public function is_enabled() {
