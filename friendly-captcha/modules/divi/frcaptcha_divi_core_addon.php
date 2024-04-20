@@ -8,6 +8,8 @@ class frcaptcha_divi_core_addon extends ET_Core_API_Spam_Provider {
 	 */
 	public $slug = 'frcaptcha';
 
+	public $custom_fields = null; // avoid notice from \ET_Core_API_Email_Providers::_initialize which expects this field
+
 	public function __construct( $owner = 'frcaptcha', $account_name = '', $api_key = '' ) {
 		parent::__construct( $owner, $account_name, $api_key );
 
