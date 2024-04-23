@@ -4,7 +4,7 @@
       window.friendlyChallenge.autoWidget.reset();
     }
     if (window.frcaptcha) {
-      window.frcaptcha.widgets.forEach(w => w.reset());
+      window.frcaptcha.widgets.forEach(function(w) { w.reset() });
     }
   };
   document.addEventListener("DOMContentLoaded", function (event) {
