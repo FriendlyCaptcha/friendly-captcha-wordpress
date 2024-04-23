@@ -37,9 +37,9 @@ function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
 
     if (200 != $status) {
         if (WP_DEBUG) {
-            frcaptcha_log_remote_request($endpoint, $request, $response);
-            // error_log("The body was " . $body);
+            frcaptcha_log_remote_request($endpoint, $response);
         }
+
         // Better safe than sorry, if the request is non-200 we can not verify the response
         // Either the user's credentials are wrong (e.g. wrong sitekey, api key) or the friendly
         // captcha servers are unresponsive.
@@ -76,23 +76,25 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
 
     $captchaClient = new Client($config);
 
-    error_log(sprintf("Verifying solution %s", $solution));
-
     $result = $captchaClient->verifyCaptchaResponse($solution);
-
-    error_log("was able to verify: " . $result->wasAbleToVerify());
-    error_log("should accept: " . $result->shouldAccept());
 
     if (!$result->wasAbleToVerify()) {
         if (WP_DEBUG) {
-            // TODO: log this
-            error_log("verification has failed", $result->getErrorCode());
+            frcaptcha_log_remote_request($config->siteverifyEndpoint, $result->getResponse());
         }
 
+        // Better safe than sorry, when we can not verify the response
+        // Either the user's credentials are wrong (e.g. wrong sitekey, api key) or the friendly
+        // captcha servers are unresponsive.
+
         // TODO notify site admin somehow
+        return array(
+            "success" => true,
+            "status" => $result->status,
+            "errors" => array()
+        );
     }
 
-    // TODO: handle this correctly for V2
     return array(
         "success" => $result->shouldAccept(),
         "status" => $result->status,

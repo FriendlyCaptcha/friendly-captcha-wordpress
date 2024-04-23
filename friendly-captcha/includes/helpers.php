@@ -1,6 +1,6 @@
 <?php
 
-function frcaptcha_log_remote_request($url, $request, $response)
+function frcaptcha_log_remote_request($url, $response)
 {
 	$log = sprintf(
 		/* translators: 1: response code, 2: message, 3: body, 4: URL */
