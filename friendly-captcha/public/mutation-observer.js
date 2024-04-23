@@ -48,7 +48,5 @@
       subtree: true,
   })};
 
-  // scripts are loaded async, so we always need to make sure that one of the main scripts is already loaded
-  document.getElementById('friendly-captcha-widget-module-js').addEventListener('load', init);
-  document.getElementById('friendly-captcha-widget-fallback-js').addEventListener('load', init);
+  init();
 })();
