@@ -31,6 +31,7 @@ class FriendlyCaptcha_Plugin
     public static $option_elementor_forms_integration_active_name = "frcaptcha_elementor_integration_active";
     public static $option_html_forms_integration_active_name = "frcaptcha_html_forms_integration_active";
     public static $option_forminator_integration_active_name = "frcaptcha_forminator_integration_active";
+    public static $option_formidable_integration_active_name = "frcaptcha_formidable_integration_active";
     public static $option_avada_forms_integration_active_name = "frcaptcha_avada_forms_integration_active";
 
     public static $option_wp_register_integration_active_name = "frcaptcha_wp_register_integration_active";
@@ -159,6 +160,11 @@ class FriendlyCaptcha_Plugin
     public function get_forminator_active()
     {
         return get_option(FriendlyCaptcha_Plugin::$option_forminator_integration_active_name) == 1;
+    }
+  
+    public function get_formidable_active() 
+    {
+        return get_option(FriendlyCaptcha_Plugin::$option_formidable_integration_active_name) == 1;
     }
 
     public function get_avada_forms_active()
@@ -339,6 +345,10 @@ if (FriendlyCaptcha_Plugin::$instance->get_html_forms_active()) {
 
 if (FriendlyCaptcha_Plugin::$instance->get_forminator_active()) {
     require plugin_dir_path(__FILE__) . '../modules/forminator/forminator.php';
+}
+
+if (FriendlyCaptcha_Plugin::$instance->get_formidable_active()) {
+    require plugin_dir_path( __FILE__ ) . '../modules/formidable/formidable.php';
 }
 
 if (FriendlyCaptcha_Plugin::$instance->get_avada_forms_active()) {
