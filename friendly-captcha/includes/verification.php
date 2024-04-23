@@ -21,7 +21,6 @@ function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
         'solution' => $solution,
     );
 
-    $body = json_encode($response_body);
     $request = array(
         'body' => $response_body,
     );
@@ -40,11 +39,12 @@ function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
             frcaptcha_log_remote_request($endpoint, $response);
         }
 
+        FriendlyCaptcha_Plugin::$instance->show_verification_failed_alert();
+
         // Better safe than sorry, if the request is non-200 we can not verify the response
         // Either the user's credentials are wrong (e.g. wrong sitekey, api key) or the friendly
         // captcha servers are unresponsive.
 
-        // TODO notify site admin somehow
         return array(
             "success" => true,
             "status" => $status,
@@ -83,11 +83,12 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
             frcaptcha_log_remote_request($config->siteverifyEndpoint, $result->getResponse());
         }
 
+        FriendlyCaptcha_Plugin::$instance->show_verification_failed_alert();
+
         // Better safe than sorry, when we can not verify the response
         // Either the user's credentials are wrong (e.g. wrong sitekey, api key) or the friendly
         // captcha servers are unresponsive.
 
-        // TODO notify site admin somehow
         return array(
             "success" => true,
             "status" => $result->status,

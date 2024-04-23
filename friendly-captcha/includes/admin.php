@@ -53,4 +53,33 @@ if (is_admin()) {
 
         add_action( 'admin_notices', 'frcaptcha_admin_notice__not_configured' );
     }
+
+    if (isset($_GET['frcaptcha-verification-failed-dismissed'])) {
+        FriendlyCaptcha_Plugin::$instance->remove_verification_failed_alert();
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_verification_failed_alert()) {
+        function frcaptcha_admin_notice__verification_failed() {
+            $url = esc_url( add_query_arg(
+                'page',
+                'friendly_captcha_admin',
+                get_admin_url() . 'options-general.php'
+            ) );
+    
+            ?>
+            <div class="notice notice-error is-dismissible">
+                <p>
+                    <b>Friendly Captcha verification has failed!</b> 
+                    <br>
+                    This is usually because you have entered an incorrect API Key. Please visit the <a href="<?php echo $url ?>">Friendly Captcha settings</a> and enter a valid Sitekey and API Key.
+                </p>
+                <a href="?frcaptcha-verification-failed-dismissed" class="notice-dismiss" style="text-decoration: none;">
+                    <span class="screen-reader-text">Dismiss this notice.</span>
+                </a>
+            </div>
+            <?php
+        }
+    
+        add_action( 'admin_notices', 'frcaptcha_admin_notice__verification_failed' );
+    }
 }
