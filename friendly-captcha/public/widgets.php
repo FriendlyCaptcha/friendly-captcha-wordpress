@@ -1,6 +1,6 @@
 <?php
 
-function frcaptcha_enqueue_widget_scripts() {
+function frcaptcha_enqueue_widget_scripts($forceMutationObserver = false) {
     $plugin = FriendlyCaptcha_Plugin::$instance;
 
     if ( !$plugin->is_configured() ) {
@@ -25,7 +25,7 @@ function frcaptcha_enqueue_widget_scripts() {
         true
     );
 
-    if ( $plugin->get_enable_mutation_observer() ) {
+    if ( $forceMutationObserver || $plugin->get_enable_mutation_observer() ) {
         wp_enqueue_script( 'friendly-captcha-mutation-observer',
             plugin_dir_url( __FILE__ ) . 'mutation-observer.js',
             array(),
@@ -61,7 +61,10 @@ function frcaptcha_transform_friendly_captcha_script_tags( $tag, $handle, $src )
     if ( 'friendly-captcha-widget-fallback' == $handle) {
         return str_replace( '<script', '<script async defer nomodule', $tag );
 	}
-	
+    if ( 'friendly-captcha-mutation-observer' == $handle) {
+        return str_replace( '<script', '<script async defer', $tag );
+	}
+
 	return $tag;
 }
 
@@ -76,7 +79,7 @@ function frcaptcha_generate_widget_tag_from_plugin($plugin) {
     $extra_attributes = "";
     $global = $plugin->get_global_puzzle_endpoint_active();
     $eu = $plugin->get_eu_puzzle_endpoint_active();
-    
+
     if ($global && $eu) {
         $extra_attributes = "data-puzzle-endpoint=\"https://eu-api.friendlycaptcha.eu/api/v1/puzzle,https://api.friendlycaptcha.com/api/v1/puzzle\"";
     } else if ($eu) {

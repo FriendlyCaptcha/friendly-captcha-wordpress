@@ -57,6 +57,7 @@
         public static $option_pb_login_integration_active_name = "frcaptcha_pb_login_integration_active";
         public static $option_pb_register_integration_active_name = "frcaptcha_pb_register_integration_active";
         public static $option_pb_reset_password_integration_active_name = "frcaptcha_pb_reset_password_integration_active";
+        public static $option_divi_integration_active_name = "frcaptcha_divi_integration_active";
 
         public static $option_widget_language_name = "frcaptcha_widget_language";
         public static $option_widget_dark_theme_active_name = "frcaptcha_widget_dark_theme_active";
@@ -222,6 +223,11 @@
             return get_option(FriendlyCaptcha_Plugin::$option_pb_reset_password_integration_active_name) == 1;
         }
 
+        public function get_divi_active() {
+            return get_option(FriendlyCaptcha_Plugin::$option_divi_integration_active_name) == 1;
+        }
+
+
         /* Widget options */
 
         public function get_widget_language() {
@@ -379,6 +385,10 @@
     }
 
     if (FriendlyCaptcha_Plugin::$instance->get_pb_reset_password_active()) {
-        require plugin_dir_path( __FILE__ ) . '../modules/profile-builder/profile_builder_reset_password.php';
+        require plugin_dir_path(__FILE__) . '../modules/profile-builder/profile_builder_reset_password.php';
+    }
+
+    if (FriendlyCaptcha_Plugin::$instance->get_divi_active()) {
+        require plugin_dir_path( __FILE__ ) . '../modules/divi/divi.php';
     }
 // }
