@@ -162,8 +162,8 @@ class FriendlyCaptcha_Plugin
     {
         return get_option(FriendlyCaptcha_Plugin::$option_forminator_integration_active_name) == 1;
     }
-  
-    public function get_formidable_active() 
+
+    public function get_formidable_active()
     {
         return get_option(FriendlyCaptcha_Plugin::$option_formidable_integration_active_name) == 1;
     }
@@ -262,9 +262,10 @@ class FriendlyCaptcha_Plugin
     {
         return get_option(FriendlyCaptcha_Plugin::$option_pb_reset_password_integration_active_name) == 1;
     }
-  
-  
-    public function get_divi_active() {
+
+
+    public function get_divi_active()
+    {
         return get_option(FriendlyCaptcha_Plugin::$option_divi_integration_active_name) == 1;
     }
 
@@ -354,7 +355,7 @@ if (FriendlyCaptcha_Plugin::$instance->get_forminator_active()) {
 }
 
 if (FriendlyCaptcha_Plugin::$instance->get_formidable_active()) {
-    require plugin_dir_path( __FILE__ ) . '../modules/formidable/formidable.php';
+    require plugin_dir_path(__FILE__) . '../modules/formidable/formidable.php';
 }
 
 if (FriendlyCaptcha_Plugin::$instance->get_avada_forms_active()) {
@@ -431,7 +432,7 @@ if (FriendlyCaptcha_Plugin::$instance->get_pb_register_active()) {
 if (FriendlyCaptcha_Plugin::$instance->get_pb_reset_password_active()) {
     require plugin_dir_path(__FILE__) . '../modules/profile-builder/profile_builder_reset_password.php';
 }
-  
+
 if (FriendlyCaptcha_Plugin::$instance->get_divi_active()) {
-    require plugin_dir_path( __FILE__ ) . '../modules/divi/divi.php';
+    require plugin_dir_path(__FILE__) . '../modules/divi/divi.php';
 }

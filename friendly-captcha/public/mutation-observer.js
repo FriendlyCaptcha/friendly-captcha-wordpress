@@ -33,24 +33,24 @@
       const mutation = mutationList[m];
 
       const nodes = mutation.addedNodes;
-        for (let n = 0; n < nodes.length; n++) {
-          if (window.friendlyChallenge) {
-            setupV1CaptchaElements(nodes[n]);
-          } else if (window.frcaptcha) {
-            setupV2CaptchaElements(nodes[n]);
-          }
+      for (let n = 0; n < nodes.length; n++) {
+        if (window.friendlyChallenge) {
+          setupV1CaptchaElements(nodes[n]);
+        } else if (window.frcaptcha) {
+          setupV2CaptchaElements(nodes[n]);
         }
       }
     }
   });
 
-  function init()  {
+  function init() {
     // Start observing the document body for changes
     observer.observe(document.body, {
       attributes: false,
       childList: true,
       subtree: true,
-  })};
+    });
+  }
 
   init();
 })();

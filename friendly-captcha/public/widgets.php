@@ -1,6 +1,7 @@
 <?php
 
-function frcaptcha_enqueue_widget_scripts($forceMutationObserver = false) {
+function frcaptcha_enqueue_widget_scripts($forceMutationObserver = false)
+{
     $plugin = FriendlyCaptcha_Plugin::$instance;
 
     if (!$plugin->is_configured()) {
@@ -62,12 +63,14 @@ function frcaptcha_v2_enqueue_widget_scripts()
     );
 }
 
-function frcaptcha_mutation_observer_scripts($plugin, $forceMutationObserver) {
+function frcaptcha_mutation_observer_scripts($plugin, $forceMutationObserver)
+{
     $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
-    
-    if ( $forceMutationObserver || $plugin->get_enable_mutation_observer() ) {
-        wp_enqueue_script( 'friendly-captcha-mutation-observer',
-            plugin_dir_url( __FILE__ ) . 'mutation-observer.js',
+
+    if ($forceMutationObserver || $plugin->get_enable_mutation_observer()) {
+        wp_enqueue_script(
+            'friendly-captcha-mutation-observer',
+            plugin_dir_url(__FILE__) . 'mutation-observer.js',
             array(),
             $version,
             true
@@ -93,7 +96,8 @@ function frcaptcha_echo_script_tags()
     }
 }
 
-function frcaptcha_v1_echo_script_tags() {
+function frcaptcha_v1_echo_script_tags()
+{
     $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
 
     echo '<script async defer type="module" src="' . plugin_dir_url(__FILE__) . 'vendor/v1/widget.module.min.js?ver=' . $version . '"></script>';
@@ -101,7 +105,8 @@ function frcaptcha_v1_echo_script_tags() {
 }
 
 
-function frcaptcha_v2_echo_script_tags() {
+function frcaptcha_v2_echo_script_tags()
+{
     $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
 
     echo '<script async defer type="module" src="' . plugin_dir_url(__FILE__) . 'vendor/v2/site.min.js?ver=' . $version . '"></script>';
@@ -112,17 +117,17 @@ add_filter('script_loader_tag', 'frcaptcha_transform_friendly_captcha_script_tag
 
 function frcaptcha_transform_friendly_captcha_script_tags($tag, $handle, $src)
 {
-	if ( 'friendly-captcha-widget-module' == $handle) {
-		return str_replace( '<script', '<script async defer type="module"', $tag );
-	}
-    if ( 'friendly-captcha-widget-fallback' == $handle) {
-        return str_replace( '<script', '<script async defer nomodule', $tag );
-	}
-    if ( 'friendly-captcha-mutation-observer' == $handle) {
-        return str_replace( '<script', '<script async defer', $tag );
-	}
+    if ('friendly-captcha-widget-module' == $handle) {
+        return str_replace('<script', '<script async defer type="module"', $tag);
+    }
+    if ('friendly-captcha-widget-fallback' == $handle) {
+        return str_replace('<script', '<script async defer nomodule', $tag);
+    }
+    if ('friendly-captcha-mutation-observer' == $handle) {
+        return str_replace('<script', '<script async defer', $tag);
+    }
 
-	return $tag;
+    return $tag;
 }
 
 function frcaptcha_generate_widget_tag_from_plugin($plugin)
@@ -138,7 +143,8 @@ function frcaptcha_generate_widget_tag_from_plugin($plugin)
     }
 }
 
-function frcaptcha_v1_generate_widget_tag_from_plugin($plugin) {
+function frcaptcha_v1_generate_widget_tag_from_plugin($plugin)
+{
     $sitekey = $plugin->get_sitekey();
     $lang = $plugin->get_widget_language();
 
@@ -151,7 +157,7 @@ function frcaptcha_v1_generate_widget_tag_from_plugin($plugin) {
     } else if ($eu) {
         $extra_attributes = "data-puzzle-endpoint=\"https://eu-api.friendlycaptcha.eu/api/v1/puzzle\"";
     }
-    
+
     $theme = $plugin->get_widget_dark_theme_active() ? "dark" : "";
 
     return sprintf(
@@ -161,7 +167,8 @@ function frcaptcha_v1_generate_widget_tag_from_plugin($plugin) {
     );
 }
 
-function frcaptcha_v2_generate_widget_tag_from_plugin($plugin) {
+function frcaptcha_v2_generate_widget_tag_from_plugin($plugin)
+{
     $sitekey = $plugin->get_sitekey();
     $lang = $plugin->get_widget_language();
 
@@ -176,7 +183,7 @@ function frcaptcha_v2_generate_widget_tag_from_plugin($plugin) {
     if ($lang != "automatic") {
         $extra_attributes .= " lang=\"" . esc_html($lang) . "\"";
     }
-    
+
     $theme = $plugin->get_widget_dark_theme_active() ? "dark" : "light";
 
     return sprintf(

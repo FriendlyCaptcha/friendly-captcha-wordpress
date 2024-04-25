@@ -335,7 +335,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_formidable_integration_field',
-            'Formidable', 'frcaptcha_settings_field_callback',
+            'Formidable',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -594,7 +595,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_divi_integration_field',
-            'Divi Theme Contact Form', 'frcaptcha_settings_field_callback',
+            'Divi Theme Contact Form',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
