@@ -1,7 +1,6 @@
 <?php
 
-function frcaptcha_enqueue_widget_scripts()
-{
+function frcaptcha_enqueue_widget_scripts($forceMutationObserver = false) {
     $plugin = FriendlyCaptcha_Plugin::$instance;
 
     if (!$plugin->is_configured()) {
@@ -14,7 +13,7 @@ function frcaptcha_enqueue_widget_scripts()
         return frcaptcha_v1_enqueue_widget_scripts();
     }
 
-    frcaptcha_mutation_observer_scripts($plugin);
+    frcaptcha_mutation_observer_scripts($plugin, $forceMutationObserver);
 }
 
 function frcaptcha_v1_enqueue_widget_scripts()
@@ -63,13 +62,12 @@ function frcaptcha_v2_enqueue_widget_scripts()
     );
 }
 
-function frcaptcha_mutation_observer_scripts($plugin) {
+function frcaptcha_mutation_observer_scripts($plugin, $forceMutationObserver) {
     $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
     
-    if ($plugin->get_enable_mutation_observer()) {
-        wp_enqueue_script(
-            'friendly-captcha-mutation-observer',
-            plugin_dir_url(__FILE__) . 'mutation-observer.js',
+    if ( $forceMutationObserver || $plugin->get_enable_mutation_observer() ) {
+        wp_enqueue_script( 'friendly-captcha-mutation-observer',
+            plugin_dir_url( __FILE__ ) . 'mutation-observer.js',
             array(),
             $version,
             true
@@ -114,14 +112,17 @@ add_filter('script_loader_tag', 'frcaptcha_transform_friendly_captcha_script_tag
 
 function frcaptcha_transform_friendly_captcha_script_tags($tag, $handle, $src)
 {
-    if ('friendly-captcha-widget-module' == $handle) {
-        return str_replace('<script', '<script async defer type="module"', $tag);
-    }
-    if ('friendly-captcha-widget-fallback' == $handle) {
-        return str_replace('<script', '<script async defer nomodule', $tag);
-    }
+	if ( 'friendly-captcha-widget-module' == $handle) {
+		return str_replace( '<script', '<script async defer type="module"', $tag );
+	}
+    if ( 'friendly-captcha-widget-fallback' == $handle) {
+        return str_replace( '<script', '<script async defer nomodule', $tag );
+	}
+    if ( 'friendly-captcha-mutation-observer' == $handle) {
+        return str_replace( '<script', '<script async defer', $tag );
+	}
 
-    return $tag;
+	return $tag;
 }
 
 function frcaptcha_generate_widget_tag_from_plugin($plugin)

@@ -1,6 +1,10 @@
 (function () {
   function findCaptchaElements(node) {
-    return node.querySelectorAll(".frc-captcha");
+    if (node.querySelectorAll) {
+      return node.querySelectorAll(".frc-captcha");
+    } else {
+      return [];
+    }
   }
 
   function setupV1CaptchaElements(node) {
@@ -28,10 +32,7 @@
     for (let m = 0; m < mutationList.length; m++) {
       const mutation = mutationList[m];
 
-      if (mutation.type === "childList") {
-        // We only care about new nodes being added
-        const nodes = mutation.addedNodes;
-
+      const nodes = mutation.addedNodes;
         for (let n = 0; n < nodes.length; n++) {
           if (window.friendlyChallenge) {
             setupV1CaptchaElements(nodes[n]);
@@ -43,10 +44,13 @@
     }
   });
 
-  // Start observing the document body for changes
-  observer.observe(document.body, {
-    attributes: false,
-    childList: true,
-    subtree: false,
-  });
+  function init()  {
+    // Start observing the document body for changes
+    observer.observe(document.body, {
+      attributes: false,
+      childList: true,
+      subtree: true,
+  })};
+
+  init();
 })();

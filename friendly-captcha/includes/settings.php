@@ -145,6 +145,11 @@ if (is_admin()) {
             FriendlyCaptcha_Plugin::$option_pb_reset_password_integration_active_name
         );
 
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_divi_integration_active_name
+        );
+
         /*Widget settings */
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
@@ -583,6 +588,18 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_pb_reset_password_integration_active_name,
                 "description" => "Enable Friendly Captcha for the <a href=\"https://de.wordpress.org/plugins/profile-builder/\" target=\"_blank\">Profile Builder</a> reset password form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_divi_integration_field',
+            'Divi Theme Contact Form', 'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_divi_integration_active_name,
+                "description" => "Enable Friendly Captcha and replace ReCaptcha in the <a href=\"https://www.elegantthemes.com/gallery/divi//\" target=\"_blank\">Divi Theme</a> contact form.<br /><strong>Important:</strong> Please choose 'FriendlyCaptcha verification' as spam protection in each individual Divi contact form.",
                 "type" => "checkbox"
             )
         );
