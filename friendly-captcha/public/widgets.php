@@ -176,8 +176,7 @@ function frcaptcha_v2_generate_widget_tag_from_plugin($plugin)
     $eu = $plugin->get_eu_puzzle_endpoint_active();
 
     if ($eu) {
-        // TODO: replace with production endpoint: $extra_attributes = "data-api-endpoint=\"eu\"";
-        $extra_attributes = "data-api-endpoint=\"https://eu.dev.frcapi.com/api/v2/captcha\"";
+        $extra_attributes = "data-api-endpoint=\"eu\"";
     }
 
     if ($lang != "automatic") {
