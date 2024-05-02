@@ -624,7 +624,7 @@ if (is_admin()) {
             'frcaptcha_widget_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_widget_language_name,
-                "description" => "Set the language for the widget. Need another language? <a href=\"https://docs.friendlycaptcha.com/#/widget_api?id=data-lang-attribute\">Help us translate</a>.",
+                "description" => "Set the language for the widget. Need another language? <a href=\"https://docs.friendlycaptcha.com/#/widget_api?id=data-lang-attribute\">Help us translate</a>.<br />Only use this when Friendly Captcha fails to select the right language for your site.",
             )
         );
 
@@ -641,18 +641,20 @@ if (is_admin()) {
             )
         );
 
-        add_settings_field(
-            'frcaptcha_settings_skip_style_injection_field',
-            'Disable Style Injection',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_widget_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_skip_style_injection_name,
-                "description" => "Don't load the CSS-Styles for the widget. Use this if you want to style the widget yourself.",
-                "type" => "checkbox"
-            )
-        );
+        if (!FriendlyCaptcha_Plugin::$instance->get_enable_v2()) {
+            add_settings_field(
+                'frcaptcha_settings_skip_style_injection_field',
+                'Disable Style Injection',
+                'frcaptcha_settings_field_callback',
+                'friendly_captcha_admin',
+                'frcaptcha_widget_settings_section',
+                array(
+                    "option_name" => FriendlyCaptcha_Plugin::$option_skip_style_injection_name,
+                    "description" => "Don't load the CSS-Styles for the widget. Use this if you want to style the widget yourself.",
+                    "type" => "checkbox"
+                )
+            );
+        }
 
         add_settings_field(
             'frcaptcha_settings_mutation_observer',
