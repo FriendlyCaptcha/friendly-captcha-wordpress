@@ -11,7 +11,10 @@ class FriendlyCaptcha_Plugin
     public $plugin_name;
 
     public static $version;
+    // JavaScript client SDK for v1
     public static $friendly_challenge_version;
+    // JavaScript client SDK for v2
+    public static $friendly_captcha_sdk_version;
 
     // Global constants
     public static $option_group = "frcaptcha_options";
@@ -70,9 +73,11 @@ class FriendlyCaptcha_Plugin
         if (defined('FRIENDLY_CAPTCHA_VERSION')) {
             FriendlyCaptcha_Plugin::$version = FRIENDLY_CAPTCHA_VERSION;
             FriendlyCaptcha_Plugin::$friendly_challenge_version = FRIENDLY_CAPTCHA_FRIENDLY_CHALLENGE_VERSION;
+            FriendlyCaptcha_Plugin::$friendly_captcha_sdk_version = FRIENDLY_CAPTCHA_FRIENDLY_CAPTCHA_SDK_VERSION;
         } else {
             FriendlyCaptcha_Plugin::$version = '0.0.0';
             FriendlyCaptcha_Plugin::$friendly_challenge_version = '0.0.0';
+            FriendlyCaptcha_Plugin::$friendly_captcha_sdk_version = '0.0.0';
         }
         $this->plugin_name = 'friendly-captcha';
 

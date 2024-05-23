@@ -42,7 +42,7 @@ function frcaptcha_v1_enqueue_widget_scripts()
 
 function frcaptcha_v2_enqueue_widget_scripts()
 {
-    $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
+    $version = FriendlyCaptcha_Plugin::$friendly_captcha_sdk_version;
 
     /* Modern browsers will load this smaller bundle */
     wp_enqueue_script(
@@ -65,7 +65,7 @@ function frcaptcha_v2_enqueue_widget_scripts()
 
 function frcaptcha_mutation_observer_scripts($plugin, $forceMutationObserver)
 {
-    $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
+    $version = FriendlyCaptcha_Plugin::$version;
 
     if ($forceMutationObserver || $plugin->get_enable_mutation_observer()) {
         wp_enqueue_script(
@@ -107,7 +107,7 @@ function frcaptcha_v1_echo_script_tags()
 
 function frcaptcha_v2_echo_script_tags()
 {
-    $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
+    $version = FriendlyCaptcha_Plugin::$friendly_captcha_sdk_version;
 
     echo '<script async defer type="module" src="' . plugin_dir_url(__FILE__) . 'vendor/v2/site.min.js?ver=' . $version . '"></script>';
     echo '<script async defer nomodule src="' . plugin_dir_url(__FILE__) . 'vendor/v2/site.compat.min.js?ver=' . $version . '"></script>';
@@ -170,17 +170,12 @@ function frcaptcha_v1_generate_widget_tag_from_plugin($plugin)
 function frcaptcha_v2_generate_widget_tag_from_plugin($plugin)
 {
     $sitekey = $plugin->get_sitekey();
-    $lang = $plugin->get_widget_language();
 
     $extra_attributes = "";
     $eu = $plugin->get_eu_puzzle_endpoint_active();
 
     if ($eu) {
         $extra_attributes = "data-api-endpoint=\"eu\"";
-    }
-
-    if ($lang != "automatic") {
-        $extra_attributes .= " lang=\"" . esc_html($lang) . "\"";
     }
 
     $theme = $plugin->get_widget_dark_theme_active() ? "dark" : "light";
