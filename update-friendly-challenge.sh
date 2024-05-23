@@ -1,2 +1,0 @@
-curl https://cdn.jsdelivr.net/npm/friendly-challenge/widget.module.min.js > friendly-captcha/public/vendor/widget.module.min.js
-curl https://cdn.jsdelivr.net/npm/friendly-challenge/widget.polyfilled.min.js > friendly-captcha/public/vendor/widget.polyfilled.min.js

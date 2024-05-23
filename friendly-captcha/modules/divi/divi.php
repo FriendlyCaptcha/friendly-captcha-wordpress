@@ -25,7 +25,8 @@ class frcaptcha_divi_load_addon
         return $instances;
     }
 
-    public static function enable($_names_by_slug) {
+    public static function enable($_names_by_slug)
+    {
         $plugin = FriendlyCaptcha_Plugin::$instance;
 
         if (!$plugin->is_configured() or !$plugin->get_divi_active()) {
@@ -51,7 +52,6 @@ class frcaptcha_divi_load_addon
         ];
 
         return $value;
-
     }
 
     public static function addWidget($output, $tag = null)
@@ -66,7 +66,8 @@ class frcaptcha_divi_load_addon
             return;
         }
 
-        $output = str_replace(self::INSERT_BEFORE,
+        $output = str_replace(
+            self::INSERT_BEFORE,
             frcaptcha_generate_widget_tag_from_plugin(FriendlyCaptcha_Plugin::$instance) . self::INSERT_BEFORE,
             $output
         );
@@ -81,8 +82,9 @@ class frcaptcha_divi_load_addon
      */
     public static function fakeToken()
     {
-        if (isset($_POST['frc-captcha-solution'])) {
-            $_POST['token'] = $_POST['frc-captcha-solution'];
+        $fieldName = FriendlyCaptcha_Plugin::$instance->get_solution_field_name();
+        if (isset($_POST[$fieldName])) {
+            $_POST['token'] = $_POST[$fieldName];
         }
     }
 }

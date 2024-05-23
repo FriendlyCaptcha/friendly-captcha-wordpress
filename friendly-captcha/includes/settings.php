@@ -5,7 +5,8 @@
 if (is_admin()) {
     add_action('admin_init', 'frcaptcha_settings_init');
 
-    function frcaptcha_settings_init() {
+    function frcaptcha_settings_init()
+    {
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_sitekey_name
@@ -21,6 +22,10 @@ if (is_admin()) {
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_enable_mutation_observer_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_enable_v2_name
         );
 
         register_setting(
@@ -177,7 +182,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_sitekey_field',
-            'Sitekey', 'frcaptcha_settings_field_callback',
+            'Sitekey',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_general_settings_section',
             array(
@@ -189,7 +195,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_api_key_field',
-            'API Key', 'frcaptcha_settings_field_callback',
+            'API Key',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_general_settings_section',
             array(
@@ -211,7 +218,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wpforms_integration_field',
-            'WPForms', 'frcaptcha_settings_field_callback',
+            'WPForms',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -223,7 +231,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wpcf7_integration_field',
-            'Contact Form 7', 'frcaptcha_settings_field_callback',
+            'Contact Form 7',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -235,7 +244,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_f12_cf7_doubleoptin_integration_field',
-            'CF7 Double-Opt-In', 'frcaptcha_settings_field_callback',
+            'CF7 Double-Opt-In',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -247,7 +257,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_gravity_forms_integration_field',
-            'Gravity Forms', 'frcaptcha_settings_field_callback',
+            'Gravity Forms',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -259,7 +270,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_coblocks_integration_field',
-            'CoBlocks Forms', 'frcaptcha_settings_field_callback',
+            'CoBlocks Forms',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -271,7 +283,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_fluentform_integration_field',
-            'Fluentform Forms', 'frcaptcha_settings_field_callback',
+            'Fluentform Forms',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -283,7 +296,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_elementor_integration_field',
-            'Elementor Pro Forms', 'frcaptcha_settings_field_callback',
+            'Elementor Pro Forms',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -295,7 +309,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_html_forms_integration_field',
-            'HTML Forms', 'frcaptcha_settings_field_callback',
+            'HTML Forms',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -307,7 +322,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_forminator_integration_field',
-            'Forminator', 'frcaptcha_settings_field_callback',
+            'Forminator',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -319,7 +335,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_formidable_integration_field',
-            'Formidable', 'frcaptcha_settings_field_callback',
+            'Formidable',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -331,7 +348,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_avada_forms_integration_field',
-            'Avada Form Builder', 'frcaptcha_settings_field_callback',
+            'Avada Form Builder',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -343,7 +361,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wp_register_integration_field',
-            'WordPress Register', 'frcaptcha_settings_field_callback',
+            'WordPress Register',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -355,7 +374,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wp_login_integration_field',
-            'WordPress Login', 'frcaptcha_settings_field_callback',
+            'WordPress Login',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -367,7 +387,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wp_reset_password_integration_field',
-            'WordPress Reset Password', 'frcaptcha_settings_field_callback',
+            'WordPress Reset Password',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -379,7 +400,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wp_comments_integration_field',
-            'WordPress Comments<br>(guests)', 'frcaptcha_settings_field_callback',
+            'WordPress Comments<br>(guests)',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -391,7 +413,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wp_comments_logged_in_integration_field',
-            'WordPress Comments<br>(logged in users)', 'frcaptcha_settings_field_callback',
+            'WordPress Comments<br>(logged in users)',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -403,7 +426,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wc_register_integration_field',
-            'WooCommerce Register', 'frcaptcha_settings_field_callback',
+            'WooCommerce Register',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -415,7 +439,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wc_login_integration_field',
-            'WooCommerce Login', 'frcaptcha_settings_field_callback',
+            'WooCommerce Login',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -427,7 +452,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wc_lost_password_integration_field',
-            'WooCommerce Lost Password', 'frcaptcha_settings_field_callback',
+            'WooCommerce Lost Password',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -439,7 +465,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wc_checkout_integration_field',
-            'WooCommerce Checkout', 'frcaptcha_settings_field_callback',
+            'WooCommerce Checkout',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -451,7 +478,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_um_login_integration_field',
-            'Ultimate Member Login', 'frcaptcha_settings_field_callback',
+            'Ultimate Member Login',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -463,7 +491,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_um_register_integration_field',
-            'Ultimate Member Register', 'frcaptcha_settings_field_callback',
+            'Ultimate Member Register',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -475,7 +504,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_um_reset_password_integration_field',
-            'Ultimate Member Reset Password', 'frcaptcha_settings_field_callback',
+            'Ultimate Member Reset Password',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -487,7 +517,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wpum_registration_integration_field',
-            'WPUM Registration', 'frcaptcha_settings_field_callback',
+            'WPUM Registration',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -499,7 +530,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wpum_login_integration_field',
-            'WPUM Login', 'frcaptcha_settings_field_callback',
+            'WPUM Login',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -511,7 +543,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_wpum_password_recovery_integration_field',
-            'WPUM Password Recovery', 'frcaptcha_settings_field_callback',
+            'WPUM Password Recovery',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -523,7 +556,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_pb_login_integration_field',
-            'Profile Builder Login', 'frcaptcha_settings_field_callback',
+            'Profile Builder Login',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -535,7 +569,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_pb_register_integration_field',
-            'Profile Builder Register', 'frcaptcha_settings_field_callback',
+            'Profile Builder Register',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -547,7 +582,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_pb_reset_password_integration_field',
-            'Profile Builder Reset Password', 'frcaptcha_settings_field_callback',
+            'Profile Builder Reset Password',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -559,7 +595,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_divi_integration_field',
-            'Divi Theme Contact Form', 'frcaptcha_settings_field_callback',
+            'Divi Theme Contact Form',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_integrations_settings_section',
             array(
@@ -579,21 +616,24 @@ if (is_admin()) {
             'friendly_captcha_admin'
         );
 
-        add_settings_field(
-            'frcaptcha_settings_widget_language_field',
-            'Widget Language',
-            'frcaptcha_widget_language_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_widget_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_widget_language_name,
-                "description" => "Set the language for the widget. Need another language? <a href=\"https://docs.friendlycaptcha.com/#/widget_api?id=data-lang-attribute\">Help us translate</a>.",
-            )
-        );
+        if (!FriendlyCaptcha_Plugin::$instance->get_enable_v2()) {
+            add_settings_field(
+                'frcaptcha_settings_widget_language_field',
+                'Widget Language',
+                'frcaptcha_widget_language_field_callback',
+                'friendly_captcha_admin',
+                'frcaptcha_widget_settings_section',
+                array(
+                    "option_name" => FriendlyCaptcha_Plugin::$option_widget_language_name,
+                    "description" => "Set the language for the widget. Need another language? <a href=\"https://docs.friendlycaptcha.com/#/widget_api?id=data-lang-attribute\">Help us translate</a>.",
+                )
+            );
+        }
 
         add_settings_field(
             'frcaptcha_settings_widget_theme_field',
-            'Dark theme', 'frcaptcha_settings_field_callback',
+            'Dark theme',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_widget_settings_section',
             array(
@@ -603,26 +643,43 @@ if (is_admin()) {
             )
         );
 
-        add_settings_field(
-            'frcaptcha_settings_skip_style_injection_field',
-            'Disable Style Injection', 'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_widget_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_skip_style_injection_name,
-                "description" => "Don't load the CSS-Styles for the widget. Use this if you want to style the widget yourself.",
-                "type" => "checkbox"
-            )
-        );
+        if (!FriendlyCaptcha_Plugin::$instance->get_enable_v2()) {
+            add_settings_field(
+                'frcaptcha_settings_skip_style_injection_field',
+                'Disable Style Injection',
+                'frcaptcha_settings_field_callback',
+                'friendly_captcha_admin',
+                'frcaptcha_widget_settings_section',
+                array(
+                    "option_name" => FriendlyCaptcha_Plugin::$option_skip_style_injection_name,
+                    "description" => "Don't load the CSS-Styles for the widget. Use this if you want to style the widget yourself.",
+                    "type" => "checkbox"
+                )
+            );
+        }
 
         add_settings_field(
             'frcaptcha_settings_mutation_observer',
-            'Dynamically Initialize', 'frcaptcha_settings_field_callback',
+            'Dynamically Initialize',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_widget_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_enable_mutation_observer_name,
                 "description" => "Make Friendly Captcha look for new widgets that are dynamically added to the page.<br>Enable this when you are using Friendly Captcha in a popup or a multi-step form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_enable_v2',
+            'Use Friendly Captcha v2',
+            'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_widget_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_enable_v2_name,
+                "description" => " Friendly Captcha v2 is in preview and is <b>not yet intended for production use</b>. You need to enable v2 in the Friendly Captcha dashboard.",
                 "type" => "checkbox"
             )
         );
@@ -640,7 +697,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_global_endpoint_field',
-            '🌍 Global Endpoint', 'frcaptcha_settings_field_callback',
+            '🌍 Global Endpoint',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_endpoint_settings_section',
             array(
@@ -652,7 +710,8 @@ if (is_admin()) {
 
         add_settings_field(
             'frcaptcha_settings_eu_endpoint_field',
-            '🇪🇺 Dedicated EU Endpoint', 'frcaptcha_settings_field_callback',
+            '🇪🇺 Dedicated EU Endpoint',
+            'frcaptcha_settings_field_callback',
             'friendly_captcha_admin',
             'frcaptcha_endpoint_settings_section',
             array(

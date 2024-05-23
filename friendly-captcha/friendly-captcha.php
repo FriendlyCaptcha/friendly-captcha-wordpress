@@ -21,6 +21,7 @@ if (!defined('WPINC')) {
 
 define('FRIENDLY_CAPTCHA_VERSION', '1.13.0');
 define('FRIENDLY_CAPTCHA_FRIENDLY_CHALLENGE_VERSION', '0.9.12');
+define('FRIENDLY_CAPTCHA_FRIENDLY_CAPTCHA_SDK_VERSION', '0.1.7');
 define('FRIENDLY_CAPTCHA_SUPPORTED_LANGUAGES', [
 	"en" => "English",
 	"de" => "German",
@@ -65,4 +66,5 @@ function frcaptcha_deactivate()
 {
 }
 
+require plugin_dir_path(__FILE__) . 'vendor/autoload.php';
 require plugin_dir_path(__FILE__) . 'includes/core.php';

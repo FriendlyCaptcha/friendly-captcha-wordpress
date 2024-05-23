@@ -1,8 +1,9 @@
 <?php
 
-add_action( 'fluentform_render_item_submit_button', 'frcaptcha_fluentform_show_widget', 10, 0 );
+add_action('fluentform_render_item_submit_button', 'frcaptcha_fluentform_show_widget', 10, 0);
 
-function frcaptcha_fluentform_show_widget() {
+function frcaptcha_fluentform_show_widget()
+{
     $plugin = FriendlyCaptcha_Plugin::$instance;
     if (!$plugin->is_configured() or !$plugin->get_fluentform_active()) {
         return;
@@ -16,23 +17,25 @@ function frcaptcha_fluentform_show_widget() {
     frcaptcha_enqueue_widget_scripts();
 }
 
-add_filter( 'fluentform_before_insert_submission', 'frcaptcha_fluentform_validate', 20, 3 );	
+add_filter('fluentform_before_insert_submission', 'frcaptcha_fluentform_validate', 20, 3);
 
-function frcaptcha_fluentform_validate($insert_data, $data, $form) {
+function frcaptcha_fluentform_validate($insert_data, $data, $form)
+{
 
     $plugin = FriendlyCaptcha_Plugin::$instance;
     if (!$plugin->is_configured() or !$plugin->get_fluentform_active()) {
         return;
     }
 
-    $solution = $data['frc-captcha-solution'];
+    $fieldName = FriendlyCaptcha_Plugin::$instance->get_solution_field_name();
+    $solution = $data[$fieldName];
 
-    if ( empty( $solution ) ) {
+    if (empty($solution)) {
         $error_message = FriendlyCaptcha_Plugin::default_error_user_message() . __(" (captcha missing)", "frcaptcha");
         wp_send_json(
             [
                 'errors' => [
-                    'g-recaptcha-response' => [ $error_message ],
+                    'g-recaptcha-response' => [$error_message],
                 ],
             ],
             422
@@ -46,7 +49,7 @@ function frcaptcha_fluentform_validate($insert_data, $data, $form) {
         wp_send_json(
             [
                 'errors' => [
-                    'g-recaptcha-response' => [ $error_message ],
+                    'g-recaptcha-response' => [$error_message],
                 ],
             ],
             422

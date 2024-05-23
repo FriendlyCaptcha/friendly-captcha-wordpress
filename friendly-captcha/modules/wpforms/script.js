@@ -6,13 +6,11 @@
     }
 
     elements.each((_, e) => {
-      const widget = e.friendlyChallengeWidget;
-      console.log(widget);
-      if (!widget) {
-        return;
+      if (e.friendlyChallengeWidget) {
+        e.friendlyChallengeWidget.reset();
+      } else if (e.frcWidget) {
+        e.frcWidget.reset();
       }
-
-      widget.reset();
     });
   }
 
