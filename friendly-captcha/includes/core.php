@@ -6,6 +6,7 @@ class FriendlyCaptcha_Plugin
 
     /**
      * Singleton global instance
+     * @var FriendlyCaptcha_Plugin
      */
     public static $instance;
     public $plugin_name;
@@ -121,6 +122,15 @@ class FriendlyCaptcha_Plugin
     public function get_enable_v2()
     {
         return get_option(FriendlyCaptcha_Plugin::$option_enable_v2_name) == 1;
+    }
+
+    public function get_solution_field_name()
+    {
+        if ($this->get_enable_v2()) {
+            return "frc-captcha-response";
+        } else {
+            return "frc-captcha-solution";
+        }
     }
 
     public function get_contact_form_7_active()

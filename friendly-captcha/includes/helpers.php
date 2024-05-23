@@ -29,7 +29,9 @@ function frcaptcha_v2_log_verify_response($url, $status, $errorCode)
 
 function frcaptcha_get_sanitized_frcaptcha_solution_from_post()
 {
-	$postValue = $_POST['frc-captcha-solution'];
+	$fieldName = FriendlyCaptcha_Plugin::$instance->get_solution_field_name();
+
+	$postValue = $_POST[$fieldName];
 	$solution = isset($postValue) ? trim(sanitize_text_field($postValue)) : '';
 	return $solution;
 }

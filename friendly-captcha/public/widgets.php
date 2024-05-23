@@ -202,7 +202,7 @@ function frcaptcha_v1_generate_widget_tag($sitekey, $language, $extra_attributes
 function frcaptcha_v2_generate_widget_tag($sitekey, $extra_attributes = "", $theme = "light")
 {
     return sprintf(
-        '<div class="frc-captcha" data-form-field-name="frc-captcha-solution" data-sitekey="%s" data-theme="%s" %s></div>
+        '<div class="frc-captcha" data-sitekey="%s" data-theme="%s" %s></div>
 		<noscript>You need to enable Javascript for the anti-spam check.</noscript>',
         esc_html($sitekey),
         esc_html($theme),
