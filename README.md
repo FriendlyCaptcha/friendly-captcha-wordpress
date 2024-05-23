@@ -19,8 +19,7 @@ cd friendly-captcha
 
 mkdir -p bin
 php -r "copy('https://getcomposer.org/installer', './bin/composer-setup.php');"
-# You can omit `--2.2 LTS` if you are using a more recent PHP version than 7.2
-php bin/composer-setup.php --install-dir=bin --2.2 LTS
+php bin/composer-setup.php --install-dir=bin --2.2
 ```
 
 ### Install dependencies

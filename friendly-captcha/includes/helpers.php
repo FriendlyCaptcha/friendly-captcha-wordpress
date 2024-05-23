@@ -14,6 +14,19 @@ function frcaptcha_log_remote_request($url, $response)
 	trigger_error($log);
 }
 
+function frcaptcha_v2_log_verify_response($url, $status, $errorCode)
+{
+	$log = sprintf(
+		/* translators: 1: response status, 2: error code, 3: error detail, 4: URL */
+		__('Friendly Captcha: %1$s %2$s from %3$s', 'frcaptcha'),
+		$status,
+		$errorCode,
+		$url
+	);
+
+	trigger_error($log);
+}
+
 function frcaptcha_get_sanitized_frcaptcha_solution_from_post()
 {
 	$postValue = $_POST['frc-captcha-solution'];

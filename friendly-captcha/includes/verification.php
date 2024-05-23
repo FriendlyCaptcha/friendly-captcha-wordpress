@@ -72,7 +72,10 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
 {
     $config = new ClientConfig();
     $config->setAPIKey($api_key)->setSitekey($sitekey);
-    $config->setSiteverifyEndpoint("https://eu.dev.frcapi.com/api/v2/captcha/siteverify");
+
+    if (FriendlyCaptcha_Plugin::$instance->get_eu_puzzle_endpoint_active()) {
+        $config->setSiteverifyEndpoint("eu");
+    }
 
     $captchaClient = new Client($config);
 
@@ -80,7 +83,11 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
 
     if (!$result->wasAbleToVerify()) {
         if (WP_DEBUG) {
-            frcaptcha_log_remote_request($config->siteverifyEndpoint, $result->getResponse());
+            frcaptcha_v2_log_verify_response(
+                $config->siteverifyEndpoint,
+                $result->status,
+                $result->response->error->error_code
+            );
         }
 
         // Better safe than sorry, when we can not verify the response
@@ -95,9 +102,10 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
         );
     }
 
+    $errorCodes = $result->getErrorCode() ? [$result->getErrorCode()] : [];
     return array(
         "success" => $result->shouldAccept(),
         "status" => $result->status,
-        "error_codes" => [$result->getErrorCode()]
+        "error_codes" => $errorCodes
     );
 }
