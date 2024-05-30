@@ -319,18 +319,21 @@ class FriendlyCaptcha_Plugin
 
         return get_option(FriendlyCaptcha_Plugin::$option_global_puzzle_endpoint_active_name) == 1;
     }
-  
+
     /* Verification failure alert */
 
-    public function show_verification_failed_alert() {
-        update_option(FriendlyCaptcha_Plugin::$option_verification_failed_alert_name, 1);
+    public function show_verification_failed_alert($response)
+    {
+        update_option(FriendlyCaptcha_Plugin::$option_verification_failed_alert_name, $response);
     }
 
-    public function get_verification_failed_alert() {
-        return get_option(FriendlyCaptcha_Plugin::$option_verification_failed_alert_name) == 1;
+    public function get_verification_failed_alert()
+    {
+        return get_option(FriendlyCaptcha_Plugin::$option_verification_failed_alert_name);
     }
 
-    public function remove_verification_failed_alert() {
+    public function remove_verification_failed_alert()
+    {
         delete_option(FriendlyCaptcha_Plugin::$option_verification_failed_alert_name);
     }
 }

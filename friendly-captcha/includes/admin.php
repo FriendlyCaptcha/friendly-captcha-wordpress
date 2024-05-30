@@ -52,7 +52,7 @@ if (is_admin()) {
                     Visit the <a href="<?php echo $url ?>">Friendly Captcha settings</a> and enter a valid Sitekey and API Key to complete the setup.
                 </p>
             </div>
-<?php
+        <?php
         }
 
         add_action('admin_notices', 'frcaptcha_admin_notice__not_configured');
@@ -62,28 +62,31 @@ if (is_admin()) {
         FriendlyCaptcha_Plugin::$instance->remove_verification_failed_alert();
     }
 
-    if (FriendlyCaptcha_Plugin::$instance->get_verification_failed_alert()) {
-        function frcaptcha_admin_notice__verification_failed() {
-            $url = esc_url( add_query_arg(
+    if (FriendlyCaptcha_Plugin::$instance->get_verification_failed_alert() != false) {
+        function frcaptcha_admin_notice__verification_failed()
+        {
+            $url = esc_url(add_query_arg(
                 'page',
                 'friendly_captcha_admin',
                 get_admin_url() . 'options-general.php'
-            ) );
-    
-            ?>
+            ));
+
+        ?>
             <div class="notice notice-error is-dismissible">
                 <p>
-                    <b>Friendly Captcha verification has failed!</b> 
+                    <b>Friendly Captcha verification has failed!</b>
                     <br>
                     This is usually because you have entered an incorrect API Key. Please visit the <a href="<?php echo $url ?>">Friendly Captcha settings</a> and enter a valid Sitekey and API Key.
+                    <br><br>
+                    <code><?php echo FriendlyCaptcha_Plugin::$instance->get_verification_failed_alert(); ?></code>
                 </p>
                 <a href="?frcaptcha-verification-failed-dismissed" class="notice-dismiss" style="text-decoration: none;">
                     <span class="screen-reader-text">Dismiss this notice.</span>
                 </a>
             </div>
-            <?php
+<?php
         }
-    
-        add_action( 'admin_notices', 'frcaptcha_admin_notice__verification_failed' );
+
+        add_action('admin_notices', 'frcaptcha_admin_notice__verification_failed');
     }
 }
