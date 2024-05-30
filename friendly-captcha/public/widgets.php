@@ -1,6 +1,6 @@
 <?php
 
-function frcaptcha_enqueue_widget_scripts()
+function frcaptcha_enqueue_widget_scripts($forceMutationObserver = false)
 {
     $plugin = FriendlyCaptcha_Plugin::$instance;
 
@@ -14,7 +14,7 @@ function frcaptcha_enqueue_widget_scripts()
         return frcaptcha_v1_enqueue_widget_scripts();
     }
 
-    frcaptcha_mutation_observer_scripts($plugin);
+    frcaptcha_mutation_observer_scripts($plugin, $forceMutationObserver);
 }
 
 function frcaptcha_v1_enqueue_widget_scripts()
@@ -42,7 +42,7 @@ function frcaptcha_v1_enqueue_widget_scripts()
 
 function frcaptcha_v2_enqueue_widget_scripts()
 {
-    $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
+    $version = FriendlyCaptcha_Plugin::$friendly_captcha_sdk_version;
 
     /* Modern browsers will load this smaller bundle */
     wp_enqueue_script(
@@ -63,10 +63,11 @@ function frcaptcha_v2_enqueue_widget_scripts()
     );
 }
 
-function frcaptcha_mutation_observer_scripts($plugin) {
-    $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
-    
-    if ($plugin->get_enable_mutation_observer()) {
+function frcaptcha_mutation_observer_scripts($plugin, $forceMutationObserver)
+{
+    $version = FriendlyCaptcha_Plugin::$version;
+
+    if ($forceMutationObserver || $plugin->get_enable_mutation_observer()) {
         wp_enqueue_script(
             'friendly-captcha-mutation-observer',
             plugin_dir_url(__FILE__) . 'mutation-observer.js',
@@ -95,7 +96,8 @@ function frcaptcha_echo_script_tags()
     }
 }
 
-function frcaptcha_v1_echo_script_tags() {
+function frcaptcha_v1_echo_script_tags()
+{
     $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
 
     echo '<script async defer type="module" src="' . plugin_dir_url(__FILE__) . 'vendor/v1/widget.module.min.js?ver=' . $version . '"></script>';
@@ -103,8 +105,9 @@ function frcaptcha_v1_echo_script_tags() {
 }
 
 
-function frcaptcha_v2_echo_script_tags() {
-    $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
+function frcaptcha_v2_echo_script_tags()
+{
+    $version = FriendlyCaptcha_Plugin::$friendly_captcha_sdk_version;
 
     echo '<script async defer type="module" src="' . plugin_dir_url(__FILE__) . 'vendor/v2/site.min.js?ver=' . $version . '"></script>';
     echo '<script async defer nomodule src="' . plugin_dir_url(__FILE__) . 'vendor/v2/site.compat.min.js?ver=' . $version . '"></script>';
@@ -119,6 +122,9 @@ function frcaptcha_transform_friendly_captcha_script_tags($tag, $handle, $src)
     }
     if ('friendly-captcha-widget-fallback' == $handle) {
         return str_replace('<script', '<script async defer nomodule', $tag);
+    }
+    if ('friendly-captcha-mutation-observer' == $handle) {
+        return str_replace('<script', '<script async defer', $tag);
     }
 
     return $tag;
@@ -137,7 +143,8 @@ function frcaptcha_generate_widget_tag_from_plugin($plugin)
     }
 }
 
-function frcaptcha_v1_generate_widget_tag_from_plugin($plugin) {
+function frcaptcha_v1_generate_widget_tag_from_plugin($plugin)
+{
     $sitekey = $plugin->get_sitekey();
     $lang = $plugin->get_widget_language();
 
@@ -160,22 +167,17 @@ function frcaptcha_v1_generate_widget_tag_from_plugin($plugin) {
     );
 }
 
-function frcaptcha_v2_generate_widget_tag_from_plugin($plugin) {
+function frcaptcha_v2_generate_widget_tag_from_plugin($plugin)
+{
     $sitekey = $plugin->get_sitekey();
-    $lang = $plugin->get_widget_language();
 
     $extra_attributes = "";
     $eu = $plugin->get_eu_puzzle_endpoint_active();
 
     if ($eu) {
-        // TODO: replace with production endpoint: $extra_attributes = "data-api-endpoint=\"eu\"";
-        $extra_attributes = "data-api-endpoint=\"https://eu.dev.frcapi.com/api/v2/captcha\"";
+        $extra_attributes = "data-api-endpoint=\"eu\"";
     }
 
-    if ($lang != "automatic") {
-        $extra_attributes .= " lang=\"" . esc_html($lang) . "\"";
-    }
-    
     $theme = $plugin->get_widget_dark_theme_active() ? "dark" : "light";
 
     return sprintf(
@@ -200,7 +202,7 @@ function frcaptcha_v1_generate_widget_tag($sitekey, $language, $extra_attributes
 function frcaptcha_v2_generate_widget_tag($sitekey, $extra_attributes = "", $theme = "light")
 {
     return sprintf(
-        '<div class="frc-captcha" data-form-field-name="frc-captcha-solution" data-sitekey="%s" data-theme="%s" %s></div>
+        '<div class="frc-captcha" data-sitekey="%s" data-theme="%s" %s></div>
 		<noscript>You need to enable Javascript for the anti-spam check.</noscript>',
         esc_html($sitekey),
         esc_html($theme),
@@ -225,4 +227,5 @@ function frcaptcha_generate_skip_style_injection_tag($plugin)
 
     $frcaptcha_skip_style_injection_tag_injected = true;
     return '<div id="frc-style"></div>';
+
 }

@@ -80,7 +80,11 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
 
     if (!$result->wasAbleToVerify()) {
         if (WP_DEBUG) {
-            frcaptcha_log_remote_request($config->siteverifyEndpoint, $result->getResponse());
+            frcaptcha_v2_log_verify_response(
+                $config->siteverifyEndpoint,
+                $result->status,
+                $result->response->error->error_code
+            );
         }
 
         FriendlyCaptcha_Plugin::$instance->show_verification_failed_alert();
@@ -96,9 +100,10 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
         );
     }
 
+    $errorCodes = $result->getErrorCode() ? [$result->getErrorCode()] : [];
     return array(
         "success" => $result->shouldAccept(),
         "status" => $result->status,
-        "error_codes" => [$result->getErrorCode()]
+        "error_codes" => $errorCodes
     );
 }

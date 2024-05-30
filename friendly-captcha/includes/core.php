@@ -6,12 +6,16 @@ class FriendlyCaptcha_Plugin
 
     /**
      * Singleton global instance
+     * @var FriendlyCaptcha_Plugin
      */
     public static $instance;
     public $plugin_name;
 
     public static $version;
+    // JavaScript client SDK for v1
     public static $friendly_challenge_version;
+    // JavaScript client SDK for v2
+    public static $friendly_captcha_sdk_version;
 
     // Global constants
     public static $option_group = "frcaptcha_options";
@@ -31,6 +35,7 @@ class FriendlyCaptcha_Plugin
     public static $option_elementor_forms_integration_active_name = "frcaptcha_elementor_integration_active";
     public static $option_html_forms_integration_active_name = "frcaptcha_html_forms_integration_active";
     public static $option_forminator_integration_active_name = "frcaptcha_forminator_integration_active";
+    public static $option_formidable_integration_active_name = "frcaptcha_formidable_integration_active";
     public static $option_avada_forms_integration_active_name = "frcaptcha_avada_forms_integration_active";
 
     public static $option_wp_register_integration_active_name = "frcaptcha_wp_register_integration_active";
@@ -55,6 +60,7 @@ class FriendlyCaptcha_Plugin
     public static $option_pb_login_integration_active_name = "frcaptcha_pb_login_integration_active";
     public static $option_pb_register_integration_active_name = "frcaptcha_pb_register_integration_active";
     public static $option_pb_reset_password_integration_active_name = "frcaptcha_pb_reset_password_integration_active";
+    public static $option_divi_integration_active_name = "frcaptcha_divi_integration_active";
 
     public static $option_widget_language_name = "frcaptcha_widget_language";
     public static $option_widget_dark_theme_active_name = "frcaptcha_widget_dark_theme_active";
@@ -64,15 +70,16 @@ class FriendlyCaptcha_Plugin
 
     public static $option_verification_failed_alert_name = "frcaptcha_verification_failed_alert";
 
-
     public function init()
     {
         if (defined('FRIENDLY_CAPTCHA_VERSION')) {
             FriendlyCaptcha_Plugin::$version = FRIENDLY_CAPTCHA_VERSION;
             FriendlyCaptcha_Plugin::$friendly_challenge_version = FRIENDLY_CAPTCHA_FRIENDLY_CHALLENGE_VERSION;
+            FriendlyCaptcha_Plugin::$friendly_captcha_sdk_version = FRIENDLY_CAPTCHA_FRIENDLY_CAPTCHA_SDK_VERSION;
         } else {
             FriendlyCaptcha_Plugin::$version = '0.0.0';
             FriendlyCaptcha_Plugin::$friendly_challenge_version = '0.0.0';
+            FriendlyCaptcha_Plugin::$friendly_captcha_sdk_version = '0.0.0';
         }
         $this->plugin_name = 'friendly-captcha';
 
@@ -118,6 +125,15 @@ class FriendlyCaptcha_Plugin
         return get_option(FriendlyCaptcha_Plugin::$option_enable_v2_name) == 1;
     }
 
+    public function get_solution_field_name()
+    {
+        if ($this->get_enable_v2()) {
+            return "frc-captcha-response";
+        } else {
+            return "frc-captcha-solution";
+        }
+    }
+
     public function get_contact_form_7_active()
     {
         return get_option(FriendlyCaptcha_Plugin::$option_contact_form_7_integration_active_name) == 1;
@@ -161,6 +177,11 @@ class FriendlyCaptcha_Plugin
     public function get_forminator_active()
     {
         return get_option(FriendlyCaptcha_Plugin::$option_forminator_integration_active_name) == 1;
+    }
+
+    public function get_formidable_active()
+    {
+        return get_option(FriendlyCaptcha_Plugin::$option_formidable_integration_active_name) == 1;
     }
 
     public function get_avada_forms_active()
@@ -258,6 +279,12 @@ class FriendlyCaptcha_Plugin
         return get_option(FriendlyCaptcha_Plugin::$option_pb_reset_password_integration_active_name) == 1;
     }
 
+
+    public function get_divi_active()
+    {
+        return get_option(FriendlyCaptcha_Plugin::$option_divi_integration_active_name) == 1;
+    }
+
     /* Widget options */
 
     public function get_widget_language()
@@ -292,7 +319,7 @@ class FriendlyCaptcha_Plugin
 
         return get_option(FriendlyCaptcha_Plugin::$option_global_puzzle_endpoint_active_name) == 1;
     }
-
+  
     /* Verification failure alert */
 
     public function show_verification_failed_alert() {
@@ -355,6 +382,10 @@ if (FriendlyCaptcha_Plugin::$instance->get_html_forms_active()) {
 
 if (FriendlyCaptcha_Plugin::$instance->get_forminator_active()) {
     require plugin_dir_path(__FILE__) . '../modules/forminator/forminator.php';
+}
+
+if (FriendlyCaptcha_Plugin::$instance->get_formidable_active()) {
+    require plugin_dir_path(__FILE__) . '../modules/formidable/formidable.php';
 }
 
 if (FriendlyCaptcha_Plugin::$instance->get_avada_forms_active()) {
@@ -430,4 +461,8 @@ if (FriendlyCaptcha_Plugin::$instance->get_pb_register_active()) {
 
 if (FriendlyCaptcha_Plugin::$instance->get_pb_reset_password_active()) {
     require plugin_dir_path(__FILE__) . '../modules/profile-builder/profile_builder_reset_password.php';
+}
+
+if (FriendlyCaptcha_Plugin::$instance->get_divi_active()) {
+    require plugin_dir_path(__FILE__) . '../modules/divi/divi.php';
 }

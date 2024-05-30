@@ -23,7 +23,6 @@ class frcaptcha_coblocks_load_addon
         );
 
         add_action('enqueue_block_editor_assets', array($instance, 'frcaptcha_coblocks_enqueue_block_editor_assets'));
-
     }
 
     public function render_field_friendly_captcha($is_preview)
@@ -34,7 +33,9 @@ class frcaptcha_coblocks_load_addon
 
     public function frcaptcha_coblocks_enqueue_block_editor_assets()
     {
-        wp_enqueue_script('frcaptcha_coblocks_load_addon', plugin_dir_url(__FILE__) . '/script.js',
+        wp_enqueue_script(
+            'frcaptcha_coblocks_load_addon',
+            plugin_dir_url(__FILE__) . '/script.js',
             array('wp-blocks', 'wp-editor', 'wp-element', 'wp-i18n'),
             filemtime(plugin_dir_path(__FILE__) . 'script.js')
         );
@@ -57,10 +58,10 @@ class frcaptcha_coblocks_load_addon
             return;
         }
 
-        $errorPrefix = '<strong>' . __( 'Error', 'wp-captcha' ) . '</strong> : ';
+        $errorPrefix = '<strong>' . __('Error', 'wp-captcha') . '</strong> : ';
         $solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 
-        if (empty( $solution )) {
+        if (empty($solution)) {
             wp_die($errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message() . __(" (captcha missing)", "frcaptcha"));
         }
 
@@ -69,13 +70,7 @@ class frcaptcha_coblocks_load_addon
             wp_die($errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message());
         }
 
-        unset($_POST['frc-captcha-solution']); // suppress the solution in email message
+        $fieldName = FriendlyCaptcha_Plugin::$instance->get_solution_field_name();
+        unset($_POST[$fieldName]); // suppress the solution in email message
     }
 }
-
-
-
-
-
-
-

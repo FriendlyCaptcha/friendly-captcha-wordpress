@@ -66,6 +66,10 @@ if (is_admin()) {
         );
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_formidable_integration_active_name
+        );
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_avada_forms_integration_active_name
         );
         register_setting(
@@ -139,6 +143,11 @@ if (is_admin()) {
         register_setting(
             FriendlyCaptcha_Plugin::$option_group,
             FriendlyCaptcha_Plugin::$option_pb_reset_password_integration_active_name
+        );
+
+        register_setting(
+            FriendlyCaptcha_Plugin::$option_group,
+            FriendlyCaptcha_Plugin::$option_divi_integration_active_name
         );
 
         /*Widget settings */
@@ -320,6 +329,19 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_forminator_integration_active_name,
                 "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/forminator/\" target=\"_blank\">Forminator</a>.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_formidable_integration_field',
+            'Formidable',
+            'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_formidable_integration_active_name,
+                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/formidable/\" target=\"_blank\">Formidable</a>.<br /><strong>Important:</strong> Make sure to add the new Friendly Captcha field to your forms.",
                 "type" => "checkbox"
             )
         );
@@ -571,6 +593,19 @@ if (is_admin()) {
             )
         );
 
+        add_settings_field(
+            'frcaptcha_settings_divi_integration_field',
+            'Divi Theme Contact Form',
+            'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_integrations_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_divi_integration_active_name,
+                "description" => "Enable Friendly Captcha and replace ReCaptcha in the <a href=\"https://www.elegantthemes.com/gallery/divi//\" target=\"_blank\">Divi Theme</a> contact form.<br /><strong>Important:</strong> Please choose 'FriendlyCaptcha verification' as spam protection in each individual Divi contact form.",
+                "type" => "checkbox"
+            )
+        );
+
         /* Widget settings section */
 
         // Section
@@ -581,17 +616,19 @@ if (is_admin()) {
             'friendly_captcha_admin'
         );
 
-        add_settings_field(
-            'frcaptcha_settings_widget_language_field',
-            'Widget Language',
-            'frcaptcha_widget_language_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_widget_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_widget_language_name,
-                "description" => "Set the language for the widget. Need another language? <a href=\"https://docs.friendlycaptcha.com/#/widget_api?id=data-lang-attribute\">Help us translate</a>.",
-            )
-        );
+        if (!FriendlyCaptcha_Plugin::$instance->get_enable_v2()) {
+            add_settings_field(
+                'frcaptcha_settings_widget_language_field',
+                'Widget Language',
+                'frcaptcha_widget_language_field_callback',
+                'friendly_captcha_admin',
+                'frcaptcha_widget_settings_section',
+                array(
+                    "option_name" => FriendlyCaptcha_Plugin::$option_widget_language_name,
+                    "description" => "Set the language for the widget. Need another language? <a href=\"https://docs.friendlycaptcha.com/#/widget_api?id=data-lang-attribute\">Help us translate</a>.",
+                )
+            );
+        }
 
         add_settings_field(
             'frcaptcha_settings_widget_theme_field',
@@ -606,18 +643,20 @@ if (is_admin()) {
             )
         );
 
-        add_settings_field(
-            'frcaptcha_settings_skip_style_injection_field',
-            'Disable Style Injection',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_widget_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_skip_style_injection_name,
-                "description" => "Don't load the CSS-Styles for the widget. Use this if you want to style the widget yourself.",
-                "type" => "checkbox"
-            )
-        );
+        if (!FriendlyCaptcha_Plugin::$instance->get_enable_v2()) {
+            add_settings_field(
+                'frcaptcha_settings_skip_style_injection_field',
+                'Disable Style Injection',
+                'frcaptcha_settings_field_callback',
+                'friendly_captcha_admin',
+                'frcaptcha_widget_settings_section',
+                array(
+                    "option_name" => FriendlyCaptcha_Plugin::$option_skip_style_injection_name,
+                    "description" => "Don't load the CSS-Styles for the widget. Use this if you want to style the widget yourself.",
+                    "type" => "checkbox"
+                )
+            );
+        }
 
         add_settings_field(
             'frcaptcha_settings_mutation_observer',
@@ -628,6 +667,19 @@ if (is_admin()) {
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_enable_mutation_observer_name,
                 "description" => "Make Friendly Captcha look for new widgets that are dynamically added to the page.<br>Enable this when you are using Friendly Captcha in a popup or a multi-step form.",
+                "type" => "checkbox"
+            )
+        );
+
+        add_settings_field(
+            'frcaptcha_settings_enable_v2',
+            'Use Friendly Captcha v2',
+            'frcaptcha_settings_field_callback',
+            'friendly_captcha_admin',
+            'frcaptcha_widget_settings_section',
+            array(
+                "option_name" => FriendlyCaptcha_Plugin::$option_enable_v2_name,
+                "description" => " Friendly Captcha v2 is in preview and is <b>not yet intended for production use</b>. You need to enable v2 in the Friendly Captcha dashboard.",
                 "type" => "checkbox"
             )
         );
