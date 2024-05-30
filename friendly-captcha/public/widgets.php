@@ -157,7 +157,7 @@ function frcaptcha_v1_generate_widget_tag_from_plugin($plugin)
     } else if ($eu) {
         $extra_attributes = "data-puzzle-endpoint=\"https://eu-api.friendlycaptcha.eu/api/v1/puzzle\"";
     }
-    
+
     $theme = $plugin->get_widget_dark_theme_active() ? "dark" : "";
 
     return sprintf(
@@ -227,5 +227,4 @@ function frcaptcha_generate_skip_style_injection_tag($plugin)
 
     $frcaptcha_skip_style_injection_tag_injected = true;
     return '<div id="frc-style"></div>';
-
 }

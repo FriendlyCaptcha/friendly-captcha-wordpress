@@ -29,6 +29,7 @@ function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
     $status = wp_remote_retrieve_response_code($response);
 
     // Useful for debugging
+    // $body = json_encode($response_body);
     // trigger_error($body);
 
     $response_body = wp_remote_retrieve_body($response);
@@ -72,7 +73,9 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
 {
     $config = new ClientConfig();
     $config->setAPIKey($api_key)->setSitekey($sitekey);
-    $config->setSiteverifyEndpoint("https://eu.dev.frcapi.com/api/v2/captcha/siteverify");
+    if (FriendlyCaptcha_Plugin::$instance->get_eu_puzzle_endpoint_active()) {
+        $config->setSiteverifyEndpoint("eu");
+    }
 
     $captchaClient = new Client($config);
 
