@@ -68,6 +68,7 @@ class FriendlyCaptcha_Plugin
     public static $option_global_puzzle_endpoint_active_name = "frcaptcha_global_endpoint_active";
     public static $option_eu_puzzle_endpoint_active_name = "frcaptcha_eu_endpoint_active";
 
+    public static $option_verification_failed_alert_name = "frcaptcha_verification_failed_alert";
 
     public function init()
     {
@@ -317,6 +318,23 @@ class FriendlyCaptcha_Plugin
         if (!$eu_active) return true; // At least one must be enabled.
 
         return get_option(FriendlyCaptcha_Plugin::$option_global_puzzle_endpoint_active_name) == 1;
+    }
+
+    /* Verification failure alert */
+
+    public function show_verification_failed_alert($response)
+    {
+        update_option(FriendlyCaptcha_Plugin::$option_verification_failed_alert_name, $response);
+    }
+
+    public function get_verification_failed_alert()
+    {
+        return get_option(FriendlyCaptcha_Plugin::$option_verification_failed_alert_name);
+    }
+
+    public function remove_verification_failed_alert()
+    {
+        delete_option(FriendlyCaptcha_Plugin::$option_verification_failed_alert_name);
     }
 }
 

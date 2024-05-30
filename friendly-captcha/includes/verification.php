@@ -15,36 +15,37 @@ function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
 {
     $endpoint = 'https://api.friendlycaptcha.com/api/v1/siteverify';
 
-    $response_body = array(
+    $request_body = array(
         'secret' => $api_key,
         'sitekey' => $sitekey,
         'solution' => $solution,
     );
 
-    $body = json_encode($response_body);
     $request = array(
-        'body' => $response_body,
+        'body' => $request_body,
     );
 
     $response = wp_remote_post(esc_url_raw($endpoint), $request);
     $status = wp_remote_retrieve_response_code($response);
 
     // Useful for debugging
+    // $body = json_encode($request_body);
     // trigger_error($body);
 
-    $response_body = wp_remote_retrieve_body($response);
-    $response_body = json_decode($response_body, true);
+    $raw_response_body = wp_remote_retrieve_body($response);
+    $response_body = json_decode($raw_response_body, true);
 
     if (200 != $status) {
         if (WP_DEBUG) {
             frcaptcha_log_remote_request($endpoint, $response);
         }
 
+        FriendlyCaptcha_Plugin::$instance->show_verification_failed_alert($raw_response_body);
+
         // Better safe than sorry, if the request is non-200 we can not verify the response
         // Either the user's credentials are wrong (e.g. wrong sitekey, api key) or the friendly
         // captcha servers are unresponsive.
 
-        // TODO notify site admin somehow
         return array(
             "success" => true,
             "status" => $status,
@@ -72,7 +73,6 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
 {
     $config = new ClientConfig();
     $config->setAPIKey($api_key)->setSitekey($sitekey);
-
     if (FriendlyCaptcha_Plugin::$instance->get_eu_puzzle_endpoint_active()) {
         $config->setSiteverifyEndpoint("eu");
     }
@@ -90,11 +90,13 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
             );
         }
 
+        $raw_response = json_encode($result->response);
+        FriendlyCaptcha_Plugin::$instance->show_verification_failed_alert($raw_response);
+
         // Better safe than sorry, when we can not verify the response
         // Either the user's credentials are wrong (e.g. wrong sitekey, api key) or the friendly
         // captcha servers are unresponsive.
 
-        // TODO notify site admin somehow
         return array(
             "success" => true,
             "status" => $result->status,
