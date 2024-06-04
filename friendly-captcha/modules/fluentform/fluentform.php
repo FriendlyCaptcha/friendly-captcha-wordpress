@@ -1,6 +1,8 @@
 <?php
 
+// See https://github.com/fluentform/fluentform/blob/5.1.14/app/Services/FormBuilder/FormBuilder.php#L274-L298
 add_action('fluentform_render_item_submit_button', 'frcaptcha_fluentform_show_widget', 10, 0);
+add_action('fluentform_render_item_step_end', 'frcaptcha_fluentform_show_widget', 10, 0);
 
 function frcaptcha_fluentform_show_widget()
 {
