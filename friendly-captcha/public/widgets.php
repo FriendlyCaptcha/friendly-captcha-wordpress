@@ -9,9 +9,9 @@ function frcaptcha_enqueue_widget_scripts($forceMutationObserver = false)
     }
 
     if (FriendlyCaptcha_Plugin::$instance->get_enable_v2()) {
-        return frcaptcha_v2_enqueue_widget_scripts();
+        frcaptcha_v2_enqueue_widget_scripts();
     } else {
-        return frcaptcha_v1_enqueue_widget_scripts();
+        frcaptcha_v1_enqueue_widget_scripts();
     }
 
     frcaptcha_mutation_observer_scripts($plugin, $forceMutationObserver);
