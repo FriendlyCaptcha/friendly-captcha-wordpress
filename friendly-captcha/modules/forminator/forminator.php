@@ -1,7 +1,6 @@
 <?php
 
 add_action('forminator_render_button_markup', 'frcaptcha_forminator_add_captcha', 10, 2);
-add_action('forminator_render_form_submit_markup', 'frcaptcha_forminator_add_captcha', 10, 2);
 add_filter('forminator_cform_form_is_submittable', 'frcaptcha_forminator_verify', 10, 3);
 
 function frcaptcha_forminator_add_captcha($html, $button)
