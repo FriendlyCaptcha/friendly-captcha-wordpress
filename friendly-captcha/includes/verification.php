@@ -14,6 +14,9 @@ function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key)
 function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
 {
     $endpoint = 'https://api.friendlycaptcha.com/api/v1/siteverify';
+    if (FriendlyCaptcha_Plugin::$instance->get_eu_puzzle_endpoint_active()) {
+        $endpoint = 'https://eu-api.friendlycaptcha.eu/api/v1/siteverify';
+    }
 
     $request_body = array(
         'secret' => $api_key,
