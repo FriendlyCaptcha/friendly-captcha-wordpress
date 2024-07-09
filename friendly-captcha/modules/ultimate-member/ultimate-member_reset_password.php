@@ -1,10 +1,11 @@
 <?php
 
-add_action( 'um_after_password_reset_fields', 'frcaptcha_um_reset_password_show_widget', 500 );
+add_action('um_after_password_reset_fields', 'frcaptcha_um_reset_password_show_widget', 500);
 
-function frcaptcha_um_reset_password_show_widget() {
+function frcaptcha_um_reset_password_show_widget()
+{
     $plugin = FriendlyCaptcha_Plugin::$instance;
-    if (!$plugin->is_configured() or !$plugin->get_um_reset_password_active()) {
+    if (!$plugin->is_configured()) {
         return;
     }
 
@@ -16,21 +17,22 @@ function frcaptcha_um_reset_password_show_widget() {
     frcaptcha_enqueue_widget_scripts();
 }
 
-add_action( 'um_reset_password_errors_hook', 'frcaptcha_um_reset_password_validate', 20, 2 );	
+add_action('um_reset_password_errors_hook', 'frcaptcha_um_reset_password_validate', 20, 2);
 
-function frcaptcha_um_reset_password_validate($post,$form_data) {
-    if ( isset( $form_data['mode'] ) && $form_data['mode'] == 'password') {
+function frcaptcha_um_reset_password_validate($post, $form_data)
+{
+    if (isset($form_data['mode']) && $form_data['mode'] == 'password') {
         $plugin = FriendlyCaptcha_Plugin::$instance;
-        if (!$plugin->is_configured() or !$plugin->get_um_reset_password_active()) {
+        if (!$plugin->is_configured()) {
             return;
         }
 
-        $errorPrefix = '<strong>' . __( 'Error', 'frcaptcha' ) . '</strong> : ';
+        $errorPrefix = '<strong>' . __('Error', 'frcaptcha') . '</strong> : ';
         $solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
-        
-        if ( empty( $solution ) ) {
+
+        if (empty($solution)) {
             $error_message = $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message() . __(' (captcha missing)', 'frcaptcha');
-            UM()->form()->add_error( 'frcaptcha', $error_message );
+            UM()->form()->add_error('frcaptcha', $error_message);
             return;
         }
 
@@ -38,7 +40,7 @@ function frcaptcha_um_reset_password_validate($post,$form_data) {
 
         if (!$verification['success']) {
             $error_message = $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message();
-            UM()->form()->add_error( 'frcaptcha', $error_message );
+            UM()->form()->add_error('frcaptcha', $error_message);
             return;
         }
     }

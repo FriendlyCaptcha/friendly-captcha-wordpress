@@ -1,9 +1,10 @@
 <?php
-if ( ! class_exists( 'GFForms' ) ) {
+if (!class_exists('GFForms')) {
 	die();
 }
 
-class GFForms_Friendlycaptcha_Field extends GF_Field {
+class GFForms_Friendlycaptcha_Field extends GF_Field
+{
 
 	/**
 	 * @var string $type The field type.
@@ -16,9 +17,10 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 	 *
 	 * @return string
 	 */
-	public function get_form_editor_field_title() {
+	public function get_form_editor_field_title()
+	{
 		// Note: I removed the space as it barely fits otherwise..
-		return esc_attr__( 'FriendlyCaptcha', 'frcaptcha' );
+		return esc_attr__('FriendlyCaptcha', 'frcaptcha');
 	}
 
 	/**
@@ -27,7 +29,8 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 	 * @return array
 	 */
 
-	public function get_form_editor_button() {
+	public function get_form_editor_button()
+	{
 		return array(
 			'group' => 'advanced_fields',
 			'text'  => $this->get_form_editor_field_title(),
@@ -40,7 +43,8 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 	 * @return array
 	 */
 
-	function get_form_editor_field_settings() {
+	function get_form_editor_field_settings()
+	{
 		return array(
 			'label_setting',
 			// 'description_setting',
@@ -49,9 +53,10 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 	}
 
 	/**
-     * Sets icon for field editor
+	 * Sets icon for field editor
 	 */
-	public function get_form_editor_field_icon() {
+	public function get_form_editor_field_icon()
+	{
 		return "dashicons-shield-alt";
 	}
 
@@ -61,7 +66,8 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 	 * @return bool
 	 */
 
-	public function is_conditional_logic_supported() {
+	public function is_conditional_logic_supported()
+	{
 		return true;
 	}
 
@@ -75,9 +81,10 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 	 * @return string
 	 */
 
-	public function get_field_input( $form, $value = '', $entry = null ) {
+	public function get_field_input($form, $value = '', $entry = null)
+	{
 		$plugin = FriendlyCaptcha_Plugin::$instance;
-		if (!$plugin->is_configured() or !$plugin->get_gravity_forms_active()) {
+		if (!$plugin->is_configured()) {
 			return;
 		}
 
@@ -92,11 +99,11 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 			FriendlyCaptcha_Plugin::$version,
 			true
 		);
-			
-		add_action( 'gform_preview_footer', array( $this, 'ensure_frcaptcha_init' ) );
+
+		add_action('gform_preview_footer', array($this, 'ensure_frcaptcha_init'));
 
 		// Replace all inline scripts to footer
-		add_filter( 'gform_init_scripts_footer', '__return_true' );
+		add_filter('gform_init_scripts_footer', '__return_true');
 
 		$widget_html = frcaptcha_generate_widget_tag_from_plugin($plugin);
 
@@ -104,25 +111,26 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 			$widget_html = '<div style="border: 1px solid gray;width: 320px;padding: 1em;line-height: 1.3;border-radius:5px;"><span class="dashicons-before dashicons-shield-alt"></span>' . __("A Friendly Captcha widget will be displayed here.", "frcaptcha") . '</div>';
 		}
 
-		return sprintf( "<div class='ginput_container ginput_container_%s'>%s</div>", $this->type, $widget_html);
+		return sprintf("<div class='ginput_container ginput_container_%s'>%s</div>", $this->type, $widget_html);
 	}
 
-	public function ensure_frcaptcha_init(){
-		?>
+	public function ensure_frcaptcha_init()
+	{
+?>
 		<script type="text/javascript">
-			( function( $ ) {
-				$( document ).bind( 'gform_post_render', function() {
-					$( '.frc-captcha' ).each( function( index, elem ) {
-							if (!elem.dataset["attached"]) {
+			(function($) {
+				$(document).bind('gform_post_render', function() {
+					$('.frc-captcha').each(function(index, elem) {
+						if (!elem.dataset["attached"]) {
 							new WidgetInstance(elem);
-							elem.dataset["attached"] = "1";	
+							elem.dataset["attached"] = "1";
 						}
-					} );
-				} );
-			} )( jQuery );
+					});
+				});
+			})(jQuery);
 		</script>
 
-		<?php
+<?php
 	}
 
 	/**
@@ -131,40 +139,43 @@ class GFForms_Friendlycaptcha_Field extends GF_Field {
 	 * @param array $form The form data.
 	 * @return bool
 	 */
-	private function is_on_last_page( $form ) {
-	    $pages = GFAPI::get_fields_by_type( $form, array( 'page' ) );
-	    return count( $pages ) + 1 === (int) $this->pageNumber;
-    }
+	private function is_on_last_page($form)
+	{
+		$pages = GFAPI::get_fields_by_type($form, array('page'));
+		return count($pages) + 1 === (int) $this->pageNumber;
+	}
 
-	public function validate( $value, $form ) {
-		if ( GFFormDisplay::is_last_page( $form ) && !$this->is_on_last_page( $form ) ) {
+	public function validate($value, $form)
+	{
+		if (GFFormDisplay::is_last_page($form) && !$this->is_on_last_page($form)) {
 			return;
 		}
-		$this->validate_frcaptcha( $form );
+		$this->validate_frcaptcha($form);
 	}
 
 	// Validate the Friendly Captcha solution
-	public function validate_frcaptcha( $form ) {
+	public function validate_frcaptcha($form)
+	{
 		$plugin = FriendlyCaptcha_Plugin::$instance;
-		if (!$plugin->is_configured() or !$plugin->get_gravity_forms_active()) {
+		if (!$plugin->is_configured()) {
 			return;
 		}
 
 		$solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
-		if ( empty( $solution ) ) {
+		if (empty($solution)) {
 			$this->failed_validation  = true;
 			$this->validation_message = FriendlyCaptcha_Plugin::default_error_user_message() . __(" (captcha missing)", "frcaptcha");
 			return;
 		}
-	
+
 		$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
 		if (!$verification["success"]) {
 			$this->failed_validation  = true;
 			$this->validation_message = FriendlyCaptcha_Plugin::default_error_user_message();
-			GFCommon::log_debug( __METHOD__ . '(): Validating the Friendly Captcha response has failed due to the following: ' . reset($verification["error_codes"]) );
+			GFCommon::log_debug(__METHOD__ . '(): Validating the Friendly Captcha response has failed due to the following: ' . reset($verification["error_codes"]));
 			return;
 		}
 	}
 }
 
-GF_Fields::register( new GFForms_Friendlycaptcha_Field() );
+GF_Fields::register(new GFForms_Friendlycaptcha_Field());

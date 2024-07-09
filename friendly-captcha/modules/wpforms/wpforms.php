@@ -1,10 +1,11 @@
 <?php
 
-add_action( 'wpforms_wp_footer_end', 'frcaptcha_wpforms_friendly_captcha_enqueue_scripts', 10, 0 );
+add_action('wpforms_wp_footer_end', 'frcaptcha_wpforms_friendly_captcha_enqueue_scripts', 10, 0);
 
-function frcaptcha_wpforms_friendly_captcha_enqueue_scripts() {
+function frcaptcha_wpforms_friendly_captcha_enqueue_scripts()
+{
     $plugin = FriendlyCaptcha_Plugin::$instance;
-    if (!$plugin->is_configured() or !$plugin->get_wpforms_active()) {
+    if (!$plugin->is_configured()) {
         return;
     }
 
@@ -12,7 +13,7 @@ function frcaptcha_wpforms_friendly_captcha_enqueue_scripts() {
 
     // We add our own script to reset the widget after form submission
     // wp_enqueue_script doesn't work with WPForms for some reason, so we have to echo the script tags manually.
-    echo '<script async defer src="'. plugin_dir_url( __FILE__ ) . 'script.js"></script>';
+    echo '<script async defer src="' . plugin_dir_url(__FILE__) . 'script.js"></script>';
 
     // The CSS reset of WPForms is really agressive.. so we add the frcaptcha styles but more `!important`ly now.
     // Really wish this wasn't necessary..
@@ -154,13 +155,17 @@ function frcaptcha_wpforms_friendly_captcha_enqueue_scripts() {
     </style>";
 }
 
-add_filter( 'wpforms_display_submit_before',
-	'frcaptcha_wpforms_add_widget', 10, 1
+add_filter(
+    'wpforms_display_submit_before',
+    'frcaptcha_wpforms_add_widget',
+    10,
+    1
 );
 
-function frcaptcha_wpforms_add_widget( $form_data ) {
+function frcaptcha_wpforms_add_widget($form_data)
+{
     $plugin = FriendlyCaptcha_Plugin::$instance;
-    if (!$plugin->is_configured() or !$plugin->get_wpforms_active()) {
+    if (!$plugin->is_configured()) {
         return;
     }
 
@@ -169,24 +174,25 @@ function frcaptcha_wpforms_add_widget( $form_data ) {
 }
 
 
-add_action( 'wpforms_process', 'frcaptcha_wpforms_process', 10, 3 );
+add_action('wpforms_process', 'frcaptcha_wpforms_process', 10, 3);
 
-function frcaptcha_wpforms_process( $fields, $entry, $form_data ) {
+function frcaptcha_wpforms_process($fields, $entry, $form_data)
+{
 
     $plugin = FriendlyCaptcha_Plugin::$instance;
-    if (!$plugin->is_configured() or !$plugin->get_wpforms_active()) {
+    if (!$plugin->is_configured()) {
         return;
     }
 
-	$solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
-		
-	if ( empty( $solution ) ) {
-        wpforms()->process->errors[ $form_data['id'] ] [ 'header' ] = esc_html__( FriendlyCaptcha_Plugin::default_error_user_message(), 'frcaptcha' );
+    $solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
+
+    if (empty($solution)) {
+        wpforms()->process->errors[$form_data['id']]['header'] = esc_html__(FriendlyCaptcha_Plugin::default_error_user_message(), 'frcaptcha');
         wpforms_log(
-            esc_html__( '[Friendly Captcha] Spam Entry' ) . uniqid(),
-            array( "Friendly Captcha solution not present", $entry ),
+            esc_html__('[Friendly Captcha] Spam Entry') . uniqid(),
+            array("Friendly Captcha solution not present", $entry),
             array(
-                'type'    => array( 'spam' ),
+                'type'    => array('spam'),
                 'form_id' => $form_data['id'],
             )
         );
@@ -195,17 +201,17 @@ function frcaptcha_wpforms_process( $fields, $entry, $form_data ) {
     $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
 
     if (!$verification["success"]) {
-        wpforms()->process->errors[ $form_data['id'] ] [ 'header' ] = esc_html__( FriendlyCaptcha_Plugin::default_error_user_message(), 'frcaptcha' );
+        wpforms()->process->errors[$form_data['id']]['header'] = esc_html__(FriendlyCaptcha_Plugin::default_error_user_message(), 'frcaptcha');
         $captcha_error_str = $verification["error_codes"] ? $verification["error_codes"] : reset($verification["error_codes"]);
         // Not entirely sure this will work as expected..
         // We could not log to be more safe?
         wpforms_log(
-            esc_html__( '[Friendly Captcha] Spam Entry' ) . uniqid(),
-            array( $captcha_error_str, $solution, $entry ),
+            esc_html__('[Friendly Captcha] Spam Entry') . uniqid(),
+            array($captcha_error_str, $solution, $entry),
             array(
-                'type'    => array( 'spam' ),
+                'type'    => array('spam'),
                 'form_id' => $form_data['id'],
             )
         );
-	}
+    }
 }

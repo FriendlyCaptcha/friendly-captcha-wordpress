@@ -1,10 +1,11 @@
 <?php
 
-add_filter( 'wppb_recover_password_generate_password_input', 'frcaptcha_pb_reset_password_show_widget', 10, 1);
+add_filter('wppb_recover_password_generate_password_input', 'frcaptcha_pb_reset_password_show_widget', 10, 1);
 
-function frcaptcha_pb_reset_password_show_widget($output) {
+function frcaptcha_pb_reset_password_show_widget($output)
+{
     $plugin = FriendlyCaptcha_Plugin::$instance;
-    if (!$plugin->is_configured() or !$plugin->get_pb_reset_password_active()) {
+    if (!$plugin->is_configured()) {
         return $output;
     }
 
@@ -16,15 +17,16 @@ function frcaptcha_pb_reset_password_show_widget($output) {
 
 add_filter('wppb_recover_password_sent_message1', 'frcaptcha_pb_reset_password_sent_message', 10, 1);
 
-function frcaptcha_pb_reset_password_sent_message($message) {
-//    We are using the plugins ReCaptcha functionality to display the error
+function frcaptcha_pb_reset_password_sent_message($message)
+{
+    //    We are using the plugins ReCaptcha functionality to display the error
     $plugin = FriendlyCaptcha_Plugin::$instance;
-    if (!$plugin->is_configured() or !$plugin->get_pb_reset_password_active()) {
+    if (!$plugin->is_configured()) {
         return $message;
     }
     $solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 
-    if ( empty( $solution ) ) {
+    if (empty($solution)) {
         $message = 'wppb_recaptcha_error';
     }
 
@@ -38,10 +40,11 @@ function frcaptcha_pb_reset_password_sent_message($message) {
 }
 
 
-add_filter('wppb_recover_password_displayed_message1','frcaptcha_pb_reset_password_display_message', 10, 1);
+add_filter('wppb_recover_password_displayed_message1', 'frcaptcha_pb_reset_password_display_message', 10, 1);
 
-function frcaptcha_pb_reset_password_display_message($message){
-//    This will only be triggered when the captcha error occurred, so we can safely send this error.
-//    We can't check again because then we will get an error from FriendlyCaptcha
+function frcaptcha_pb_reset_password_display_message($message)
+{
+    //    This will only be triggered when the captcha error occurred, so we can safely send this error.
+    //    We can't check again because then we will get an error from FriendlyCaptcha
     return $message = $message . '<p class="wppb-warning">' . FriendlyCaptcha_Plugin::default_error_user_message() . '</p>';
 }

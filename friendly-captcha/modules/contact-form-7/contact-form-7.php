@@ -5,7 +5,7 @@ add_action('wp_enqueue_scripts', 'frcaptcha_wpcf7_friendly_captcha_enqueue_scrip
 function frcaptcha_wpcf7_friendly_captcha_enqueue_scripts()
 {
 	$plugin = FriendlyCaptcha_Plugin::$instance;
-	if (!$plugin->is_configured() or !$plugin->get_contact_form_7_active()) {
+	if (!$plugin->is_configured()) {
 		return;
 	}
 
@@ -34,7 +34,7 @@ add_filter(
 function frcaptcha_wpcf7_friendly_captcha_add_widget_if_missing($elements)
 {
 	$plugin = FriendlyCaptcha_Plugin::$instance;
-	if (!$plugin->is_configured() or !$plugin->get_contact_form_7_active()) {
+	if (!$plugin->is_configured()) {
 		return $elements;
 	}
 
@@ -57,11 +57,11 @@ function frcaptcha_wpcf7_friendly_captcha_verify_response($spam)
 	}
 
 	$plugin = FriendlyCaptcha_Plugin::$instance;
-	if (!$plugin->is_configured() or !$plugin->get_contact_form_7_active()) {
+	if (!$plugin->is_configured()) {
 		return $spam;
 	}
 
-	if ($plugin->get_f12_cf7_doubleoptin_active()) {
+	if ($plugin->get_integration_active("f12_cf7_doubleoptin")) {
 		// Forge12 Double Opt-In triggers a form submit when clicking the link in the email.
 		// That form submit will be a GET request and does not have the frc-captcha-solution field, so we need to let it pass.
 		if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['optin'])) {
@@ -123,7 +123,7 @@ function frcaptcha_wpcf7_friendly_captcha_verify_response($spam)
 function frcaptcha_wpcf7_friendly_captcha_widget_shortcode($form_tag)
 {
 	$plugin = FriendlyCaptcha_Plugin::$instance;
-	if (!$plugin->is_configured() or !$plugin->get_contact_form_7_active()) {
+	if (!$plugin->is_configured()) {
 		return;
 	}
 
@@ -135,7 +135,7 @@ add_action('wpcf7_init', 'frcaptcha_wpcf7_friendly_captcha_add_form_tag_friendly
 function frcaptcha_wpcf7_friendly_captcha_add_form_tag_friendly_captcha()
 {
 	$plugin = FriendlyCaptcha_Plugin::$instance;
-	if (!$plugin->is_configured() or !$plugin->get_contact_form_7_active()) {
+	if (!$plugin->is_configured()) {
 		return;
 	}
 

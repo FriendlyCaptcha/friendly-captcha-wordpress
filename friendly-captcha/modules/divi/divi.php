@@ -29,7 +29,7 @@ class frcaptcha_divi_load_addon
     {
         $plugin = FriendlyCaptcha_Plugin::$instance;
 
-        if (!$plugin->is_configured() or !$plugin->get_divi_active()) {
+        if (!$plugin->is_configured()) {
             return;
         }
 
@@ -41,7 +41,7 @@ class frcaptcha_divi_load_addon
     {
         $plugin = FriendlyCaptcha_Plugin::$instance;
 
-        if (!$plugin->is_configured() or !$plugin->get_divi_active()) {
+        if (!$plugin->is_configured()) {
             return;
         }
 
@@ -62,7 +62,7 @@ class frcaptcha_divi_load_addon
 
         $plugin = FriendlyCaptcha_Plugin::$instance;
 
-        if (!$plugin->is_configured() or !$plugin->get_divi_active()) {
+        if (!$plugin->is_configured()) {
             return;
         }
 

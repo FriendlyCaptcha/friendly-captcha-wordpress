@@ -9,7 +9,7 @@ class frcaptcha_coblocks_load_addon
     public static function load()
     {
         $plugin = FriendlyCaptcha_Plugin::$instance;
-        if (!$plugin->is_configured() or !$plugin->get_coblocks_active()) {
+        if (!$plugin->is_configured()) {
             return;
         }
 
@@ -46,7 +46,7 @@ class frcaptcha_coblocks_load_addon
     {
         $plugin = FriendlyCaptcha_Plugin::$instance;
 
-        if (!$plugin->is_configured() or !$plugin->get_coblocks_active()) {
+        if (!$plugin->is_configured()) {
             return;
         }
 

@@ -1,10 +1,11 @@
 <?php
 
-add_action( 'woocommerce_lostpassword_form', 'frcaptcha_wc_lost_password_show_widget', 10, 0 );
+add_action('woocommerce_lostpassword_form', 'frcaptcha_wc_lost_password_show_widget', 10, 0);
 
-function frcaptcha_wc_lost_password_show_widget() {
+function frcaptcha_wc_lost_password_show_widget()
+{
     $plugin = FriendlyCaptcha_Plugin::$instance;
-    if (!$plugin->is_configured() or !$plugin->get_wc_lost_password_active()) {
+    if (!$plugin->is_configured()) {
         return;
     }
 
