@@ -104,6 +104,7 @@ if (is_admin()) {
         $show_all_integrations = isset($_GET['frcaptcha-all-integrations']);
 
         foreach (FriendlyCaptcha_Plugin::$integrations as $integration) {
+            // Only show integrations for plugins that are installed unless the user wants to see all integrations
             if (!$show_all_integrations && array_key_exists('plugins', $integration)) {
                 $plugins = $integration['plugins'];
 

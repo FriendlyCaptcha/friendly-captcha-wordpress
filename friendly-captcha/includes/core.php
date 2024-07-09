@@ -199,7 +199,7 @@ class FriendlyCaptcha_Plugin
         ),
         array(
             "name" => "WPUM Registration",
-            "slug" => 'wpum_register',
+            "slug" => 'wpum_registration',
             "entry" => "wpum/wpum_registration.php",
             "plugins" => array("wp-user-manager/wp-user-manager.php"),
             "settings_description" => "Enable Friendly Captcha for the WP User Manager registration form.",
