@@ -49,7 +49,7 @@ function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
         return array(
             "success" => true,
             "status" => $status,
-            "errors" => array()
+            "error_codes" => array()
         );
     }
 
@@ -100,7 +100,7 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
         return array(
             "success" => true,
             "status" => $result->status,
-            "errors" => array()
+            "error_codes" => array()
         );
     }
 
@@ -109,5 +109,75 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
         "success" => $result->shouldAccept(),
         "status" => $result->status,
         "error_codes" => $errorCodes
+    );
+}
+
+function frcaptcha_verify_auth_info($sitekey, $api_key)
+{
+    $endpoint = 'https://eu-api.friendlycaptcha.eu/api/v1/authInfo';
+
+    $request_body = array(
+        'secret' => $api_key,
+        'sitekey' => $sitekey,
+    );
+
+    $request = array(
+        'body' => $request_body,
+    );
+
+    $response = wp_remote_post(esc_url_raw($endpoint), $request);
+    $status = wp_remote_retrieve_response_code($response);
+    if ($status >= 500) {
+        if (WP_DEBUG) {
+            frcaptcha_log_remote_request($endpoint, $response);
+        }
+
+        return array(
+            'success' => true
+        );
+    }
+
+    // Useful for debugging
+    // $body = json_encode($request_body);
+    // trigger_error($body);
+
+    $raw_response_body = wp_remote_retrieve_body($response);
+    $response_body = json_decode($raw_response_body, true);
+
+    $success = isset($response_body['success'])
+        ? $response_body['success']
+        : false;
+
+    $errorCodes = isset($response_body['errors'])
+        ? $response_body['errors']
+        : array();
+
+    if ($success) {
+        return array(
+            'success' => true
+        );
+    }
+
+    $message = 'Unknown error. Please check your sitekey and api key.';
+    if (count($errorCodes) > 0) {
+        $errorCode = $errorCodes[0];
+        switch ($errorCode) {
+            case 'sitekey_missing':
+            case 'sitekey_invalid':
+                $message = 'Invalid sitekey. Please get a valid sitekey from the Friendly Captcha dashboard.';
+                break;
+            case 'sitekey_account_mismatch':
+                $message = 'Sitekey and API key do not belong to the same Friendly Captcha account.';
+                break;
+            case 'secret_missing':
+            case 'secret_invalid':
+                $message = 'Invalid API key. Please get a valid API key from the Friendly Captcha dashboard.';
+                break;
+        }
+    }
+
+    return array(
+        'success' => false,
+        'message' => $message
     );
 }
