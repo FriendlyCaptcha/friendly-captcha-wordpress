@@ -158,7 +158,7 @@ function frcaptcha_verify_auth_info($sitekey, $api_key)
         );
     }
 
-    $message = 'Unknown error. Please check your sitekey and api key.';
+    $message = 'Unknown error. Please check your sitekey and API key.';
     if (count($errorCodes) > 0) {
         $errorCode = $errorCodes[0];
         switch ($errorCode) {
