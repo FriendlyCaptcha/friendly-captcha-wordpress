@@ -4,6 +4,8 @@
 
 if (is_admin()) {
     add_action('admin_init', 'frcaptcha_settings_init');
+    add_action('update_option_' . FriendlyCaptcha_Plugin::$option_sitekey_name, 'frcaptcha_settings_validate');
+    add_action('update_option_' . FriendlyCaptcha_Plugin::$option_api_key_name, 'frcaptcha_settings_validate');
 
     function frcaptcha_settings_init()
     {
@@ -62,6 +64,13 @@ if (is_admin()) {
             'frcaptcha_general_settings_section',
             'Account Configuration',
             'frcaptcha_general_section_callback',
+            'friendly_captcha_admin'
+        );
+
+        add_settings_section(
+            'frcaptcha_save_settings_section',
+            '',
+            'frcaptcha_save_section_callback',
             'friendly_captcha_admin'
         );
 
@@ -262,5 +271,25 @@ if (is_admin()) {
                 "type" => "checkbox"
             )
         );
+    }
+
+    $settings_validated = false;
+    function frcaptcha_settings_validate()
+    {
+        // Deduplicate validation when multiple fields are changed
+        global $settings_validated;
+        if ($settings_validated) {
+            $settings_validated = true;
+            return;
+        }
+
+        $sitekey = get_option(FriendlyCaptcha_Plugin::$option_sitekey_name);
+        $api_key = get_option(FriendlyCaptcha_Plugin::$option_api_key_name);
+
+        $verification = frcaptcha_verify_auth_info($sitekey, $api_key);
+
+        if (!$verification['success']) {
+            add_settings_error(FriendlyCaptcha_Plugin::$option_api_key_name, 'config_invalid', $verification['message'], 'error');
+        }
     }
 }
