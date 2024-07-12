@@ -36,11 +36,12 @@ function frcaptcha_integrations_section_callback()
 {
     $show_all_integrations = isset($_GET['frcaptcha-all-integrations']);
 
-    $toggle_link = $show_all_integrations ? '<a href="?page=friendly_captcha_admin">Show installed integrations</a>' :
-        '<a href="?page=friendly_captcha_admin&frcaptcha-all-integrations">Show all integrations</a>';
+    $toggle_url = esc_url(add_query_arg('frcaptcha-all-integrations', $show_all_integrations ? false : '1'));
+    $toggle_text = $show_all_integrations ? 'Show installed integrations' : 'Show all integrations';
 
     echo '<p>Friendly Captcha can be integrated into a number of different form plugins. You can enable Friendly Captcha for each of them separately.</p>
-    <p>This list only shows integrations for the plugins you have installed. <br/><b>' . $toggle_link . '</b></p>';
+    <p>This list only shows integrations for the plugins you have installed. <br/><b>
+    <a href="' . $toggle_url . '">' . $toggle_text . '</a></b></p>';
 }
 
 function frcaptcha_widget_section_callback()
