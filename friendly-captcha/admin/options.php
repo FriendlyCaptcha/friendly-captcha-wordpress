@@ -10,7 +10,6 @@ function frcaptcha_options_page_html()
         <hr>
         <form action="options.php" method="post">
             <?php
-            settings_errors();
             settings_fields(FriendlyCaptcha_Plugin::$option_group);
             do_settings_sections('friendly_captcha_admin');
             submit_button();
@@ -27,10 +26,23 @@ function frcaptcha_general_section_callback()
 {
     echo '<p>If you don\'t have a Friendly Captcha account yet, you can sign up at <a href="https://friendlycaptcha.com" target="_blank">FriendlyCaptcha.com</a>.';
 }
+
+function frcaptcha_save_section_callback()
+{
+    echo '<p><button class="button button-primary" type="submit">Save Changes</button></p>';
+}
+
 function frcaptcha_integrations_section_callback()
 {
-    echo '<p>Friendly Captcha can be enabled individually for different parts of your website.</p>';
+    $show_all_integrations = isset($_GET['frcaptcha-all-integrations']);
+
+    $toggle_link = $show_all_integrations ? '<a href="?page=friendly_captcha_admin">Show installed integrations</a>' :
+        '<a href="?page=friendly_captcha_admin&frcaptcha-all-integrations">Show all integrations</a>';
+
+    echo '<p>Friendly Captcha can be integrated into a number of different form plugins. You can enable Friendly Captcha for each of them separately.</p>
+    <p>This list only shows integrations for the plugins you have installed. <br/><b>' . $toggle_link . '</b></p>';
 }
+
 function frcaptcha_widget_section_callback()
 {
     echo '<p>Settings for the Friendly Captcha widget. This is the widget the users of your website will see.</p>';
@@ -78,13 +90,13 @@ function frcaptcha_widget_language_field_callback(array $args)
 ?>
     <select autcomplete="none" type="select" name="<?php echo $option_name; ?>" id="<?php echo $option_name; ?>">
         <option value="automatic" <?php if ($value == "automatic") {
-                                echo "selected ";
-                            } ?>>Automatic</option>
-        <?php 
-            foreach (FRIENDLY_CAPTCHA_SUPPORTED_LANGUAGES as $code => $name) {
-                $selected = $code == $value ? 'selected' : '';
-                echo "<option value=\"{$code}\" {$selected}>{$name}</option>";
-            }
+                                        echo "selected ";
+                                    } ?>>Automatic</option>
+        <?php
+        foreach (FRIENDLY_CAPTCHA_SUPPORTED_LANGUAGES as $code => $name) {
+            $selected = $code == $value ? 'selected' : '';
+            echo "<option value=\"{$code}\" {$selected}>{$name}</option>";
+        }
         ?>
     </select>
     <p class="description"><?php echo $description ?></p>

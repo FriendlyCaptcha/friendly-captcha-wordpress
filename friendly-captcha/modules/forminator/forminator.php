@@ -6,7 +6,7 @@ add_filter('forminator_cform_form_is_submittable', 'frcaptcha_forminator_verify'
 function frcaptcha_forminator_add_captcha($html, $button)
 {
 	$plugin = FriendlyCaptcha_Plugin::$instance;
-	if (!$plugin->is_configured() or !$plugin->get_forminator_active()) {
+	if (!$plugin->is_configured()) {
 		return;
 	}
 
@@ -20,7 +20,7 @@ function frcaptcha_forminator_add_captcha($html, $button)
 function frcaptcha_forminator_verify($can_show, $id, $form_settings)
 {
 	$plugin = FriendlyCaptcha_Plugin::$instance;
-	if (!$plugin->is_configured() or !$plugin->get_forminator_active()) {
+	if (!$plugin->is_configured()) {
 		return $can_show;
 	}
 

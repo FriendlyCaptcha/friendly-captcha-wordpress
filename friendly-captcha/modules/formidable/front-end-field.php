@@ -1,10 +1,10 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	die( 'You are not allowed to call this page directly.' );
+if (!defined('ABSPATH')) {
+	die('You are not allowed to call this page directly.');
 }
 
 $plugin = FriendlyCaptcha_Plugin::$instance;
-if (!$plugin->is_configured() or !$plugin->get_formidable_active()) {
+if (!$plugin->is_configured()) {
 	return;
 }
 

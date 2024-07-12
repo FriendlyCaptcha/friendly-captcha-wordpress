@@ -7,7 +7,7 @@ add_action('fluentform_render_item_step_end', 'frcaptcha_fluentform_show_widget'
 function frcaptcha_fluentform_show_widget()
 {
     $plugin = FriendlyCaptcha_Plugin::$instance;
-    if (!$plugin->is_configured() or !$plugin->get_fluentform_active()) {
+    if (!$plugin->is_configured()) {
         return;
     }
 
@@ -25,7 +25,7 @@ function frcaptcha_fluentform_validate($insert_data, $data, $form)
 {
 
     $plugin = FriendlyCaptcha_Plugin::$instance;
-    if (!$plugin->is_configured() or !$plugin->get_fluentform_active()) {
+    if (!$plugin->is_configured()) {
         return;
     }
 

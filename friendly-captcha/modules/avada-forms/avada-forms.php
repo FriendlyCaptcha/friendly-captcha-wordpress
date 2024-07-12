@@ -11,7 +11,7 @@ function add_friendly_captcha($html, $args)
 
     $plugin = FriendlyCaptcha_Plugin::$instance;
 
-    if (!$plugin->is_configured() or !$plugin->get_avada_forms_active()) {
+    if (!$plugin->is_configured()) {
         return $html;
     }
 
@@ -25,7 +25,7 @@ function verify_friendly_captcha($demo_mode)
 {
     $plugin = FriendlyCaptcha_Plugin::$instance;
 
-    if (!$plugin->is_configured() or !$plugin->get_avada_forms_active()) {
+    if (!$plugin->is_configured()) {
         return $demo_mode;
     }
 

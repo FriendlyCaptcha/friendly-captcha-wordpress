@@ -4,6 +4,8 @@
 
 if (is_admin()) {
     add_action('admin_init', 'frcaptcha_settings_init');
+    add_action('update_option_' . FriendlyCaptcha_Plugin::$option_sitekey_name, 'frcaptcha_settings_validate');
+    add_action('update_option_' . FriendlyCaptcha_Plugin::$option_api_key_name, 'frcaptcha_settings_validate');
 
     function frcaptcha_settings_init()
     {
@@ -28,127 +30,12 @@ if (is_admin()) {
             FriendlyCaptcha_Plugin::$option_enable_v2_name
         );
 
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_contact_form_7_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_f12_cf7_doubleoptin_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wpforms_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_gravity_forms_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_coblocks_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_fluentform_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_elementor_forms_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_html_forms_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_forminator_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_formidable_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_avada_forms_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wp_register_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wp_login_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wp_reset_password_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wp_comments_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wp_comments_logged_in_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wc_register_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wc_login_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wc_lost_password_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wc_checkout_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_um_login_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_um_register_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_um_reset_password_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wpum_registration_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wpum_login_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_wpum_password_recovery_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_pb_login_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_pb_register_integration_active_name
-        );
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_pb_reset_password_integration_active_name
-        );
-
-        register_setting(
-            FriendlyCaptcha_Plugin::$option_group,
-            FriendlyCaptcha_Plugin::$option_divi_integration_active_name
-        );
+        foreach (FriendlyCaptcha_Plugin::$integrations as $integration) {
+            register_setting(
+                FriendlyCaptcha_Plugin::$option_group,
+                FriendlyCaptcha_Plugin::$instance->get_integration_option_name($integration['slug'])
+            );
+        }
 
         /*Widget settings */
         register_setting(
@@ -177,6 +64,13 @@ if (is_admin()) {
             'frcaptcha_general_settings_section',
             'Account Configuration',
             'frcaptcha_general_section_callback',
+            'friendly_captcha_admin'
+        );
+
+        add_settings_section(
+            'frcaptcha_save_settings_section',
+            '',
+            'frcaptcha_save_section_callback',
             'friendly_captcha_admin'
         );
 
@@ -216,395 +110,39 @@ if (is_admin()) {
             'friendly_captcha_admin'
         );
 
-        add_settings_field(
-            'frcaptcha_settings_wpforms_integration_field',
-            'WPForms',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_wpforms_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/wpforms/\" target=\"_blank\">WPForms</a> and <a href=\"https://wordpress.org/plugins/wpforms-lite/\"  target=\"_blank\">WPForms lite</a> forms.",
-                "type" => "checkbox"
-            )
-        );
+        $show_all_integrations = isset($_GET['frcaptcha-all-integrations']);
 
-        add_settings_field(
-            'frcaptcha_settings_wpcf7_integration_field',
-            'Contact Form 7',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_contact_form_7_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/contact-form-7/\" target=\"_blank\">Contact Form 7</a> forms.",
-                "type" => "checkbox"
-            )
-        );
+        foreach (FriendlyCaptcha_Plugin::$integrations as $integration) {
+            // Only show integrations for plugins that are installed unless the user wants to see all integrations
+            if (!$show_all_integrations && array_key_exists('plugins', $integration)) {
+                $plugins = $integration['plugins'];
 
-        add_settings_field(
-            'frcaptcha_settings_f12_cf7_doubleoptin_integration_field',
-            'CF7 Double-Opt-In',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_f12_cf7_doubleoptin_integration_active_name,
-                "description" => "Enable support for the Forge12 Double Opt-In plugin for Contact Form 7. You need to enable Contact Form 7 as well.",
-                "type" => "checkbox"
-            )
-        );
+                $active = false;
+                foreach ($plugins as $plugin) {
+                    if (is_plugin_active($plugin)) {
+                        $active = true;
+                        break;
+                    }
+                }
 
-        add_settings_field(
-            'frcaptcha_settings_gravity_forms_integration_field',
-            'Gravity Forms',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_gravity_forms_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://gravityforms.com\" target=\"_blank\">Gravity Forms</a> forms.<br> The widget is available under <i>Advanced Fields</i> in the form builder. For the best protection add the widget to the last page in multi-page forms.",
-                "type" => "checkbox"
-            )
-        );
+                if (!$active) {
+                    continue;
+                }
+            }
 
-        add_settings_field(
-            'frcaptcha_settings_coblocks_integration_field',
-            'CoBlocks Forms',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_coblocks_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/coblocks/\" target=\"_blank\">CoBlocks</a> forms.<br> Please insert the Friendly Captcha block into each form which should be protected. If multiple CoBlocks forms are used on the same page, all of them must use Friendly Captcha.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_fluentform_integration_field',
-            'Fluentform Forms',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_fluentform_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/fluentform/\" target=\"_blank\">Fluentform</a> forms.<br>",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_elementor_integration_field',
-            'Elementor Pro Forms',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_elementor_forms_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/elementor/\" target=\"_blank\">Elementor Pro</a> forms.<br> The widget is available as a field type in Elementor Pro form editor. Add it as a field to the forms that you want to protect.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_html_forms_integration_field',
-            'HTML Forms',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_html_forms_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/html-forms/\" target=\"_blank\">HTML Forms</a>.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_forminator_integration_field',
-            'Forminator',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_forminator_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/forminator/\" target=\"_blank\">Forminator</a>.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_formidable_integration_field',
-            'Formidable',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_formidable_integration_active_name,
-                "description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/formidable/\" target=\"_blank\">Formidable</a>.<br /><strong>Important:</strong> Make sure to add the new Friendly Captcha field to your forms.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_avada_forms_integration_field',
-            'Avada Form Builder',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_avada_forms_integration_active_name,
-                "description" => "Enable Friendly Captcha for Avada Form Builder.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_wp_register_integration_field',
-            'WordPress Register',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_wp_register_integration_active_name,
-                "description" => "Enable Friendly Captcha for the WordPress sign up form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_wp_login_integration_field',
-            'WordPress Login',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_wp_login_integration_active_name,
-                "description" => "Enable Friendly Captcha for the WordPress log in form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_wp_reset_password_integration_field',
-            'WordPress Reset Password',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_wp_reset_password_integration_active_name,
-                "description" => "Enable Friendly Captcha for the WordPress <i>\"Reset Password\"</i> form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_wp_comments_integration_field',
-            'WordPress Comments<br>(guests)',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_wp_comments_integration_active_name,
-                "description" => "Enable Friendly Captcha for WordPress Comments for guest visitors.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_wp_comments_logged_in_integration_field',
-            'WordPress Comments<br>(logged in users)',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_wp_comments_logged_in_integration_active_name,
-                "description" => "Enable Friendly Captcha for WordPress Comments for users that are logged in to Wordpress.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_wc_register_integration_field',
-            'WooCommerce Register',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_wc_register_integration_active_name,
-                "description" => "Enable Friendly Captcha for the WooCommerce sign up form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_wc_login_integration_field',
-            'WooCommerce Login',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_wc_login_integration_active_name,
-                "description" => "Enable Friendly Captcha for the WooCommerce log in form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_wc_lost_password_integration_field',
-            'WooCommerce Lost Password',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_wc_lost_password_integration_active_name,
-                "description" => "Enable Friendly Captcha for the WooCommerce lost password form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_wc_checkout_integration_field',
-            'WooCommerce Checkout',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_wc_checkout_integration_active_name,
-                "description" => "Enable Friendly Captcha for the WooCommerce checkout form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_um_login_integration_field',
-            'Ultimate Member Login',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_um_login_integration_active_name,
-                "description" => "Enable Friendly Captcha for the Ultimate Member login form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_um_register_integration_field',
-            'Ultimate Member Register',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_um_register_integration_active_name,
-                "description" => "Enable Friendly Captcha for the Ultimate Member sign up form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_um_reset_password_integration_field',
-            'Ultimate Member Reset Password',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_um_reset_password_integration_active_name,
-                "description" => "Enable Friendly Captcha for the Ultimate Member reset password form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_wpum_registration_integration_field',
-            'WPUM Registration',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_wpum_registration_integration_active_name,
-                "description" => "Enable Friendly Captcha for the WPUM registration form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_wpum_login_integration_field',
-            'WPUM Login',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_wpum_login_integration_active_name,
-                "description" => "Enable Friendly Captcha for the WPUM login form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_wpum_password_recovery_integration_field',
-            'WPUM Password Recovery',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_wpum_password_recovery_integration_active_name,
-                "description" => "Enable Friendly Captcha for the WPUM password recovery form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_pb_login_integration_field',
-            'Profile Builder Login',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_pb_login_integration_active_name,
-                "description" => "Enable Friendly Captcha for the <a href=\"https://de.wordpress.org/plugins/profile-builder/\" target=\"_blank\">Profile Builder</a> login form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_pb_register_integration_field',
-            'Profile Builder Register',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_pb_register_integration_active_name,
-                "description" => "Enable Friendly Captcha for the <a href=\"https://de.wordpress.org/plugins/profile-builder/\" target=\"_blank\">Profile Builder</a> sign up form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_pb_reset_password_integration_field',
-            'Profile Builder Reset Password',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_pb_reset_password_integration_active_name,
-                "description" => "Enable Friendly Captcha for the <a href=\"https://de.wordpress.org/plugins/profile-builder/\" target=\"_blank\">Profile Builder</a> reset password form.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_divi_integration_field',
-            'Divi Theme Contact Form',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_integrations_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_divi_integration_active_name,
-                "description" => "Enable Friendly Captcha and replace ReCaptcha in the <a href=\"https://www.elegantthemes.com/gallery/divi//\" target=\"_blank\">Divi Theme</a> contact form.<br /><strong>Important:</strong> Please choose 'FriendlyCaptcha verification' as spam protection in each individual Divi contact form.",
-                "type" => "checkbox"
-            )
-        );
+            add_settings_field(
+                'frcaptcha_settings_' . $integration['slug'] . '_integration_field',
+                $integration['name'],
+                'frcaptcha_settings_field_callback',
+                'friendly_captcha_admin',
+                'frcaptcha_integrations_settings_section',
+                array(
+                    "option_name" => FriendlyCaptcha_Plugin::$instance->get_integration_option_name($integration['slug']),
+                    "description" => $integration['settings_description'],
+                    "type" => "checkbox"
+                )
+            );
+        }
 
         /* Widget settings section */
 
@@ -733,5 +271,25 @@ if (is_admin()) {
                 "type" => "checkbox"
             )
         );
+    }
+
+    $settings_validated = false;
+    function frcaptcha_settings_validate()
+    {
+        // Deduplicate validation when multiple fields are changed
+        global $settings_validated;
+        if ($settings_validated) {
+            $settings_validated = true;
+            return;
+        }
+
+        $sitekey = get_option(FriendlyCaptcha_Plugin::$option_sitekey_name);
+        $api_key = get_option(FriendlyCaptcha_Plugin::$option_api_key_name);
+
+        $verification = frcaptcha_verify_auth_info($sitekey, $api_key);
+
+        if (!$verification['success']) {
+            add_settings_error(FriendlyCaptcha_Plugin::$option_api_key_name, 'config_invalid', $verification['message'], 'error');
+        }
     }
 }

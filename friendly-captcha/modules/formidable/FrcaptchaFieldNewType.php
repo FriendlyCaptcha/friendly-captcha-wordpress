@@ -1,6 +1,7 @@
 <?php
 
-class FrcaptchaFieldNewType extends FrmFieldType {
+class FrcaptchaFieldNewType extends FrmFieldType
+{
 
 	/**
 	 * @var string
@@ -16,7 +17,8 @@ class FrcaptchaFieldNewType extends FrmFieldType {
 	/**
 	 * Which Formidable settings should be hidden or displayed?
 	 */
-	protected function field_settings_for_type() {
+	protected function field_settings_for_type()
+	{
 		$settings            = parent::field_settings_for_type();
 		$settings['default'] = true;
 
@@ -26,14 +28,16 @@ class FrcaptchaFieldNewType extends FrmFieldType {
 	/**
 	 * Need custom options too? Add them here or remove this function.
 	 */
-	protected function extra_field_opts() {
+	protected function extra_field_opts()
+	{
 		return array(
 			// name => default,
 		);
 	}
 
-	protected function include_form_builder_file() {
-		return dirname( __FILE__ ) . '/builder-field.php';
+	protected function include_form_builder_file()
+	{
+		return dirname(__FILE__) . '/builder-field.php';
 	}
 
 	/**
@@ -43,7 +47,8 @@ class FrcaptchaFieldNewType extends FrmFieldType {
 	 *
 	 * @return array
 	 */
-	public function displayed_field_type( $field ) {
+	public function displayed_field_type($field)
+	{
 		return array(
 			$this->type => true,
 		);
@@ -52,49 +57,52 @@ class FrcaptchaFieldNewType extends FrmFieldType {
 	/**
 	 * Add settings in the builder here.
 	 */
-	public function show_extra_field_choices( $args ) {
+	public function show_extra_field_choices($args)
+	{
 		$field = $args['field'];
-		include( dirname( __FILE__ ) . '/builder-settings.php' );
+		include(dirname(__FILE__) . '/builder-settings.php');
 	}
 
-	protected function html5_input_type() {
+	protected function html5_input_type()
+	{
 		return 'text';
 	}
 
 	/**
 	 * @return array|null If there is an error, return an array.
 	 */
-	public function validate( $args ) {
+	public function validate($args)
+	{
 
 		$plugin = FriendlyCaptcha_Plugin::$instance;
-		if (!$plugin->is_configured() or !$plugin->get_formidable_active()) {
-			return array( 'field' . $args['id'] => __('FriendlyCaptcha_Plugin is missing') );
+		if (!$plugin->is_configured()) {
+			return array('field' . $args['id'] => __('FriendlyCaptcha_Plugin is missing'));
 		}
 
-		$errorPrefix = '<strong>' . __( 'Error', 'wp-captcha' ) . '</strong> : ';
+		$errorPrefix = '<strong>' . __('Error', 'wp-captcha') . '</strong> : ';
 		$solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 
 		$errors = array();
 
-		if ( empty( $solution ) ) {
-			$errors[ 'field' . $args['id'] ] = $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message();
+		if (empty($solution)) {
+			$errors['field' . $args['id']] = $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message();
 		}
 
 		$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
 
 		if (!$verification["success"]) {
-			$errors[ 'field' . $args['id'] ] = $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message();
+			$errors['field' . $args['id']] = $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message();
 		}
 
 		return $errors;
-
 	}
 
 	/**
 	 * If the saved value will be different from the submitted value,
 	 * alter it here.
 	 */
-	public function get_value_to_save( $value, $atts ) {
+	public function get_value_to_save($value, $atts)
+	{
 		// Make changes to $value or remove this function.
 		return $value;
 	}
@@ -104,7 +112,8 @@ class FrcaptchaFieldNewType extends FrmFieldType {
 	 *
 	 * @return string
 	 */
-	protected function prepare_display_value( $value, $atts ) {
+	protected function prepare_display_value($value, $atts)
+	{
 		// Make changes to $value here or remove this function.
 		return $value;
 	}
@@ -112,9 +121,10 @@ class FrcaptchaFieldNewType extends FrmFieldType {
 	/**
 	 * @return string Whatever shows in the front end goes here.
 	 */
-	public function front_field_input( $args, $shortcode_atts ) {
+	public function front_field_input($args, $shortcode_atts)
+	{
 		ob_start();
-		include( dirname( __FILE__ ) . '/front-end-field.php' );
+		include(dirname(__FILE__) . '/front-end-field.php');
 		$input_html = ob_get_contents();
 		ob_end_clean();
 		return $input_html;
