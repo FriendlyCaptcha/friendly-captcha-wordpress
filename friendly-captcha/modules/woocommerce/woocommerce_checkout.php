@@ -37,6 +37,7 @@ function frcaptcha_wc_checkout_validate()
     if (empty($solution)) {
         $error_message = $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message() . __(' (captcha missing)', 'frcaptcha');
         wc_add_notice($error_message, 'error');
+        return;
     }
 
     $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());

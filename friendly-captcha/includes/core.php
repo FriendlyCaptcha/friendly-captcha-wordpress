@@ -31,7 +31,7 @@ class FriendlyCaptcha_Plugin
     public static $option_global_puzzle_endpoint_active_name = "frcaptcha_global_endpoint_active";
     public static $option_eu_puzzle_endpoint_active_name = "frcaptcha_eu_endpoint_active";
 
-    public static $option_verification_failed_alert_name = "frcaptcha_verification_failed_alert";
+    public static $option_verification_failed_alert_name = "frcaptcha_verification_failed_alert_v2";
 
     public static $integrations = array(
         array(

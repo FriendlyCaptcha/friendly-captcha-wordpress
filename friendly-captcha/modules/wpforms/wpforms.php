@@ -196,6 +196,7 @@ function frcaptcha_wpforms_process($fields, $entry, $form_data)
                 'form_id' => $form_data['id'],
             )
         );
+        return;
     }
 
     $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());

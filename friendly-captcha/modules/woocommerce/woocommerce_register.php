@@ -37,6 +37,7 @@ function frcaptcha_wc_register_validate($validation_error)
     if (empty($solution)) {
         $error_message = $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message() . __(' (captcha missing)', 'frcaptcha');
         $validation_error->add('frcaptcha-empty-error', $error_message);
+        return $validation_error;
     }
 
     $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());

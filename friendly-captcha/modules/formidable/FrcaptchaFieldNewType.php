@@ -86,6 +86,7 @@ class FrcaptchaFieldNewType extends FrmFieldType
 
 		if (empty($solution)) {
 			$errors['field' . $args['id']] = $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message();
+			return $errors;
 		}
 
 		$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
