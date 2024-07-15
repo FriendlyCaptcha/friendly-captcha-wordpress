@@ -31,6 +31,7 @@ function frcaptcha_pb_register_validate($output_field_errors, $form_fields, $glo
     //    We need to use a field id in the array. Because we don't have such id we just use a high number that will never be used by the plugin itself.
     if (empty($solution)) {
         $output_field_errors[100] = '<span class="wppb-form-error">' . FriendlyCaptcha_Plugin::default_error_user_message() .  __(' (captcha missing)', 'frcaptcha') . '</span>';
+        return;
     }
 
     $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
