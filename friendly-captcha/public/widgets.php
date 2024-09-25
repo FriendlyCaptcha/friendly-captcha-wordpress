@@ -33,7 +33,7 @@ function frcaptcha_v1_enqueue_widget_scripts()
     /* Fallback for (very) old browsers */
     wp_enqueue_script(
         'friendly-captcha-widget-fallback',
-        plugin_dir_url(__FILE__) . 'vendor/v1/widget.min.js',
+        plugin_dir_url(__FILE__) . 'vendor/v1/widget.polyfilled.min.js',
         array(),
         $version,
         true
@@ -101,7 +101,7 @@ function frcaptcha_v1_echo_script_tags()
     $version = FriendlyCaptcha_Plugin::$friendly_challenge_version;
 
     echo '<script async defer type="module" src="' . plugin_dir_url(__FILE__) . 'vendor/v1/widget.module.min.js?ver=' . $version . '"></script>';
-    echo '<script async defer nomodule src="' . plugin_dir_url(__FILE__) . 'vendor/v1/widget.min.js?ver=' . $version . '"></script>';
+    echo '<script async defer nomodule src="' . plugin_dir_url(__FILE__) . 'vendor/v1/widget.polyfilled.min.js?ver=' . $version . '"></script>';
 }
 
 

@@ -96,6 +96,12 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 == Changelog ==
 
+= 1.15.2 =
+
+* Use polyfilled version of widgets for better old browser support for Friendly Captcha v1.
+* Update `friendly-captcha-sdk` to version `0.1.8`.
+* Update `friendly-challenge` to version `0.9.18` which adds support for more languages (Arabic, Korean, Hebrew, Thai).
+
 = 1.15.1 =
 
 * Don't call siteverify endpoint when Captcha solution is empty
