@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Friendly Captcha for WordPress
  * Description: Protect WordPress website forms from spam and abuse with Friendly Captcha, a privacy-first anti-bot solution.
- * Version: 1.15.1
+ * Version: 1.15.2
  * Requires at least: 5.0
  * Requires PHP: 7.3
  * Author: Friendly Captcha GmbH
@@ -19,9 +19,9 @@ if (!defined('WPINC')) {
 	die;
 }
 
-define('FRIENDLY_CAPTCHA_VERSION', '1.15.1');
-define('FRIENDLY_CAPTCHA_FRIENDLY_CHALLENGE_VERSION', '0.9.12');
-define('FRIENDLY_CAPTCHA_FRIENDLY_CAPTCHA_SDK_VERSION', '0.1.7');
+define('FRIENDLY_CAPTCHA_VERSION', '1.15.2');
+define('FRIENDLY_CAPTCHA_FRIENDLY_CHALLENGE_VERSION', '0.9.18');
+define('FRIENDLY_CAPTCHA_FRIENDLY_CAPTCHA_SDK_VERSION', '0.1.8');
 define('FRIENDLY_CAPTCHA_SUPPORTED_LANGUAGES', [
 	"en" => "English",
 	"de" => "German",
@@ -52,6 +52,11 @@ define('FRIENDLY_CAPTCHA_SUPPORTED_LANGUAGES', [
 	"hu" => "Hungarian",
 	"ro" => "Romanian",
 	"zh" => "Chinese (simplified)",
+	"vi" => "Vietnamese",
+	"he" => "Hebrew",
+	"th" => "Thai",
+	"kr" => "Korean",
+	"ar" => "Arabic"
 ]);
 
 register_activation_hook(__FILE__, 'frcaptcha_activate');

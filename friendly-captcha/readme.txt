@@ -4,7 +4,7 @@ Tags: captcha, antispam, spam, contact form, recaptcha, friendly-captcha, block 
 Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.3
-Stable tag: 1.15.1
+Stable tag: 1.15.2
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -95,6 +95,12 @@ If you see an integration that's missing, please [open a pull request](https://g
 However, you may wish to email the authors of plugins you'd like to support Friendly Captcha: it will usually take them only an hour or two to add native support if they choose to do so. This will simplify your use of Friendly Captcha, and is the best solution in the long run.
 
 == Changelog ==
+
+= 1.15.2 =
+
+* Use polyfilled version of widgets for better old browser support for Friendly Captcha v1.
+* Update `friendly-captcha-sdk` to version `0.1.8`.
+* Update `friendly-challenge` to version `0.9.18` which adds support for more languages (Arabic, Korean, Hebrew, Thai).
 
 = 1.15.1 =
 
