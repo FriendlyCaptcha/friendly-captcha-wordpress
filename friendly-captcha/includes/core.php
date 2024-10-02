@@ -236,7 +236,6 @@ class FriendlyCaptcha_Plugin
             "name" => "Divi Theme Contact Form",
             "slug" => 'divi',
             "entry" => "divi/divi.php",
-            "plugins" => array("divi/divi.php", "divi-builder/divi-builder.php"),
             "settings_description" => "Enable Friendly Captcha and replace ReCaptcha in the <a href=\"https://www.elegantthemes.com/gallery/divi//\" target=\"_blank\">Divi Theme</a> contact form.<br /><strong>Important:</strong> Please choose 'FriendlyCaptcha verification' as spam protection in each individual Divi contact form.",
         ),
     );
