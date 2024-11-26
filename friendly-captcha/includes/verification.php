@@ -64,6 +64,10 @@ function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
         ? $response_body['errors']
         : array();
 
+    // Useful for debugging with customers
+    if (!$success && WP_DEBUG) {
+        frcaptcha_log_unsuccessful_verification($request_body, $response_body);
+    }
 
     return array(
         "success" => $success,
@@ -105,6 +109,11 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
             "status" => $result->status,
             "error_codes" => array()
         );
+    }
+
+    // Useful for debugging with customers
+    if (!$result->shouldAccept() && WP_DEBUG) {
+        frcaptcha_log_unsuccessful_verification($solution, $result->response);
     }
 
     $errorCodes = $result->getErrorCode() ? [$result->getErrorCode()] : [];
