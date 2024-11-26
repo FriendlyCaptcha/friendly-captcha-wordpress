@@ -14,6 +14,18 @@ function frcaptcha_log_remote_request($url, $response)
 	trigger_error($log);
 }
 
+function frcaptcha_log_unsuccessful_verification($request, $response)
+{
+	$log = sprintf(
+		/* translators: 1: request, 2: response */
+		__('Friendly Captcha verification unsuccessful. This can usually be ignored and is only logged for debugging purposes. Request: %1$s Response: %2$s', 'frcaptcha'),
+		json_encode($request),
+		json_encode($response)
+	);
+
+	trigger_error($log);
+}
+
 function frcaptcha_v2_log_verify_response($url, $status, $errorCode)
 {
 	$log = sprintf(
