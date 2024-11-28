@@ -100,7 +100,6 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 * Update `friendly-captcha-sdk` to version `0.1.10`, which fixes compatibility with some old browsers (including Safari 11.x and 12.x).
 
-
 = 1.15.4 =
 
 * Log failed verification requests when WP_DEBUG is enabled
