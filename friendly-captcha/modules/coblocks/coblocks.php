@@ -5,7 +5,7 @@ add_filter('render_block_data', array('Frcaptcha_Coblocks', 'render_block_data')
 
 class Frcaptcha_Coblocks
 {
-    private const HCAPTCHA_DUMMY_TOKEN = 'hcaptcha_token';
+    private const FRIENDLY_CAPTCHA_DUMMY_TOKEN = 'friendlycaptcha_token';
 
     /**
      * Add Friendly Captcha to CoBlocks form.
@@ -80,7 +80,7 @@ class Frcaptcha_Coblocks
         add_filter('pre_option_coblocks_google_recaptcha_site_key', '__return_true');
         add_filter('pre_option_coblocks_google_recaptcha_secret_key', '__return_true');
 
-        $_POST['g-recaptcha-token'] = self::HCAPTCHA_DUMMY_TOKEN;
+        $_POST['g-recaptcha-token'] = self::FRIENDLY_CAPTCHA_DUMMY_TOKEN;
 
         add_filter('pre_http_request', ['Frcaptcha_Coblocks', 'verify'], 10, 3);
     }
@@ -94,7 +94,7 @@ class Frcaptcha_Coblocks
 
         if (
             CoBlocks_Form::GCAPTCHA_VERIFY_URL !== $url ||
-            self::HCAPTCHA_DUMMY_TOKEN !== $parsed_args['body']['response']
+            self::FRIENDLY_CAPTCHA_DUMMY_TOKEN !== $parsed_args['body']['response']
         ) {
             return $response;
         }
