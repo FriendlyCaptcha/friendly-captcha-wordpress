@@ -67,14 +67,14 @@ class FriendlyCaptcha_Plugin
             "slug" => 'coblocks',
             "entry" => "coblocks/coblocks.php",
             "plugins" => array("coblocks/class-coblocks.php"),
-            "settings_description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/coblocks/\" target=\"_blank\">CoBlocks</a> forms.<br> Please insert the Friendly Captcha block into each form which should be protected. If multiple CoBlocks forms are used on the same page, all of them must use Friendly Captcha.",
+            "settings_description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/coblocks/\" target=\"_blank\">CoBlocks</a> forms.",
         ),
         array(
             "name" => "Fluent Forms",
             "slug" => 'fluentform',
             "entry" => "fluentform/fluentform.php",
             "plugins" => array("fluentform/fluentform.php"),
-            "settings_description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/fluentform/\" target=\"_blank\">Fluentform</a> forms.<br>",
+            "settings_description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/fluentform/\" target=\"_blank\">Fluentform</a> forms.",
         ),
         array(
             "name" => "Elementor Pro Forms",

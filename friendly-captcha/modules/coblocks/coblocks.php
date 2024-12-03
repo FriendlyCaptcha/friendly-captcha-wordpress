@@ -80,6 +80,8 @@ class Frcaptcha_Coblocks
         add_filter('pre_option_coblocks_google_recaptcha_site_key', '__return_true');
         add_filter('pre_option_coblocks_google_recaptcha_secret_key', '__return_true');
 
+        $_POST['g-recaptcha-token'] = self::HCAPTCHA_DUMMY_TOKEN;
+
         add_filter('pre_http_request', ['Frcaptcha_Coblocks', 'verify'], 10, 3);
     }
 
