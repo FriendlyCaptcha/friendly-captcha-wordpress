@@ -1,5 +1,7 @@
 <?php
 
+// Implementation inspired by https://github.com/hCaptcha/hcaptcha-wordpress-plugin/blob/master/src/php/CoBlocks/Form.php
+
 add_filter('render_block', array('Frcaptcha_Coblocks', 'render_block'), 10, 3);
 add_filter('render_block_data', array('Frcaptcha_Coblocks', 'render_block_data'), 10, 3);
 
