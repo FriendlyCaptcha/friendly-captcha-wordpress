@@ -105,6 +105,7 @@ class Frcaptcha_Coblocks
 
         $solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
         if (empty($solution)) {
+            wp_die('Friendly Captcha solution is empty, please try again.');
             return [
                 'body'     => '{"success":false}',
                 'response' =>
@@ -117,6 +118,9 @@ class Frcaptcha_Coblocks
 
         $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
         if (!$verification["success"]) {
+            // I haven't found a way to show a custom error message in the form, 
+            // this is better than having no error message at all.
+            wp_die('Friendly Captcha solution is invalid, please try again.');
             return [
                 'body'     => '{"success":false}',
                 'response' =>
