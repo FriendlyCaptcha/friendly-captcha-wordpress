@@ -17,9 +17,9 @@ function frcaptcha_wp_login_show_widget()
     frcaptcha_enqueue_widget_scripts();
 }
 
-add_filter('authenticate', 'frcaptcha_wp_login_validate', 20, 3);
+add_filter('wp_authenticate_user', 'frcaptcha_wp_login_validate', 20, 2);
 
-function frcaptcha_wp_login_validate($user, $username, $password)
+function frcaptcha_wp_login_validate($user, $password)
 {
     if ($user instanceof WP_Error) {
         return $user;
