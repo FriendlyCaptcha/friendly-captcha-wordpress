@@ -4,7 +4,7 @@ Tags: captcha, antispam, spam, contact form, recaptcha, friendly-captcha, block 
 Requires at least: 5.0
 Tested up to: 6.5
 Requires PHP: 7.3
-Stable tag: 1.15.8
+Stable tag: 1.15.9
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -96,7 +96,7 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 == Changelog ==
 
-= 1.15.8 =
+= 1.15.9 =
 
 * Fix WordPress login integration when Wordfence 2FA is enabled
 * Verify captcha solution before password is verified in WordPress login
