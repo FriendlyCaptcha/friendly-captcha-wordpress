@@ -17,8 +17,7 @@ function frcaptcha_wp_login_show_widget()
     frcaptcha_enqueue_widget_scripts();
 }
 
-// The default filter has priority 20, but we want to run before the default filter
-add_filter('authenticate', 'frcaptcha_wp_login_validate', 10, 3);
+add_filter('authenticate', 'frcaptcha_wp_login_validate', 20, 3);
 
 function frcaptcha_wp_login_validate($user, $username, $password)
 {
