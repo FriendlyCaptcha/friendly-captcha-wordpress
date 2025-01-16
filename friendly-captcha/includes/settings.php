@@ -230,7 +230,7 @@ if (is_admin()) {
             'frcaptcha_widget_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_enable_v2_name,
-                "description" => " Friendly Captcha v2 is in its alpha stage and is <b>not yet intended for production use</b>.",
+                "description" => " Friendly Captcha v2 is the newest version with improved security and better user experience.<br>You first need to enable v2 for your application in the Friendly Captcha dashboard.",
                 "type" => "checkbox"
             )
         );
