@@ -217,20 +217,7 @@ if (is_admin()) {
             'frcaptcha_widget_settings_section',
             array(
                 "option_name" => FriendlyCaptcha_Plugin::$option_enable_v2_name,
-                "description" => " Friendly Captcha v2 is in preview and is <b>not yet intended for production use</b>. You need to enable v2 in the Friendly Captcha dashboard.",
-                "type" => "checkbox"
-            )
-        );
-
-        add_settings_field(
-            'frcaptcha_settings_enable_v2',
-            'Use Friendly Captcha v2',
-            'frcaptcha_settings_field_callback',
-            'friendly_captcha_admin',
-            'frcaptcha_widget_settings_section',
-            array(
-                "option_name" => FriendlyCaptcha_Plugin::$option_enable_v2_name,
-                "description" => " Friendly Captcha v2 is the newest version with improved security and better user experience.<br>You first need to enable v2 for your application in the Friendly Captcha dashboard.",
+                "description" => " Friendly Captcha v2 is the newest version with improved security and a better user experience.<br>You first need to enable v2 for your application in the Friendly Captcha dashboard.",
                 "type" => "checkbox"
             )
         );
