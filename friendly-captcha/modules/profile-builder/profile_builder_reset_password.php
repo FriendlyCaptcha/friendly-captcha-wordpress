@@ -27,14 +27,13 @@ function frcaptcha_pb_reset_password_sent_message($message)
     $solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 
     if (empty($solution)) {
-        $message = 'wppb_recaptcha_error';
-        return $message;
+        return 'wppb_recaptcha_error';
     }
 
     $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
 
     if (!$verification['success']) {
-        $message = 'wppb_recaptcha_error';
+        return 'wppb_recaptcha_error';
     }
 
     return $message;

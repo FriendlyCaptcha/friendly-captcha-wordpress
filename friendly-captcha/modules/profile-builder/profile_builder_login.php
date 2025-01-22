@@ -25,22 +25,21 @@ function frcaptcha_pb_login_validate($user)
         if (!$plugin->is_configured()) {
             return $user;
         }
-        $solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
 
+        $solution = frcaptcha_get_sanitized_frcaptcha_solution_from_post();
         if (empty($solution)) {
-            $user = new WP_Error('wpbb_recaptcha_error', FriendlyCaptcha_Plugin::default_error_user_message() . __(' (captcha missing)', 'frcaptcha'));
             remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
             remove_filter('authenticate', 'wp_authenticate_email_password', 20, 3);
-            return;
+            return new WP_Error('wpbb_recaptcha_error', FriendlyCaptcha_Plugin::default_error_user_message() . __(' (captcha missing)', 'frcaptcha'));
         }
 
         $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
-
         if (!$verification['success']) {
-            $user = new WP_Error('wppb_recaptcha_error', FriendlyCaptcha_Plugin::default_error_user_message());
             remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
             remove_filter('authenticate', 'wp_authenticate_email_password', 20, 3);
+            return new WP_Error('wppb_recaptcha_error', FriendlyCaptcha_Plugin::default_error_user_message());
         }
     }
+
     return $user;
 }

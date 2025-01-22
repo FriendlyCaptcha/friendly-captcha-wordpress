@@ -43,7 +43,9 @@ function frcaptcha_get_sanitized_frcaptcha_solution_from_post()
 {
 	$fieldName = FriendlyCaptcha_Plugin::$instance->get_solution_field_name();
 
-	$postValue = $_POST[$fieldName];
-	$solution = isset($postValue) ? trim(sanitize_text_field($postValue)) : '';
-	return $solution;
+	if (isset($_POST[$fieldName])) {
+		return trim(sanitize_text_field($_POST[$fieldName]));
+	}
+
+	return '';
 }
