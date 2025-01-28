@@ -63,7 +63,7 @@ add_filter('um_submit_form_errors_hook_login', 'remove_filter_authenticate');
 
 function remove_filter_authenticate($credentials)
 {
-    remove_filter('authenticate', 'frcaptcha_wp_login_validate', 20);
+    remove_filter('wp_authenticate_user', 'frcaptcha_wp_login_validate', 20);
 
     return $credentials;
 }

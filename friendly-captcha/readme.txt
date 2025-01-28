@@ -96,6 +96,10 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 == Changelog ==
 
+= 1.15.11 =
+
+* Fix bug that caused the Ultimate Member integration to verify response twice
+
 = 1.15.10 =
 
 * Fix form validation bug in Profile Builder register page
