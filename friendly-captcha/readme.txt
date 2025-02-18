@@ -98,6 +98,10 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 = 1.15.13 =
 
+* Fix Elementor integration not loading correctly
+
+= 1.15.12 =
+
 * Fix bug that caused the Ultimate Member integration to verify response twice
 
 = 1.15.10 =
