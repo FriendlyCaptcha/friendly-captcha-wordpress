@@ -46,15 +46,6 @@ class Elementor_Form_Friendlycaptcha_Field extends \ElementorPro\Modules\Forms\F
 		}
 
 		echo frcaptcha_generate_widget_tag_from_plugin($plugin);
-		frcaptcha_enqueue_widget_scripts();
-
-		wp_enqueue_script(
-			'frcaptcha_elementor-friendly-captcha',
-			plugin_dir_url(__FILE__) . 'script.js',
-			array('friendly-captcha-widget-module', 'friendly-captcha-widget-fallback'),
-			FriendlyCaptcha_Plugin::$version,
-			true
-		);
 
 		echo "<style>.frc-captcha {max-width: 100%; width:100%}</style>";
 
