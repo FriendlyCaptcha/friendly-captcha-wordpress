@@ -42,7 +42,7 @@ function verify_friendly_captcha($demo_mode)
         die(wp_json_encode(['status' => 'error', 'info' => ['friendly_captcha' => $message]]));
     }
 
-    $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+    $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'avada-forms');
 
     if (!$verification["success"]) {
         $message = FriendlyCaptcha_Plugin::default_error_user_message();

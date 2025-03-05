@@ -86,7 +86,7 @@ class Elementor_Form_Friendlycaptcha_Field extends \ElementorPro\Modules\Forms\F
 			return;
 		}
 
-		$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+		$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'elementor');
 
 		if (!$verification["success"]) {
 			$error_message = FriendlyCaptcha_Plugin::default_error_user_message();

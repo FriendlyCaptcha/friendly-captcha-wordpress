@@ -116,7 +116,7 @@ class Frcaptcha_Coblocks
             ];
         }
 
-        $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+        $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'coblocks');
         if (!$verification["success"]) {
             // I haven't found a way to show a custom error message in the form, 
             // this is better than having no error message at all.

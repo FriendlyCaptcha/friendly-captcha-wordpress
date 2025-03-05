@@ -30,7 +30,7 @@ function frcaptcha_pb_reset_password_sent_message($message)
         return 'wppb_recaptcha_error';
     }
 
-    $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+    $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'profile-builder');
 
     if (!$verification['success']) {
         return 'wppb_recaptcha_error';

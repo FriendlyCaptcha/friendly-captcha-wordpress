@@ -168,7 +168,7 @@ class GFForms_Friendlycaptcha_Field extends GF_Field
 			return;
 		}
 
-		$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+		$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'gravityforms');
 		if (!$verification["success"]) {
 			$this->failed_validation  = true;
 			$this->validation_message = FriendlyCaptcha_Plugin::default_error_user_message();

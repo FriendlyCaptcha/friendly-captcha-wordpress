@@ -86,7 +86,7 @@ class frcaptcha_divi_core_addon extends ET_Core_API_Spam_Provider
         }
 
         $plugin = FriendlyCaptcha_Plugin::$instance;
-        $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+        $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'divi');
 
         if ($verification["success"]) {
             return array(

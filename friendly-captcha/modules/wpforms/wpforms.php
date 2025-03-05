@@ -199,7 +199,7 @@ function frcaptcha_wpforms_process($fields, $entry, $form_data)
         return;
     }
 
-    $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+    $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'wpforms');
 
     if (!$verification["success"]) {
         wpforms()->process->errors[$form_data['id']]['header'] = esc_html__(FriendlyCaptcha_Plugin::default_error_user_message(), 'frcaptcha');
