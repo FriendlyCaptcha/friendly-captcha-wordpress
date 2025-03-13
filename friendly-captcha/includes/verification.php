@@ -4,19 +4,19 @@ use FriendlyCaptcha\SDK\{Client, ClientConfig};
 
 function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key, $integration = null)
 {
-    $frcSdk = 'friendly-captcha-wordpress@' . FriendlyCaptcha_Plugin::$version;
-    if ($integration) {
-        $frcSdk = $frcSdk . "; " . $integration;
-    }
-
     if (FriendlyCaptcha_Plugin::$instance->get_enable_v2()) {
+        $frcSdk = 'friendly-captcha-wordpress@' . FriendlyCaptcha_Plugin::$version;
+        if ($integration) {
+            $frcSdk = $frcSdk . "; " . $integration;
+        }
+
         return frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key, $frcSdk);
     } else {
-        return frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key, $frcSdk);
+        return frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key);
     }
 }
 
-function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key, $frcSdk)
+function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
 {
     $endpoint = 'https://api.friendlycaptcha.com/api/v1/siteverify';
     if (FriendlyCaptcha_Plugin::$instance->get_eu_puzzle_endpoint_active()) {
@@ -29,13 +29,8 @@ function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key, $fr
         'solution' => $solution,
     );
 
-    $request_headers = array(
-        'Frc-Sdk' => $frcSdk,
-    );
-
     $request = array(
         'body' => $request_body,
-        'headers' => $request_headers,
     );
 
     $response = wp_remote_post(esc_url_raw($endpoint), $request);
