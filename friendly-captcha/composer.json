@@ -1,5 +1,5 @@
 {
   "require": {
-    "friendlycaptcha/sdk": "^0.1.0"
+    "friendlycaptcha/sdk": "^0.1.2"
   }
 }
