@@ -80,7 +80,7 @@ function frcaptcha_wpcf7_friendly_captcha_verify_response($spam)
 		return true;
 	}
 
-	$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+	$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'contact-form-7');
 
 	if ($verification["success"]) {
 		$spam = false;

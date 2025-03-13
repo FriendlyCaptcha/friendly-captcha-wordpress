@@ -32,7 +32,7 @@ function frcaptcha_forminator_verify($can_show, $id, $form_settings)
 		];
 	}
 
-	$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+	$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'forminator');
 	if (!$verification["success"]) {
 		return [
 			'can_submit' => false,

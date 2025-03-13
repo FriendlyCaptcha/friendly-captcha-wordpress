@@ -36,7 +36,7 @@ function frcaptcha_um_register_validate($post, $form_data)
             return;
         }
 
-        $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+        $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'ultimate-member');
 
         if (!$verification['success']) {
             $error_message = $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message();

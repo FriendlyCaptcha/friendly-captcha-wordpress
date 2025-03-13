@@ -33,7 +33,7 @@ function frcaptcha_pb_login_validate($user)
             return new WP_Error('wpbb_recaptcha_error', FriendlyCaptcha_Plugin::default_error_user_message() . __(' (captcha missing)', 'frcaptcha'));
         }
 
-        $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+        $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'profile-builder');
         if (!$verification['success']) {
             remove_filter('authenticate', 'wp_authenticate_username_password', 20, 3);
             remove_filter('authenticate', 'wp_authenticate_email_password', 20, 3);

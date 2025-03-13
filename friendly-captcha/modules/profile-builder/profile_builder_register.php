@@ -44,7 +44,7 @@ function frcaptcha_pb_register_validate($output_field_errors, $form_fields, $glo
         return $output_field_errors;
     }
 
-    $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+    $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'profile-builder');
     if (!$verification['success']) {
         $frcaptcha_pb_register_general_top_error_message_val = FriendlyCaptcha_Plugin::default_error_user_message();
         $output_field_errors = (array) $output_field_errors;

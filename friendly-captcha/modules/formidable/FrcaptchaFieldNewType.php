@@ -89,7 +89,7 @@ class FrcaptchaFieldNewType extends FrmFieldType
 			return $errors;
 		}
 
-		$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+		$verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'formidable');
 
 		if (!$verification["success"]) {
 			$errors['field' . $args['id']] = $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message();

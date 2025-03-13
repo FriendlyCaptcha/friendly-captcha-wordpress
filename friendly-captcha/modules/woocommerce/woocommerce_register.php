@@ -40,7 +40,7 @@ function frcaptcha_wc_register_validate($validation_error)
         return $validation_error;
     }
 
-    $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+    $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'woocommerce');
 
     if (!$verification['success']) {
         $error_message = $errorPrefix . FriendlyCaptcha_Plugin::default_error_user_message();

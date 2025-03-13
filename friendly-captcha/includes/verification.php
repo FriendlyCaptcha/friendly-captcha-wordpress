@@ -2,10 +2,15 @@
 
 use FriendlyCaptcha\SDK\{Client, ClientConfig};
 
-function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key)
+function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key, $integration = null)
 {
     if (FriendlyCaptcha_Plugin::$instance->get_enable_v2()) {
-        return frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key);
+        $frcSdk = 'friendly-captcha-wordpress@' . FriendlyCaptcha_Plugin::$version;
+        if ($integration) {
+            $frcSdk = $frcSdk . "; " . $integration;
+        }
+
+        return frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key, $frcSdk);
     } else {
         return frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key);
     }
@@ -76,10 +81,10 @@ function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
     );
 }
 
-function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key)
+function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key, $frcSdk)
 {
     $config = new ClientConfig();
-    $config->setAPIKey($api_key)->setSitekey($sitekey);
+    $config->setAPIKey($api_key)->setSitekey($sitekey)->setSDKTrailer($frcSdk);
     if (FriendlyCaptcha_Plugin::$instance->get_eu_puzzle_endpoint_active()) {
         $config->setSiteverifyEndpoint("eu");
     }

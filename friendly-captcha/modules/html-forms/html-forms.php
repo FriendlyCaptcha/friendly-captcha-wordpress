@@ -25,7 +25,7 @@ add_filter('hf_validate_form', function ($error_code, $form, $data) {
         return 'frcaptcha_empty';
     }
 
-    $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key());
+    $verification = frcaptcha_verify_captcha_solution($solution, $plugin->get_sitekey(), $plugin->get_api_key(), 'html-forms');
 
     if (!$verification["success"]) {
         return 'frcaptcha_invalid';
