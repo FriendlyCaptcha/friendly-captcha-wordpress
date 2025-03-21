@@ -90,17 +90,7 @@ class GFForms_Friendlycaptcha_Field extends GF_Field
 
 		$is_form_editor  = $this->is_form_editor();
 
-		frcaptcha_enqueue_widget_scripts();
-
-		wp_enqueue_script(
-			'frcaptcha_gravity_forms-friendly-captcha',
-			plugin_dir_url(__FILE__) . 'script.js',
-			array('friendly-captcha-widget-module', 'friendly-captcha-widget-fallback'),
-			FriendlyCaptcha_Plugin::$version,
-			true
-		);
-
-		add_action('gform_preview_footer', array($this, 'ensure_frcaptcha_init'));
+		frcaptcha_enqueue_widget_scripts(true);
 
 		// Replace all inline scripts to footer
 		add_filter('gform_init_scripts_footer', '__return_true');
@@ -112,25 +102,6 @@ class GFForms_Friendlycaptcha_Field extends GF_Field
 		}
 
 		return sprintf("<div class='ginput_container ginput_container_%s'>%s</div>", $this->type, $widget_html);
-	}
-
-	public function ensure_frcaptcha_init()
-	{
-?>
-		<script type="text/javascript">
-			(function($) {
-				$(document).bind('gform_post_render', function() {
-					$('.frc-captcha').each(function(index, elem) {
-						if (!elem.dataset["attached"]) {
-							new WidgetInstance(elem);
-							elem.dataset["attached"] = "1";
-						}
-					});
-				});
-			})(jQuery);
-		</script>
-
-<?php
 	}
 
 	/**
