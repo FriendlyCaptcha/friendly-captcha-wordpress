@@ -36,9 +36,8 @@ add_filter('preprocess_comment', 'frcaptcha_wp_comments_validate', 10, 1);
 
 function frcaptcha_wp_comments_validate($comment)
 {
-
     // Skip captcha for trackback or pingback
-    if ($comment['comment_type'] != '' && $comment['comment_type'] != 'comment') {
+    if ($comment['comment_type'] != '' && $comment['comment_type'] != 'comment' && $comment['comment_type'] != 'review') {
         return $comment;
     }
 
