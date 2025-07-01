@@ -12,6 +12,14 @@ class GFForms_Friendlycaptcha_Field extends GF_Field
 
 	public $type = 'frcaptcha';
 
+	public function __construct()
+	{
+		parent::__construct();
+		add_action('wp_enqueue_scripts', function () {
+			frcaptcha_enqueue_widget_scripts(true);
+		}, 10, 1);
+	}
+
 	/**
 	 * Return the field title, for use in the form editor.
 	 *
@@ -89,8 +97,6 @@ class GFForms_Friendlycaptcha_Field extends GF_Field
 		}
 
 		$is_form_editor  = $this->is_form_editor();
-
-		frcaptcha_enqueue_widget_scripts(true);
 
 		// Replace all inline scripts to footer
 		add_filter('gform_init_scripts_footer', '__return_true');
