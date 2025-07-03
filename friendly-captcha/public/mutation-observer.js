@@ -25,7 +25,17 @@
 
   function setupV2CaptchaElements(node) {
     const elements = findCaptchaElements(node);
-    window.frcaptcha.attach(elements);
+    for (let i = 0; i < elements.length; i++) {
+      const element = elements[i];
+
+      // friendly-captcha-sdk adds the "frcWidget" property to the element when it's initialized
+      if (element && !element.frcWidget) {
+        // If the widget was initialized before and then re-inserted into the DOM, the iframe will still be there
+        // We remove any existing content to make sure we end up with exactly one iframe
+        element.innerHTML = "";
+        window.frcaptcha.attach(element);
+      }
+    }
   }
 
   const observer = new MutationObserver((mutationList) => {
