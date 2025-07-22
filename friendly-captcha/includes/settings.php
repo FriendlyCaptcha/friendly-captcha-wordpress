@@ -4,6 +4,7 @@
 
 if (is_admin()) {
     add_action('admin_init', 'frcaptcha_settings_init');
+    add_filter('pre_update_option_' . FriendlyCaptcha_Plugin::$option_api_key_name, 'frcaptcha_settings_sanitize_api_key', 10, 2);
     add_action('update_option_' . FriendlyCaptcha_Plugin::$option_sitekey_name, 'frcaptcha_settings_validate');
     add_action('update_option_' . FriendlyCaptcha_Plugin::$option_api_key_name, 'frcaptcha_settings_validate');
 
@@ -260,6 +261,17 @@ if (is_admin()) {
         );
     }
 
+    function frcaptcha_settings_sanitize_api_key($value, $old_value)
+    {
+        // We hide the API key in the settings page and replace it with asterisks.
+        // We don't want to save the asterisks, so we return the old value.
+        if (preg_match('/^\*+$/', $value)) {
+            return $old_value;
+        }
+
+        return $value;
+    }
+
     $settings_validated = false;
     function frcaptcha_settings_validate()
     {
@@ -272,6 +284,11 @@ if (is_admin()) {
 
         $sitekey = get_option(FriendlyCaptcha_Plugin::$option_sitekey_name);
         $api_key = get_option(FriendlyCaptcha_Plugin::$option_api_key_name);
+
+        if (empty($sitekey) || empty($api_key)) {
+            add_settings_error(FriendlyCaptcha_Plugin::$option_api_key_name, 'config_invalid', 'Please enter a sitekey and API key.', 'error');
+            return;
+        }
 
         $verification = frcaptcha_verify_auth_info($sitekey, $api_key);
 
