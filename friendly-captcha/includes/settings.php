@@ -6,6 +6,7 @@ if (is_admin()) {
     add_action('admin_init', 'frcaptcha_settings_init');
     add_action('update_option_' . FriendlyCaptcha_Plugin::$option_sitekey_name, 'frcaptcha_settings_validate');
     add_action('update_option_' . FriendlyCaptcha_Plugin::$option_api_key_name, 'frcaptcha_settings_validate');
+    add_filter('pre_update_option_' . FriendlyCaptcha_Plugin::$option_api_key_name, 'frcaptcha_settings_pre_update_api_key', 10, 3);
 
     function frcaptcha_settings_init()
     {
@@ -278,5 +279,18 @@ if (is_admin()) {
         if (!$verification['success']) {
             add_settings_error(FriendlyCaptcha_Plugin::$option_api_key_name, 'config_invalid', $verification['message'], 'error');
         }
+    }
+
+    function frcaptcha_settings_pre_update_api_key($new_value, $old_value, $option_name)
+    {
+        // API keys never have '*' characters; if we see one, it's because we've
+        // rendered the API key in the front-end as a string of '*'s for security
+        // reasons. Rather than update the API key option with that value, swap it
+        // out for the old value prior to the update.
+        if (is_string($new_value) && strpos($new_value, '*') !== false) {
+            return $old_value;
+        }
+
+        return $new_value;
     }
 }
