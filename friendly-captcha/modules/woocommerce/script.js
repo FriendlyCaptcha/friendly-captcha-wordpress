@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+jQuery(function ($) {
   function resetWidgets() {
     if (window.frcaptcha) {
       window.frcaptcha.widgets.forEach((c) => c.reset());
@@ -7,22 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Old WooCommerce
-  document.body.addEventListener("checkout_error", function () {
+  $(document.body).on("checkout_error", function () {
+    console.log("checkout_error jQuery");
     resetWidgets();
   });
-
-  // WooCommerce Blocks
-  if (window.wp && window.wp.data && window.wc && window.wc.wcBlocksData) {
-    const checkoutStore = window.wc.wcBlocksData.checkoutStore;
-
-    // Subscribe to store changes
-    window.wp.data.subscribe(function () {
-      const state = window.wp.data.select(checkoutStore);
-
-      if (state.isAfterProcessing && state.validationErrors) {
-        resetWidgets();
-      }
-    });
-  }
 });
