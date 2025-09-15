@@ -15,6 +15,13 @@ function frcaptcha_wc_checkout_show_widget()
     echo '<style>.frc-captcha {max-width:100%; margin-bottom: 1em}</style>';
 
     frcaptcha_enqueue_widget_scripts();
+    wp_enqueue_script(
+        'frcaptcha_wc-friendly-captcha',
+        plugin_dir_url(__FILE__) . 'script.js',
+        array('friendly-captcha-widget-module', 'friendly-captcha-widget-fallback'),
+        FriendlyCaptcha_Plugin::$version,
+        true
+    );
 }
 
 add_action('woocommerce_checkout_process', 'frcaptcha_wc_checkout_validate', 20, 3);
