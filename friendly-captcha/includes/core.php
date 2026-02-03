@@ -238,6 +238,13 @@ class FriendlyCaptcha_Plugin
             "entry" => "divi/divi.php",
             "settings_description" => "Enable Friendly Captcha and replace ReCaptcha in the <a href=\"https://www.elegantthemes.com/gallery/divi//\" target=\"_blank\">Divi Theme</a> contact form.<br /><strong>Important:</strong> Please choose 'FriendlyCaptcha verification' as spam protection in each individual Divi contact form.",
         ),
+        array(
+            "name" => "WP Job Openings",
+            "slug" => 'wp_job_openings',
+            "entry" => "wp-job-openings/wp-job-openings.php",
+            "plugins" => array("wp-job-openings/wp-job-openings.php", "pro-pack-for-wp-job-openings/pro-pack.php"),
+            "settings_description" => "Enable Friendly Captcha for the <a href=\"https://wordpress.org/plugins/wp-job-openings/\" target=\"_blank\">WP Job Openings</a> application form.",
+        ),
     );
 
     public function init()
