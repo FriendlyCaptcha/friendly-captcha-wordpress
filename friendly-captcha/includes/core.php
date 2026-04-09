@@ -245,6 +245,13 @@ class FriendlyCaptcha_Plugin
             "plugins" => array("wp-job-openings/wp-job-openings.php", "pro-pack-for-wp-job-openings/pro-pack.php"),
             "settings_description" => "Enable Friendly Captcha for the <a href=\"https://wordpress.org/plugins/wp-job-openings/\" target=\"_blank\">WP Job Openings</a> application form.",
         ),
+        array(
+            "name" => "SI Schedule+Registration",
+            "slug" => 'tws_siwp',
+            "entry" => "tws-siwp/tws-siwp.php",
+            "plugins" => array("tws-siwp/tws-siwp.php"),
+            "settings_description" => "Enable Friendly Captcha for the SI Schedule+Registration trial lesson signup form.",
+        ),
     );
 
     public function init()
