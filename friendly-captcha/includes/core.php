@@ -250,7 +250,7 @@ class FriendlyCaptcha_Plugin
             "slug" => 'tws_siwp',
             "entry" => "tws-siwp/tws-siwp.php",
             "plugins" => array("tws-siwp/tws-siwp.php"),
-            "settings_description" => "Enable Friendly Captcha for the SI Schedule+Registration trial lesson signup form.",
+            "settings_description" => "Enable Friendly Captcha for the <a href=\"https://www.ballettschul-software.de/zusatzmodule.php#sischedreg\" target=\"_blank\">SI Schedule+Registration</a> trial lesson signup form.",
         ),
     );
 
@@ -401,6 +401,6 @@ require plugin_dir_path(__FILE__) . 'settings.php';
 
 foreach (FriendlyCaptcha_Plugin::$integrations as $integration) {
     if (FriendlyCaptcha_Plugin::$instance->get_integration_active($integration['slug'])) {
-        require_once plugin_dir_path(__FILE__) . '../modules/' . $integration['entry'];
+        include_once plugin_dir_path(__FILE__) . '../modules/' . $integration['entry'];
     }
 }
