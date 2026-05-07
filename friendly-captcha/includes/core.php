@@ -252,6 +252,13 @@ class FriendlyCaptcha_Plugin
             "plugins" => array("tws-siwp/tws-siwp.php"),
             "settings_description" => "Enable Friendly Captcha for the <a href=\"https://www.ballettschul-software.de/zusatzmodule.php#sischedreg\" target=\"_blank\">SI Schedule+Registration</a> trial lesson signup form.",
         ),
+        array(
+            "name" => "Generic Integration",
+            "slug" => "generic_integration",
+            "entry" => "generic_integration/generic_integration.php",
+            "plugins" => [],
+            "settings_description" => "Enable Friendly Captcha for integrations with user-defined PHP-Code. See the plugin's <a href=\"https://wordpress.org/plugins/friendly-captcha/#faq\" target=\"_blank\">FAQ</a> for more information.",
+        ),
     );
 
     public function init()
