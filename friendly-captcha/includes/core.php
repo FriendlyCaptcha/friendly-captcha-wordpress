@@ -246,6 +246,13 @@ class FriendlyCaptcha_Plugin
             "settings_description" => "Enable Friendly Captcha for the <a href=\"https://wordpress.org/plugins/wp-job-openings/\" target=\"_blank\">WP Job Openings</a> application form.",
         ),
         array(
+            "name" => "Generic Integration (for custom and unsupported plugins)",
+            "slug" => "generic_integration",
+            "entry" => "generic_integration/generic_integration.php",
+            "plugins" => [],
+            "settings_description" => "Enable Friendly Captcha for integrations with user-defined PHP-Code. (not recommended)",
+        ),
+        array(
             "name" => "SI Schedule+Registration",
             "slug" => 'tws_siwp',
             "entry" => "tws-siwp/tws-siwp.php",
