@@ -124,6 +124,7 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 * Add support for generic integrations with custom PHP-Code
 * Add support for SI Schedule+Registration
+* Update Friendly Captcha SDKs to most recent versions
 
 = 1.16.0 =
 
