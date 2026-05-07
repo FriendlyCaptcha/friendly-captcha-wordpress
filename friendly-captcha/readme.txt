@@ -60,6 +60,30 @@ To use Friendly Captcha, you can create an account at [www.friendlycaptcha.com](
 = You don't support a certain plugin. How can I get support for it added? =
 Open a PR on GitHub [here](https://github.com/FriendlyCaptcha/friendly-captcha-wordpress) or just email the authors of the plugin itself. Adding Friendly Captcha support is typically quite a quick task for most plugins.
 
+= How do I add Friendly Captcha to a custom or unsupported form? =
+
+Enable the **Generic Integration (for custom and unsupported plugins)** option in the Friendly Captcha settings page. This exposes two WordPress filters that you can use from your own theme or plugin code to render the widget and verify the solution.
+
+**1. Render the widget inside your form**
+
+Apply the `frc_captcha_append_widget` filter to append the widget HTML wherever you want it to appear (typically just before the submit button):
+
+`<?php echo apply_filters('frc_captcha_append_widget', ''); ?>`
+
+**2. Verify the solution on submit**
+
+When the form is submitted, read the captcha solution from `$_POST` and pass it through the `frc_captcha_validation` filter. The second argument controls the network-failure behavior: `true` lets the user through (lax), `false` blocks them (strict).
+
+`<?php
+$solution = isset($_POST['frc-captcha-solution']) ? $_POST['frc-captcha-solution'] : '';
+$is_human = apply_filters('frc_captcha_validation', $solution, true);
+if (!$is_human) {
+    // Reject submission, e.g. show an error.
+}
+?>`
+
+If you have Friendly Captcha v2 enabled, use `frc-captcha-response` as the field name instead of `frc-captcha-solution`.
+
 = Where can I get more information about Friendly Captcha? =
 Please see our website at: [www.friendlycaptcha.com](https://friendlycaptcha.com/)
 

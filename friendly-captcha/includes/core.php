@@ -246,18 +246,18 @@ class FriendlyCaptcha_Plugin
             "settings_description" => "Enable Friendly Captcha for the <a href=\"https://wordpress.org/plugins/wp-job-openings/\" target=\"_blank\">WP Job Openings</a> application form.",
         ),
         array(
-            "name" => "Generic Integration (for custom and unsupported plugins)",
-            "slug" => "generic_integration",
-            "entry" => "generic_integration/generic_integration.php",
-            "plugins" => [],
-            "settings_description" => "Enable Friendly Captcha for integrations with user-defined PHP-Code. (not recommended)",
-        ),
-        array(
             "name" => "SI Schedule+Registration",
             "slug" => 'tws_siwp',
             "entry" => "tws-siwp/tws-siwp.php",
             "plugins" => array("tws-siwp/tws-siwp.php"),
             "settings_description" => "Enable Friendly Captcha for the <a href=\"https://www.ballettschul-software.de/zusatzmodule.php#sischedreg\" target=\"_blank\">SI Schedule+Registration</a> trial lesson signup form.",
+        ),
+        array(
+            "name" => "Generic Integration",
+            "slug" => "generic_integration",
+            "entry" => "generic_integration/generic_integration.php",
+            "plugins" => [],
+            "settings_description" => "Enable Friendly Captcha for integrations with user-defined PHP-Code. See the plugin's <a href=\"https://wordpress.org/plugins/friendly-captcha/#faq\" target=\"_blank\">FAQ</a> for more information.",
         ),
     );
 
