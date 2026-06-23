@@ -65,6 +65,11 @@ if (is_admin()) {
     if (FriendlyCaptcha_Plugin::$instance->get_verification_failed_alert() != false) {
         function frcaptcha_admin_notice__verification_failed()
         {
+            $alert = FriendlyCaptcha_Plugin::$instance->get_verification_failed_alert();
+            if ($alert == false) {
+                return;
+            }
+
             $settings_url = esc_url(add_query_arg(
                 'page',
                 'friendly_captcha_admin',
@@ -78,9 +83,13 @@ if (is_admin()) {
                 <p>
                     <b>Friendly Captcha verification has failed!</b>
                     <br>
-                    This is usually because you have entered an incorrect API Key. Please visit the <a href="<?php echo $settings_url ?>">Friendly Captcha settings</a> and enter a valid Sitekey and API Key.
+                    This is usually because you have entered an incorrect API Key. If you aren't sure, visit the <a href="<?php echo $settings_url ?>">Friendly Captcha settings</a> and enter a valid Sitekey and API Key.
+                    <?php if (!empty($alert['time'])) : ?>
+                        <br><br>
+                        Last failure: <b><?php echo esc_html(wp_date(get_option('date_format') . ' ' . get_option('time_format'), $alert['time'])); ?></b>. This notice clears automatically a week after the last failure.
+                    <?php endif; ?>
                     <br><br>
-                    <code><?php echo FriendlyCaptcha_Plugin::$instance->get_verification_failed_alert(); ?></code>
+                    <code><?php echo esc_html($alert['response']); ?></code>
                 </p>
                 <a href="<?php echo $dismiss_url ?>" class="notice-dismiss" style="text-decoration: none;">
                     <span class="screen-reader-text">Dismiss this notice.</span>
