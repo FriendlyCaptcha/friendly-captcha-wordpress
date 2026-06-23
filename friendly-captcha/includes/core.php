@@ -375,12 +375,32 @@ class FriendlyCaptcha_Plugin
 
     public function show_verification_failed_alert($response)
     {
-        update_option(FriendlyCaptcha_Plugin::$option_verification_failed_alert_name, $response);
+        update_option(FriendlyCaptcha_Plugin::$option_verification_failed_alert_name, array(
+            'response' => $response,
+            'time' => time(),
+        ));
     }
 
     public function get_verification_failed_alert()
     {
-        return get_option(FriendlyCaptcha_Plugin::$option_verification_failed_alert_name);
+        $alert = get_option(FriendlyCaptcha_Plugin::$option_verification_failed_alert_name);
+        if ($alert == false) {
+            return false;
+        }
+
+        // Drop legacy string alerts (pre-timestamp) and start fresh.
+        if (!is_array($alert)) {
+            $this->remove_verification_failed_alert();
+            return false;
+        }
+
+        // Auto-dismiss a week after the most recent failure (timer resets on each).
+        if (isset($alert['time']) && (time() - $alert['time']) > WEEK_IN_SECONDS) {
+            $this->remove_verification_failed_alert();
+            return false;
+        }
+
+        return $alert;
     }
 
     public function remove_verification_failed_alert()

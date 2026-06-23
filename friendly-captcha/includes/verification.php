@@ -48,7 +48,10 @@ function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
             frcaptcha_log_remote_request($endpoint, $response);
         }
 
-        FriendlyCaptcha_Plugin::$instance->show_verification_failed_alert($raw_response_body);
+        // Only alert admins on config errors (4xx); skip transient 5xx/network.
+        if ($status >= 400 && $status < 500) {
+            FriendlyCaptcha_Plugin::$instance->show_verification_failed_alert($raw_response_body);
+        }
 
         // Better safe than sorry, if the request is non-200 we can not verify the response
         // Either the user's credentials are wrong (e.g. wrong sitekey, api key) or the friendly
@@ -102,8 +105,11 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key, $fr
             );
         }
 
-        $raw_response = json_encode($result->response);
-        FriendlyCaptcha_Plugin::$instance->show_verification_failed_alert($raw_response);
+        // Only alert admins on config errors; skip transient request/decode errors.
+        if ($result->isClientError()) {
+            $raw_response = json_encode($result->response);
+            FriendlyCaptcha_Plugin::$instance->show_verification_failed_alert($raw_response);
+        }
 
         // Better safe than sorry, when we can not verify the response
         // Either the user's credentials are wrong (e.g. wrong sitekey, api key) or the friendly
