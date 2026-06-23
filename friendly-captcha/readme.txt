@@ -4,7 +4,7 @@ Tags: captcha, antispam, spam, contact form, recaptcha, friendly-captcha, block 
 Requires at least: 5.0
 Tested up to: 6.8
 Requires PHP: 7.3
-Stable tag: 1.17.1
+Stable tag: 1.17.2
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -120,7 +120,7 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 == Changelog ==
 
-= 1.17.1 =
+= 1.17.2 =
 
 * Only show the admin verification-failed notice for configuration errors
 * The notice now shows the time of the last failure and auto-dismisses a week after the last failure
