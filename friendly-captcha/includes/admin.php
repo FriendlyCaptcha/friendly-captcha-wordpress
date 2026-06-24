@@ -58,8 +58,19 @@ if (is_admin()) {
         add_action('admin_notices', 'frcaptcha_admin_notice__not_configured');
     }
 
-    if (isset($_GET['frcaptcha-verification-failed-dismissed'])) {
-        FriendlyCaptcha_Plugin::$instance->remove_verification_failed_alert();
+    // Deferred to admin_init so pluggable functions (current_user_can) are loaded
+    // and the handler only runs on real admin requests, not admin-ajax.
+    add_action('admin_init', 'frcaptcha_maybe_dismiss_verification_failed_alert');
+    function frcaptcha_maybe_dismiss_verification_failed_alert()
+    {
+        if (
+            isset($_GET['frcaptcha-verification-failed-dismissed']) &&
+            current_user_can('manage_options') &&
+            isset($_GET['_wpnonce']) &&
+            wp_verify_nonce(sanitize_text_field(wp_unslash($_GET['_wpnonce'])), 'frcaptcha-dismiss-verification-failed')
+        ) {
+            FriendlyCaptcha_Plugin::$instance->remove_verification_failed_alert();
+        }
     }
 
     if (FriendlyCaptcha_Plugin::$instance->get_verification_failed_alert() != false) {
@@ -76,7 +87,10 @@ if (is_admin()) {
                 get_admin_url() . 'options-general.php'
             ));
 
-            $dismiss_url = esc_url(add_query_arg('frcaptcha-verification-failed-dismissed', '1'));
+            $dismiss_url = esc_url(wp_nonce_url(
+                add_query_arg('frcaptcha-verification-failed-dismissed', '1'),
+                'frcaptcha-dismiss-verification-failed'
+            ));
 
         ?>
             <div class="notice notice-error is-dismissible">
