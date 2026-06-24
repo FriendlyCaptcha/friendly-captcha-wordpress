@@ -53,7 +53,8 @@ function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
             FriendlyCaptcha_Plugin::$instance->show_verification_failed_alert($raw_response_body);
         }
 
-        // Better safe than sorry, if the request is non-200 we can not verify the response
+        // Fail open (intentional): if the request is non-200 we can not verify the response,
+        // so we accept it rather than lock legitimate users out of every protected form.
         // Either the user's credentials are wrong (e.g. wrong sitekey, api key) or the friendly
         // captcha servers are unresponsive.
 
@@ -111,7 +112,8 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key, $fr
             FriendlyCaptcha_Plugin::$instance->show_verification_failed_alert($raw_response);
         }
 
-        // Better safe than sorry, when we can not verify the response
+        // Fail open (intentional): when we can not verify the response we accept it rather
+        // than lock legitimate users out of every protected form.
         // Either the user's credentials are wrong (e.g. wrong sitekey, api key) or the friendly
         // captcha servers are unresponsive.
 
