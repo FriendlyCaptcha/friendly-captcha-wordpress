@@ -1,0 +1,22 @@
+{%- set classes = ['frcaptcha-placeholder'] | merge( [ base_styles.base ] ) | join(' ') | trim %}
+
+{# We render a placeholder instead of the real widget here #}
+{# The real widget messed with the Elementor editor #}
+<div
+        data-frcaptcha-placeholder
+        data-id="{{ id }}"
+        data-element_type="{{ type }}"
+        data-e-type="{{ type }}"
+        class="{{ classes }}"
+        style="
+        position: relative;
+        width: 100%;
+        text-align: center;
+        border: 1px solid #f4f4f4;
+        padding-bottom: 20px;
+        padding-top: 20px;
+        background-color: #fff;"
+>
+    Anti-Robot Verification
+</div>
+
