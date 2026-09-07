@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Friendly Captcha for WordPress
  * Description: Protect WordPress website forms from spam and abuse with Friendly Captcha, a privacy-first anti-bot solution.
- * Version: 1.17.3
+ * Version: 1.18.0
  * Requires at least: 5.0
  * Requires PHP: 7.3
  * Author: Friendly Captcha GmbH
@@ -19,7 +19,7 @@ if (!defined('WPINC')) {
 	die;
 }
 
-define('FRIENDLY_CAPTCHA_VERSION', '1.17.3');
+define('FRIENDLY_CAPTCHA_VERSION', '1.18.0');
 define('FRIENDLY_CAPTCHA_FRIENDLY_CHALLENGE_VERSION', '0.9.19');
 define('FRIENDLY_CAPTCHA_FRIENDLY_CAPTCHA_SDK_VERSION', '0.1.25');
 define('FRIENDLY_CAPTCHA_SUPPORTED_LANGUAGES', [
@@ -61,7 +61,21 @@ define('FRIENDLY_CAPTCHA_SUPPORTED_LANGUAGES', [
 
 register_activation_hook(__FILE__, 'frcaptcha_activate');
 
-function frcaptcha_activate() {}
+function frcaptcha_activate()
+{
+	// New installs default to Friendly Captcha v2. Existing sites are left alone:
+	// v2 uses different credentials and the application has to be enabled for v2 in
+	// the Friendly Captcha dashboard first, so flipping them over would break their
+	// forms until an admin re-keys the plugin.
+	$is_new_install = get_option(FriendlyCaptcha_Plugin::$option_installed_version_name) === false
+		&& get_option(FriendlyCaptcha_Plugin::$option_sitekey_name) === false;
+
+	if ($is_new_install) {
+		update_option(FriendlyCaptcha_Plugin::$option_enable_v2_name, 1);
+	}
+
+	update_option(FriendlyCaptcha_Plugin::$option_installed_version_name, FRIENDLY_CAPTCHA_VERSION);
+}
 
 register_deactivation_hook(__FILE__, 'frcaptcha_deactivate');
 
