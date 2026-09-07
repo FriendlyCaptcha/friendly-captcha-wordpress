@@ -24,8 +24,6 @@ class FriendlyCaptcha_Plugin
     public static $option_skip_style_injection_name = "frcaptcha_skip_style_injection";
     public static $option_enable_mutation_observer_name = "frcaptcha_enable_mutation_observer";
     public static $option_enable_v2_name = "frcaptcha_enable_v2";
-    // Written on activation. Its absence marks a site that predates this option.
-    public static $option_installed_version_name = "frcaptcha_installed_version";
 
     public static $option_widget_language_name = "frcaptcha_widget_language";
     public static $option_widget_dark_theme_active_name = "frcaptcha_widget_dark_theme_active";

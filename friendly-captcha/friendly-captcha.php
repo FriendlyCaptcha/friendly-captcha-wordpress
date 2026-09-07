@@ -63,18 +63,13 @@ register_activation_hook(__FILE__, 'frcaptcha_activate');
 
 function frcaptcha_activate()
 {
-	// New installs default to Friendly Captcha v2. Existing sites are left alone:
-	// v2 uses different credentials and the application has to be enabled for v2 in
-	// the Friendly Captcha dashboard first, so flipping them over would break their
-	// forms until an admin re-keys the plugin.
-	$is_new_install = get_option(FriendlyCaptcha_Plugin::$option_installed_version_name) === false
-		&& get_option(FriendlyCaptcha_Plugin::$option_sitekey_name) === false;
-
-	if ($is_new_install) {
+	// A site without a sitekey isn't verifying anything yet, so treat it as a new
+	// install and default it to Friendly Captcha v2. Configured sites keep whatever
+	// they had: v2 uses different credentials and the application has to be enabled
+	// for v2 in the dashboard first, so flipping them would break their forms.
+	if (FriendlyCaptcha_Plugin::$instance->get_sitekey() === '') {
 		update_option(FriendlyCaptcha_Plugin::$option_enable_v2_name, 1);
 	}
-
-	update_option(FriendlyCaptcha_Plugin::$option_installed_version_name, FRIENDLY_CAPTCHA_VERSION);
 }
 
 register_deactivation_hook(__FILE__, 'frcaptcha_deactivate');
