@@ -2,7 +2,7 @@
 Contributors: friendlycaptcha
 Tags: captcha, antispam, spam, contact form, recaptcha, friendly-captcha, block spam, anti-spam, comments, elementor
 Requires at least: 5.0
-Tested up to: 6.8
+Tested up to: 7.1
 Requires PHP: 7.3
 Stable tag: 1.17.3
 License: GPL v2 or later
