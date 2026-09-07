@@ -67,8 +67,10 @@ function frcaptcha_activate()
 	// install and default it to Friendly Captcha v2. Configured sites keep whatever
 	// they had: v2 uses different credentials and the application has to be enabled
 	// for v2 in the dashboard first, so flipping them would break their forms.
+	// add_option() rather than update_option() so an explicit opt-out survives a
+	// deactivate/reactivate.
 	if (FriendlyCaptcha_Plugin::$instance->get_sitekey() === '') {
-		update_option(FriendlyCaptcha_Plugin::$option_enable_v2_name, 1);
+		add_option(FriendlyCaptcha_Plugin::$option_enable_v2_name, 1);
 	}
 }
 
