@@ -63,12 +63,8 @@ register_activation_hook(__FILE__, 'frcaptcha_activate');
 
 function frcaptcha_activate()
 {
-	// A site without a sitekey isn't verifying anything yet, so treat it as a new
-	// install and default it to Friendly Captcha v2. Configured sites keep whatever
-	// they had: v2 uses different credentials and the application has to be enabled
-	// for v2 in the dashboard first, so flipping them would break their forms.
-	// add_option() rather than update_option() so an explicit opt-out survives a
-	// deactivate/reactivate.
+	// No sitekey means nothing is verified yet, so treat it as a new install.
+	// add_option() leaves an explicit opt-out intact.
 	if (FriendlyCaptcha_Plugin::$instance->get_sitekey() === '') {
 		add_option(FriendlyCaptcha_Plugin::$option_enable_v2_name, 1);
 	}
