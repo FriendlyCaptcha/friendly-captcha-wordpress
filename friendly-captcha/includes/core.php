@@ -81,7 +81,7 @@ class FriendlyCaptcha_Plugin
             "slug" => 'elementor',
             "entry" => "elementor/elementor.php",
             "plugins" => array("elementor/elementor.php", "elementor-pro/elementor-pro.php"),
-            "settings_description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/elementor/\" target=\"_blank\">Elementor Pro</a> forms.<br> The widget is available as a field type in Elementor Pro form editor. Add it as a field to the forms that you want to protect.",
+            "settings_description" => "Enable Friendly Captcha for <a href=\"https://wordpress.org/plugins/elementor/\" target=\"_blank\">Elementor Pro</a> forms.<br> The widget is available as a field type in Elementor Pro form editor. Add it as a field to the forms that you want to protect.<br> For Elementor atomic forms, add the FriendlyCaptcha element to the form.",
         ),
         array(
             "name" => "HTML Forms",
