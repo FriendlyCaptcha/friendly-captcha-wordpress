@@ -4,7 +4,7 @@ Tags: captcha, antispam, spam, contact form, recaptcha, friendly-captcha, block 
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.3
-Stable tag: 1.18.0
+Stable tag: 1.19.0
 License: GPL v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html  
 
@@ -119,6 +119,10 @@ If you see an integration that's missing, please [open a pull request](https://g
 However, you may wish to email the authors of plugins you'd like to support Friendly Captcha: it will usually take them only an hour or two to add native support if they choose to do so. This will simplify your use of Friendly Captcha, and is the best solution in the long run.
 
 == Changelog ==
+
+= 1.19.0 =
+
+* Add support for Elementor atomic forms (Editor V4). Add the FriendlyCaptcha element to an atomic form to protect it.
 
 = 1.18.0 =
 
