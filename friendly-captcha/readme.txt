@@ -1,6 +1,6 @@
 === Friendly Captcha for WordPress ===
 Contributors: friendlycaptcha
-Tags: captcha, antispam, spam, contact form, recaptcha, friendly-captcha, block spam, anti-spam, comments, elementor
+Tags: captcha, antispam, spam, contact form, recaptcha
 Requires at least: 5.0
 Tested up to: 7.1
 Requires PHP: 7.3
