@@ -2,8 +2,20 @@
 
 use FriendlyCaptcha\SDK\{Client, ClientConfig};
 
+// Real solutions are a few KB. Longer ones are rejected without a request, because a request that fails
+// is accepted below.
+const FRCAPTCHA_MAX_SOLUTION_LENGTH = 64 * 1024;
+
 function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key, $integration = null)
 {
+    if (is_string($solution) && strlen($solution) > FRCAPTCHA_MAX_SOLUTION_LENGTH) {
+        return array(
+            "success" => false,
+            "status" => -1,
+            "error_codes" => array("response_too_long")
+        );
+    }
+
     if (FriendlyCaptcha_Plugin::$instance->get_enable_v2()) {
         $frcSdk = 'friendly-captcha-wordpress@' . FriendlyCaptcha_Plugin::$version;
         if ($integration) {
