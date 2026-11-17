@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "abf157cf28eb088e74a14c026749e730",
+    "content-hash": "f3fb6cfdf99861000eeaa3a10606f91d",
     "packages": [
         {
             "name": "friendlycaptcha/sdk",
-            "version": "0.1.2",
+            "version": "0.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendlyCaptcha/friendly-captcha-php.git",
-                "reference": "9cc23e800f36ba281d017f481b7d3a070a03d010"
+                "reference": "f5862f6903c213619939d005e5cd99f2ed931c50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendlyCaptcha/friendly-captcha-php/zipball/9cc23e800f36ba281d017f481b7d3a070a03d010",
-                "reference": "9cc23e800f36ba281d017f481b7d3a070a03d010",
+                "url": "https://api.github.com/repos/FriendlyCaptcha/friendly-captcha-php/zipball/f5862f6903c213619939d005e5cd99f2ed931c50",
+                "reference": "f5862f6903c213619939d005e5cd99f2ed931c50",
                 "shasum": ""
             },
             "require": {
@@ -46,9 +46,9 @@
             "description": "Serverside SDK for the Friendly Captcha API.",
             "support": {
                 "issues": "https://github.com/FriendlyCaptcha/friendly-captcha-php/issues",
-                "source": "https://github.com/FriendlyCaptcha/friendly-captcha-php/tree/0.1.2"
+                "source": "https://github.com/FriendlyCaptcha/friendly-captcha-php/tree/0.2.2"
             },
-            "time": "2025-03-05T16:37:37+00:00"
+            "time": "2026-11-17T10:26:44+00:00"
         }
     ],
     "packages-dev": [],
