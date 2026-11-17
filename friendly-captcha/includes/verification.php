@@ -2,20 +2,12 @@
 
 use FriendlyCaptcha\SDK\{Client, ClientConfig};
 
-// Real solutions are a few KB. Longer ones are rejected without a request, because a request that fails
-// is accepted below.
-const FRCAPTCHA_MAX_SOLUTION_LENGTH = 64 * 1024;
+// Real v1 solutions are a few KB. Longer ones are rejected without a request, because a request that fails
+// is accepted below. The SDK does the same for v2.
+const FRCAPTCHA_V1_MAX_SOLUTION_LENGTH = 1024 * 1024;
 
 function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key, $integration = null)
 {
-    if (is_string($solution) && strlen($solution) > FRCAPTCHA_MAX_SOLUTION_LENGTH) {
-        return array(
-            "success" => false,
-            "status" => -1,
-            "error_codes" => array("response_too_long")
-        );
-    }
-
     if (FriendlyCaptcha_Plugin::$instance->get_enable_v2()) {
         $frcSdk = 'friendly-captcha-wordpress@' . FriendlyCaptcha_Plugin::$version;
         if ($integration) {
@@ -30,6 +22,14 @@ function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key, $integ
 
 function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
 {
+    if (is_string($solution) && strlen($solution) > FRCAPTCHA_V1_MAX_SOLUTION_LENGTH) {
+        return array(
+            "success" => false,
+            "status" => -1,
+            "error_codes" => array("response_too_long")
+        );
+    }
+
     $endpoint = 'https://api.friendlycaptcha.com/api/v1/siteverify';
     if (FriendlyCaptcha_Plugin::$instance->get_eu_puzzle_endpoint_active()) {
         $endpoint = 'https://eu-api.friendlycaptcha.eu/api/v1/siteverify';
@@ -102,7 +102,7 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key, $fr
     $config = new ClientConfig();
     $config->setAPIKey($api_key)->setSitekey($sitekey)->setSDKTrailer($frcSdk);
     if (FriendlyCaptcha_Plugin::$instance->get_eu_puzzle_endpoint_active()) {
-        $config->setSiteverifyEndpoint("eu");
+        $config->setApiEndpoint("eu");
     }
 
     $captchaClient = new Client($config);
@@ -112,7 +112,7 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key, $fr
     if (!$result->wasAbleToVerify()) {
         if (WP_DEBUG) {
             frcaptcha_v2_log_verify_response(
-                $config->siteverifyEndpoint,
+                $config->apiEndpoint ?: "global",
                 $result->status,
                 $result->response->error->error_code
             );
