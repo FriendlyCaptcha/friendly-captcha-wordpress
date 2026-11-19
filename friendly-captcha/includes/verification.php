@@ -2,9 +2,10 @@
 
 use FriendlyCaptcha\SDK\{Client, ClientConfig};
 
-// Real v1 solutions are a few KB. Longer ones are rejected without a request, because a request that fails
-// is accepted below. The SDK does the same for v2.
-const FRCAPTCHA_V1_MAX_SOLUTION_LENGTH = 1024 * 1024;
+// Longer v1 solutions are truncated to this before they are sent. It's above the API's request body limit, so the
+// API still answers them as invalid. Truncating keeps the upload short enough to finish before the timeout. The SDK
+// does the same for v2.
+const FRCAPTCHA_V1_MAX_SOLUTION_LENGTH = 2 * 1024 * 1024;
 
 function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key, $integration = null)
 {
@@ -23,11 +24,7 @@ function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key, $integ
 function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
 {
     if (is_string($solution) && strlen($solution) > FRCAPTCHA_V1_MAX_SOLUTION_LENGTH) {
-        return array(
-            "success" => false,
-            "status" => -1,
-            "error_codes" => array("response_too_long")
-        );
+        $solution = substr($solution, 0, FRCAPTCHA_V1_MAX_SOLUTION_LENGTH);
     }
 
     $endpoint = 'https://api.friendlycaptcha.com/api/v1/siteverify';
