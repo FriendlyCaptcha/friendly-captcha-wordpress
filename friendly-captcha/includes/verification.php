@@ -2,6 +2,11 @@
 
 use FriendlyCaptcha\SDK\{Client, ClientConfig};
 
+// Longer v1 solutions are truncated to this before they are sent. It's above the API's request body limit, so the
+// API still answers them as invalid. Truncating keeps the upload short enough to finish before the timeout. The SDK
+// does the same for v2.
+const FRCAPTCHA_V1_MAX_SOLUTION_LENGTH = 2 * 1024 * 1024;
+
 function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key, $integration = null)
 {
     if (FriendlyCaptcha_Plugin::$instance->get_enable_v2()) {
@@ -18,6 +23,10 @@ function frcaptcha_verify_captcha_solution($solution, $sitekey, $api_key, $integ
 
 function frcaptcha_v1_verify_captcha_solution($solution, $sitekey, $api_key)
 {
+    if (is_string($solution) && strlen($solution) > FRCAPTCHA_V1_MAX_SOLUTION_LENGTH) {
+        $solution = substr($solution, 0, FRCAPTCHA_V1_MAX_SOLUTION_LENGTH);
+    }
+
     $endpoint = 'https://api.friendlycaptcha.com/api/v1/siteverify';
     if (FriendlyCaptcha_Plugin::$instance->get_eu_puzzle_endpoint_active()) {
         $endpoint = 'https://eu-api.friendlycaptcha.eu/api/v1/siteverify';
@@ -90,7 +99,7 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key, $fr
     $config = new ClientConfig();
     $config->setAPIKey($api_key)->setSitekey($sitekey)->setSDKTrailer($frcSdk);
     if (FriendlyCaptcha_Plugin::$instance->get_eu_puzzle_endpoint_active()) {
-        $config->setSiteverifyEndpoint("eu");
+        $config->setApiEndpoint("eu");
     }
 
     $captchaClient = new Client($config);
@@ -100,7 +109,7 @@ function frcaptcha_v2_verify_captcha_solution($solution, $sitekey, $api_key, $fr
     if (!$result->wasAbleToVerify()) {
         if (WP_DEBUG) {
             frcaptcha_v2_log_verify_response(
-                $config->siteverifyEndpoint,
+                $config->apiEndpoint ?: "global",
                 $result->status,
                 $result->response->error->error_code
             );
