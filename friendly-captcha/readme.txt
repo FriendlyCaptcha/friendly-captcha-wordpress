@@ -122,7 +122,7 @@ However, you may wish to email the authors of plugins you'd like to support Frie
 
 = 1.19.1 =
 
-* Fix very long captcha responses being accepted without verification. They are now shortened before they are sent, so the API rejects them as invalid.
+* Improve handling of very long captcha responses
 * Update the Friendly Captcha PHP SDK to 0.2.3
 
 = 1.19.0 =
